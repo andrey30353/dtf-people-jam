@@ -726,6 +726,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 4, y: 0, z: -27.250011}
   ClosePosition: {x: -0.016650727, y: 0, z: -27.250011}
+  time: 0.5
 --- !u!65 &86303453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2084,7 +2085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321375471}
   m_LocalRotation: {x: -0.00872602, y: -0.9999619, z: 0.0001749476, w: 0.00024032593}
-  m_LocalPosition: {x: 20.00094, y: 0, z: 3.995925}
+  m_LocalPosition: {x: 20.00094, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 77455158}
@@ -2104,8 +2105,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Move: {x: 16, y: 0, z: 0}
   IsOpen: 0
-  OpenPosition: {x: 20.00094, y: 0, z: 3.995925}
-  ClosePosition: {x: 20.00094, y: 0, z: -4}
+  OpenPosition: {x: 20.00094, y: 0, z: -4}
+  ClosePosition: {x: 20.00094, y: 0, z: 4}
+  time: 0.5
 --- !u!65 &321375474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2471,6 +2473,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 15, y: 0, z: -15}
   ClosePosition: {x: 12, y: 0, z: -12}
+  time: 0.5
 --- !u!65 &379639209
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2583,6 +2586,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -15, y: 0, z: -15}
   ClosePosition: {x: -12.005358, y: 0, z: -11.994584}
+  time: 0.5
 --- !u!65 &381562040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2940,6 +2944,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -9.999999, y: 0, z: 4}
   ClosePosition: {x: -9.999999, y: 0, z: -0.0000060097136}
+  time: 0.5
 --- !u!65 &407127118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4439,6 +4444,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -4, y: 0, z: -20.001295}
   ClosePosition: {x: 3.9999979, y: 0, z: -20.001295}
+  time: 0.5
 --- !u!65 &678037330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4986,6 +4992,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -4, y: 0, z: 10}
   ClosePosition: {x: 0, y: 0, z: 10}
+  time: 0.5
 --- !u!65 &781163291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5267,6 +5274,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 4, y: 0, z: -10}
   ClosePosition: {x: 0, y: 0, z: -10}
+  time: 0.5
 --- !u!65 &794263394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5458,6 +5466,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -20.00159, y: 0, z: 4}
   ClosePosition: {x: -20.00159, y: 0, z: -3.9978707}
+  time: 0.5
 --- !u!65 &831514026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5570,6 +5579,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 27.25, y: 0, z: 4}
   ClosePosition: {x: 27.25, y: 0, z: -0.0000060097136}
+  time: 0.5
 --- !u!65 &842948749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6020,6 +6030,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -15, y: 0, z: 15}
   ClosePosition: {x: -12, y: 0, z: 12}
+  time: 0.5
 --- !u!65 &941773652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6992,6 +7003,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -27.25, y: 0, z: 4}
   ClosePosition: {x: -27.25, y: 0, z: -0.0000060097136}
+  time: 0.5
 --- !u!65 &1064009977
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7518,6 +7530,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: -4, y: 0, z: 27.249998}
   ClosePosition: {x: 0.01665869, y: 0, z: 27.249998}
+  time: 0.5
 --- !u!65 &1122044143
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8518,6 +8531,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 9.999999, y: 0, z: 4}
   ClosePosition: {x: 9.999999, y: 0, z: 0.0000060097136}
+  time: 0.5
 --- !u!65 &1282227668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10656,6 +10670,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 15, y: 0, z: 15}
   ClosePosition: {x: 12, y: 0, z: 12}
+  time: 0.5
 --- !u!65 &1695285534
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10988,6 +11003,7 @@ MonoBehaviour:
   IsOpen: 0
   OpenPosition: {x: 4, y: 0, z: 20}
   ClosePosition: {x: -4, y: 0, z: 20}
+  time: 0.5
 --- !u!65 &1768522675
 BoxCollider:
   m_ObjectHideFlags: 0
