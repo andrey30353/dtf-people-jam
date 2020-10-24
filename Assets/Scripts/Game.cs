@@ -10,7 +10,18 @@ public class Game : MonoBehaviour
     public int AgentCount;
   
     public int LiveCount;
-    public int DeadCount;       
+    public int DeadCount;
+
+    public List<Agent> LiveAgents;
+
+    public LayerMask AgentMask;
+
+    public static Game Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -20,9 +31,15 @@ public class Game : MonoBehaviour
         foreach (var agent in agents)
         {
             if (agent.Live)
-                LiveCount++;
+            {
+                LiveAgents.Add(agent);
+                LiveCount++; 
+            }
             else
+            { 
                 DeadCount++;
+            }
+
         }
 
         Assert.IsTrue(LiveCount != 0);
@@ -43,5 +60,24 @@ public class Game : MonoBehaviour
             print("Победа!");
             return;
         }
+    }
+
+    public void MoveAgents(Vector3 point, float radius)
+    {
+        var result = new Collider[10];
+
+       var res =  Physics.OverlapSphere(point, radius, AgentMask.value);
+        // Physics.OverlapSphereNonAlloc(point, radius, result, AgentMask.value);
+
+        print(res.Length);
+
+        foreach (var item in res)
+        {
+           var agent =  item.GetComponent<Agent>();
+            agent.MoveTo(point);
+        }
+
+       
+       // fore
     }
 }

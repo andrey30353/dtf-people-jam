@@ -8,6 +8,13 @@ public class Door : MonoBehaviour
 
     public bool IsOpen;
 
+    private bool InProcess;
+
+    private void Start()
+    {
+        
+    }
+
     [ContextMenu("Select")]
     public void Select()
     {
@@ -23,7 +30,14 @@ public class Door : MonoBehaviour
     {
         transform.localPosition -= Move * 0.5f;
         IsOpen = true;
+
     }
+
+    //private IEnumerator Open()
+    //{
+    //    transform.localPosition -= Move * 0.5f;
+    //    IsOpen = true;
+    //}
 
     private void Close()
     {

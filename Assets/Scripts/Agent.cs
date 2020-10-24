@@ -28,9 +28,9 @@ public class Agent : MonoBehaviour
 
         mr.material.color = Live ? LiveColor : DeadColor;
 
-        Assert.IsTrue((Dead && kill) || (Dead && infect));
+       // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
-        Assert.IsTrue(!kill && !infect);
+       // Assert.IsTrue(Live && !kill && !infect);
     }
 
  
@@ -49,7 +49,7 @@ public class Agent : MonoBehaviour
         if (otherAgent.mover.isStoped)
             return;
 
-        Debug.Log(collision.gameObject.name);
+        // Debug.Log(collision.gameObject.name);
 
         if(Live && otherAgent.Dead)
         {
@@ -91,5 +91,10 @@ public class Agent : MonoBehaviour
             return;
 
         gameObject.SetActive(false);
+    }
+
+    public void MoveTo(Vector3 point)
+    {
+        mover.rb.velocity = (point - transform.position).normalized * mover.startSpeed;
     }
 }

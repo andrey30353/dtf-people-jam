@@ -7,6 +7,11 @@ public class PlayerRay : MonoBehaviour
     public int Distance;
     public LayerMask LayerMask;
 
+    public LayerMask FloorLayerMask;  
+
+    public float Radius;
+    private Vector3 point;
+
     Camera camera;
     void Start()
     {
@@ -32,5 +37,27 @@ public class PlayerRay : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            var ray = camera.ScreenPointToRay(Input.mousePosition);                     
+          
+            if (Physics.Raycast(ray, out var hit, Distance, FloorLayerMask))
+            {
+                point = hit.point;
+
+                Game.Instance.MoveAgents(point, Radius);
+                Debug.DrawLine(point, point + Vector3.up * 5, Color.yellow, 10);              
+            }
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (point == Vector3.zero)
+            return;
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(point, Radius);
     }
 }

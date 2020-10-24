@@ -8,7 +8,7 @@ public class Cage : MonoBehaviour
     {
         if (other.CompareTag("Agent"))
         {
-            print(other.gameObject);
+            //print(other.gameObject);
 
             var agent = other.gameObject.GetComponent<Agent>();
             if (agent == null)
