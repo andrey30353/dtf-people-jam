@@ -47,15 +47,42 @@ public class Mover : MonoBehaviour
         if (isStoped)
             return;
 
-        if(rb.velocity.x < 1 && rb.velocity.x > -1)
+        var rel = 1f;
+        var xVal = Mathf.Abs(rb.velocity.x);
+        var zVal = Mathf.Abs(rb.velocity.z);
+        if (xVal < zVal)
         {
-            rb.velocity = new Vector3(rb.velocity.x * 2, 0, rb.velocity.z);
+            rel = rb.velocity.x / rb.velocity.z;
+        }
+        else
+        {
+            rel = rb.velocity.z / rb.velocity.x;
         }
 
-        if (rb.velocity.z < 1 && rb.velocity.z > -1)
+        if(Mathf.Abs(rel) < 0.1f)
         {
-            rb.velocity = new Vector3(rb.velocity.x , 0, rb.velocity.z * 2);
+            Vector3 additional;
+            if (rb.velocity.x < rb.velocity.z)
+            {                
+                additional = rb.velocity.x < 0 ? Vector3.left : Vector3.right;
+            }
+            else
+            {
+                additional = rb.velocity.z < 0 ? Vector3.back : Vector3.forward;
+            }
+            rb.velocity += additional;
         }
+     
+        /*
+        if(rb.velocity.x < 2 && rb.velocity.x > -2)
+        {
+            rb.velocity = new Vector3(rb.velocity.x + 1, 0, rb.velocity.z);
+        }
+
+        if (rb.velocity.z < 2 && rb.velocity.z > -2)
+        {
+            rb.velocity = new Vector3(rb.velocity.x , 0, rb.velocity.z + 1);
+        }*/
 
         var currentSpeed = rb.velocity.magnitude;
         if (currentSpeed < startSpeed + speedThreshold)
