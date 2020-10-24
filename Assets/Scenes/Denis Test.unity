@@ -11903,7 +11903,7 @@ MonoBehaviour:
   FloorLayerMask:
     serializedVersion: 2
     m_Bits: 2048
-  Radius: 3
+  Radius: 5
 --- !u!4 &2032129329
 Transform:
   m_ObjectHideFlags: 0
