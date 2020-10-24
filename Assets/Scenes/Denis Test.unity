@@ -10893,6 +10893,9 @@ MonoBehaviour:
   LiveCount: 0
   DeadCount: 0
   LiveAgents: []
+  AgentMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1768522672
 GameObject:
   m_ObjectHideFlags: 0
@@ -11900,6 +11903,7 @@ MonoBehaviour:
   FloorLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  Radius: 3
 --- !u!4 &2032129329
 Transform:
   m_ObjectHideFlags: 0
