@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,4 +45,6 @@ public class Door : MonoBehaviour
         transform.localPosition += Move * 0.5f;
         IsOpen = false;
     }
+
+    
 }

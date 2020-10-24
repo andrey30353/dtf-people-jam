@@ -12,6 +12,8 @@ public class PlayerRay : MonoBehaviour
     public float Radius;
     private Vector3 point;
 
+    public Agent selectedAgent;
+
     Camera camera;
     void Start()
     {
@@ -30,10 +32,22 @@ public class PlayerRay : MonoBehaviour
             if (Physics.Raycast(ray, out var hit, Distance, LayerMask))
             {
                 var door = hit.collider.gameObject.GetComponent<Door>();
-                if (door == null)
-                    return;
+                if (door != null)
+                {
+                    door.Select();
+                }
 
-                door.Select();
+                var agent = hit.collider.gameObject.GetComponent<Agent>();
+                if (agent != null)
+                {
+                    if (selectedAgent != null && selectedAgent != agent)
+                    {
+                        selectedAgent.Manage(false);
+                    }
+
+                    selectedAgent = agent;                    
+                    agent.Manage(true);                   
+                }
             }
         }
 

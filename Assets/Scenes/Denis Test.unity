@@ -11899,11 +11899,12 @@ MonoBehaviour:
   Distance: 100
   LayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   FloorLayerMask:
     serializedVersion: 2
     m_Bits: 2048
   Radius: 5
+  selectedAgent: {fileID: 0}
 --- !u!4 &2032129329
 Transform:
   m_ObjectHideFlags: 0

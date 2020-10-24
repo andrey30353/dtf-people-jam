@@ -70,6 +70,11 @@ public class Agent : MonoBehaviour
         }              
     }
 
+    internal void Manage(bool manage)
+    {
+        mover.Manage(manage);
+    }
+
     private void Infect(Agent infector)
     {
         if (Dead)
