@@ -88,6 +88,9 @@ public class Agent : MonoBehaviour
         mover.startSpeed = infector.mover.startSpeed;
         kill = infector.kill;
         infect = infector.infect;
+
+        gameObject.layer = infector.gameObject.layer;
+        gameObject.tag = infector.gameObject.tag;
     }
 
     private void Kill()

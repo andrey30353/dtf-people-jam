@@ -11,16 +11,12 @@ public class Door : MonoBehaviour
 
     private bool InProcess;
 
-    private void Start()
-    {
-        
-    }
+    public Vector3 OpenPosition;
+    public Vector3 ClosePosition;
+       
 
-    [ContextMenu("Select")]
     public void Select()
-    {
-        //print("Select " + name);
-
+    {      
         if (IsOpen)
             Close();
         else
@@ -29,12 +25,13 @@ public class Door : MonoBehaviour
     
     private void Open()
     {
-        transform.localPosition -= Move * 0.5f;
+        transform.localPosition = OpenPosition;
+      
         IsOpen = true;
 
     }
 
-    //private IEnumerator Open()
+    //private IEnumerator OpenCor()
     //{
     //    transform.localPosition -= Move * 0.5f;
     //    IsOpen = true;
@@ -42,9 +39,9 @@ public class Door : MonoBehaviour
 
     private void Close()
     {
-        transform.localPosition += Move * 0.5f;
+        transform.localPosition = ClosePosition;
+       
         IsOpen = false;
     }
-
     
 }

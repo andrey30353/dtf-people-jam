@@ -723,7 +723,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 0, y: 0, z: -8}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 4, y: 0, z: -27.250011}
+  ClosePosition: {x: -0.016650727, y: 0, z: -27.250011}
 --- !u!65 &86303453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2101,7 +2103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 16, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 20.00094, y: 0, z: 3.995925}
+  ClosePosition: {x: 20.00094, y: 0, z: -4}
 --- !u!65 &321375474
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2463,8 +2467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c2fa760d2e84c48a60d7d1f53d8730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Move: {x: -3, y: 0, z: 3}
+  Move: {x: 15, y: 0, z: 3}
   IsOpen: 0
+  OpenPosition: {x: 15, y: 0, z: -15}
+  ClosePosition: {x: 12, y: 0, z: -12}
 --- !u!65 &379639209
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2574,7 +2580,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: -8, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -15, y: 0, z: -15}
+  ClosePosition: {x: -12.005358, y: 0, z: -11.994584}
 --- !u!65 &381562040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2721,6 +2729,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Agent
       objectReference: {fileID: 0}
+    - target: {fileID: 915172767851006627, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 915172767851006628, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01
@@ -2769,6 +2781,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 991899048}
+    - target: {fileID: 915172767851006633, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
+      propertyPath: startSpeedVector.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 915172767851006633, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
+      propertyPath: startSpeedVector.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1983694613779854785, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
       propertyPath: infect
       value: 1
@@ -2917,7 +2937,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 0, y: 0, z: -8}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -9.999999, y: 0, z: 4}
+  ClosePosition: {x: -9.999999, y: 0, z: -0.0000060097136}
 --- !u!65 &407127118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4414,7 +4436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 16, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -4, y: 0, z: -20.001295}
+  ClosePosition: {x: 3.9999979, y: 0, z: -20.001295}
 --- !u!65 &678037330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4960,6 +4984,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Move: {x: -8, y: 0, z: 0}
   IsOpen: 0
+  OpenPosition: {x: -4, y: 0, z: 10}
+  ClosePosition: {x: 0, y: 0, z: 10}
 --- !u!65 &781163291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5238,7 +5264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 8, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 4, y: 0, z: -10}
+  ClosePosition: {x: 0, y: 0, z: -10}
 --- !u!65 &794263394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5427,7 +5455,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 16, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -20.00159, y: 0, z: 4}
+  ClosePosition: {x: -20.00159, y: 0, z: -3.9978707}
 --- !u!65 &831514026
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5537,7 +5567,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 0, y: 0, z: -8}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 27.25, y: 0, z: 4}
+  ClosePosition: {x: 27.25, y: 0, z: -0.0000060097136}
 --- !u!65 &842948749
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5985,7 +6017,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: -8, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -15, y: 0, z: 15}
+  ClosePosition: {x: -12, y: 0, z: 12}
 --- !u!65 &941773652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6955,7 +6989,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 0, y: 0, z: -8}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -27.25, y: 0, z: 4}
+  ClosePosition: {x: -27.25, y: 0, z: -0.0000060097136}
 --- !u!65 &1064009977
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7479,7 +7515,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 0, y: 0, z: -8}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: -4, y: 0, z: 27.249998}
+  ClosePosition: {x: 0.01665869, y: 0, z: 27.249998}
 --- !u!65 &1122044143
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8477,7 +8515,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 0, y: 0, z: 8}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 9.999999, y: 0, z: 4}
+  ClosePosition: {x: 9.999999, y: 0, z: 0.0000060097136}
 --- !u!65 &1282227668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10594,7 +10634,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695285531}
   m_LocalRotation: {x: -0, y: -0.92379355, z: -0, w: 0.38289097}
-  m_LocalPosition: {x: 12.005412, y: 0, z: 11.9946375}
+  m_LocalPosition: {x: 12, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 77455158}
@@ -10613,7 +10653,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: -8, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 15, y: 0, z: 15}
+  ClosePosition: {x: 12, y: 0, z: 12}
 --- !u!65 &1695285534
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10943,7 +10985,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move: {x: 16, y: 0, z: 0}
-  IsOpen: 1
+  IsOpen: 0
+  OpenPosition: {x: 4, y: 0, z: 20}
+  ClosePosition: {x: -4, y: 0, z: 20}
 --- !u!65 &1768522675
 BoxCollider:
   m_ObjectHideFlags: 0
