@@ -9,6 +9,8 @@ public class Door : MonoBehaviour
 
     public bool IsOpen;
 
+    public bool IsClosed => !IsOpen;
+
     private bool InProcess;
 
     public Vector3 OpenPosition;
@@ -16,8 +18,20 @@ public class Door : MonoBehaviour
 
     public float time = 0.5f;
 
+    public int Hp = 5;
+
+    public bool Broken => Hp <= 0;
+
+    private void Start()
+    {
+        //Hp
+    }
+
     public void Select()
     {
+        if (Broken)
+            return;
+
         if (InProcess)
             return;
 
@@ -75,27 +89,60 @@ public class Door : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!InProcess)
+        if (Broken)
             return;
 
-        // только закрывающаяся дверь может прищемить
-        if (!IsOpen)
-            return;
+        // Kill()
 
-        if (collision.gameObject.tag != "Agent")
-            return;
+        if (InProcess)
+        {
+            // только закрывающаяся дверь может прищемить
+            if (IsClosed)
+                return;
 
-        var agent = collision.gameObject.GetComponent<Agent>();
-        if (agent == null)
-            return;
+            if (collision.gameObject.tag != "Agent")
+                return;
 
-        if (agent.Dead)
-            return;
+            var agent = collision.gameObject.GetComponent<Agent>();
+            if (agent == null)
+                return;
 
-        
-        agent.Kill();
-        
+            if (agent.Dead)
+                return;
+
+            agent.Kill();           
+        }
+        else
+        {   // ломается только закрытая дверь
+            if (IsClosed)
+            {
+                if (collision.gameObject.tag != "Agent")
+                    return;
+
+                var agent = collision.gameObject.GetComponent<Agent>();
+                if (agent == null)
+                    return;
+
+                if (agent.Dead /*&& agent.BreakDoor*/)
+                {
+                    Hp--;
+                    CheckDoorHp();
+                }
+            }
+        }
+
     }
 
+    private void CheckDoorHp()
+    {
+        if (Broken)
+        {
+            Break();
+        }
+    }
 
+    private void Break()
+    {
+        gameObject.SetActive(false);
+    }
 }

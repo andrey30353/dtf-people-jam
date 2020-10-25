@@ -23,7 +23,7 @@ public class Agent : MonoBehaviour
     public bool Live;
 
     public bool Dead => !Live;
-
+      
     public Color LiveColor;
     public Color DeadColor;
 
@@ -34,6 +34,8 @@ public class Agent : MonoBehaviour
     public bool infect;
 
     public GameObject killSpritePrefab;
+
+    //public bool BreakDoor ;
 
     [ContextMenu("Start")]
     private void Start()
