@@ -93,12 +93,14 @@ public class Agent : MonoBehaviour
         gameObject.tag = infector.gameObject.tag;
     }
 
-    private void Kill()
+    public void Kill()
     {
         if (Dead)
             return;
 
         gameObject.SetActive(false);
+
+        Game.Instance.LiveCount--;
     }
 
     public void MoveTo(Vector3 point)

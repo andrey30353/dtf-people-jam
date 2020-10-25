@@ -16,7 +16,6 @@ public class Door : MonoBehaviour
 
     public float time = 0.5f;
 
-
     public void Select()
     {
         if (InProcess)
@@ -74,6 +73,29 @@ public class Door : MonoBehaviour
         InProcess = false;
     }
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!InProcess)
+            return;
+
+        // только закрывающаяся дверь может прищемить
+        if (!IsOpen)
+            return;
+
+        if (collision.gameObject.tag != "Agent")
+            return;
+
+        var agent = collision.gameObject.GetComponent<Agent>();
+        if (agent == null)
+            return;
+
+        if (agent.Dead)
+            return;
+
+        
+        agent.Kill();
+        
+    }
+
 
 }
