@@ -2861,9 +2861,13 @@ PrefabInstance:
       propertyPath: startSpeedVector.y
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 915172767851006633, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
+      propertyPath: Speed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1983694613779854785, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
       propertyPath: infect
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1983694613779854785, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
       propertyPath: kill

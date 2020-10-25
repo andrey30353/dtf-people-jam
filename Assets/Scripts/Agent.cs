@@ -69,8 +69,10 @@ public class Agent : MonoBehaviour
 
         if(Live && otherAgent.Dead)
         {
-            if(otherAgent.infect)
-                Infect(otherAgent);
+            if (otherAgent.infect)
+            {
+                StartCoroutine(InfectCor(otherAgent, this, 0.5f));                
+            }
 
             if (otherAgent.kill)
             {
@@ -82,7 +84,9 @@ public class Agent : MonoBehaviour
         if(Dead && otherAgent.Live)
         {
             if (infect)
-                otherAgent.Infect(this);
+            {
+                StartCoroutine(InfectCor(this, otherAgent, 0.5f));               
+            }
 
             if (kill)
             {
@@ -118,12 +122,29 @@ public class Agent : MonoBehaviour
         mr.material.color = DeadColor;
 
        // print($"deadSpeed / mover.startSpeed => {deadSpeed}/{mover.startSpeed} = {deadSpeed / mover.startSpeed}")
-        mover.Speed = infector.mover.Speed;
+        // todo
+        //mover.Speed = infector.mover.Speed;
         kill = infector.kill;
         infect = infector.infect;
 
         gameObject.layer = infector.gameObject.layer;
         gameObject.tag = infector.gameObject.tag;
+    }
+
+    private IEnumerator InfectCor(Agent infector, Agent victim, float time)
+    {
+        // todo
+        victim.mover.Speed = infector.mover.Speed;
+
+        infector.mover.StopMove();
+
+        victim.mover.StopMove();
+        yield return new WaitForSeconds(time);
+
+        victim.Infect(infector);
+
+        victim.mover.RestoreMove();
+        infector.mover.RestoreMove();        
     }
 
     public void Kill()

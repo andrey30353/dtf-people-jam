@@ -8,7 +8,7 @@ public class Mover : MonoBehaviour
     public Rigidbody rb;
     public Collider collider;  
 
-    public Vector2 startSpeedVector;
+   // public float startSpeed;
 
     public float Speed;
        
@@ -26,7 +26,9 @@ public class Mover : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
-        SetRandomVelocity();       
+        SetRandomVelocity();
+
+       // startSpeed = Speed;
         //rb.AddForce(new Vector3(3, 0, 3)*100);
 
         speedThreshold = Speed * 0f;
@@ -121,9 +123,6 @@ public class Mover : MonoBehaviour
                 rb.velocity *= Speed / currentSpeed;
             }
         }
-
-
-        
     }
 
     internal void Manage(bool manage)
@@ -132,7 +131,7 @@ public class Mover : MonoBehaviour
 
         if(!manage)
         {
-           rb.velocity = new Vector3(startSpeedVector.x, 0, startSpeedVector.y);
+            SetRandomVelocity();
         }
     }
 }
