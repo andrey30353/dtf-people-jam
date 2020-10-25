@@ -51,7 +51,7 @@ public class PlayerRay : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
             var ray = camera.ScreenPointToRay(Input.mousePosition);                     
           
