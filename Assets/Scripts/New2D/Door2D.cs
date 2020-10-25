@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Door2D : MonoBehaviour
 {
-    public Vector3 Move;
-
     public bool IsOpen;
 
     public bool IsClosed => !IsOpen;
@@ -87,7 +85,7 @@ public class Door2D : MonoBehaviour
         InProcess = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (Broken)
             return;
@@ -100,34 +98,25 @@ public class Door2D : MonoBehaviour
             if (IsClosed)
                 return;
 
-            if (collision.gameObject.tag != "Agent")
-                return;
+            //if (collision.gameObject.tag != "Agent")
+            //    return;
 
-            var agent = collision.gameObject.GetComponent<Agent>();
+            var agent = collision.gameObject.GetComponent<Liver2D>();
             if (agent == null)
                 return;
 
-            if (agent.Dead)
-                return;
-
-            agent.Kill();           
+            agent.Dead();
         }
         else
         {   // ломается только закрытая дверь
             if (IsClosed)
             {
-                if (collision.gameObject.tag != "Agent")
-                    return;
-
-                var agent = collision.gameObject.GetComponent<Agent>();
+                var agent = collision.gameObject.GetComponent<Enemy2D>();
                 if (agent == null)
                     return;
 
-                if (agent.Dead /*&& agent.BreakDoor*/)
-                {
-                    Hp--;
-                    CheckDoorHp();
-                }
+                Hp--;
+                CheckDoorHp();
             }
         }
 

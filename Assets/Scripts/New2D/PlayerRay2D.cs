@@ -5,39 +5,40 @@ using UnityEngine;
 public class PlayerRay2D : MonoBehaviour
 {
     public int Distance;
-    public LayerMask LayerMask;
+
+    public LayerMask InteractionMask;
 
     public LayerMask FloorLayerMask;  
 
     public float Radius;
-    private Vector3 point;
-
-    public Agent2D selectedAgent;   
+    public Vector3 point;
+ 
+    public Liver2D selectedAgent;   
 
     Camera camera;
     void Start()
     {
         camera = Camera.main;
+        point = Vector3.up;
     }
 
     // Update is called once per frame 
     void LateUpdate()
     {
         if (Input.GetMouseButtonDown(0))
-        {
-
-            var ray = camera.ScreenPointToRay(Input.mousePosition);
-            // Debug.DrawRay(camera.transform.position, Vector3.down * 20, Color.yellow);
-
-            if (Physics.Raycast(ray, out var hit, Distance, LayerMask))
-            {
-                var door = hit.collider.gameObject.GetComponent<Door>();
+        {           
+            var origin = camera.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, Distance, InteractionMask);            
+           
+            if (hit.collider != null)
+            {               
+                var door = hit.collider.gameObject.GetComponent<Door2D>();
                 if (door != null)
                 {
                     door.Select();
                 }
 
-                var agent = hit.collider.gameObject.GetComponent<Agent2D>();
+                var agent = hit.collider.gameObject.GetComponent<Liver2D>();
                 if (agent != null)
                 {
                     if (selectedAgent != null && selectedAgent != agent)
@@ -54,15 +55,11 @@ public class PlayerRay2D : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            var ray = camera.ScreenPointToRay(Input.mousePosition);                     
-          
-            if (Physics.Raycast(ray, out var hit, Distance, FloorLayerMask))
-            {
-                point = hit.point;
-
-                Game2D.Instance.MoveAgents(point, Radius);
-                //Debug.DrawLine(point, point + Vector3.up * 5, Color.yellow, 10);              
-            }
+            var origin = camera.ScreenToWorldPoint(Input.mousePosition);
+            origin.z = 0;
+            //print(origin);
+            
+            Game2D.Instance.MoveAgents(origin, Radius);           
         }
 
     }

@@ -34,19 +34,16 @@ public class Game2D : MonoBehaviour
 
     private void Start()
     {
-        Livers = AgentsContent.GetComponentsInChildren<Liver2D>();
-        Assert.IsTrue(Livers.Length != 0);
-
-        Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();
-        Assert.IsTrue(Enemies.Length != 0);
+        Livers = AgentsContent.GetComponentsInChildren<Liver2D>(); 
+        Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();        
 
         LiverCount = Livers.Length;
         EnemiesCount = Enemies.Length;
         
         GameUi.UpdateUI();
 
-        Assert.IsTrue(LiverCount != 0);
-        Assert.IsTrue(EnemiesCount != 0);
+       // Assert.IsTrue(LiverCount != 0);
+       // Assert.IsTrue(EnemiesCount != 0);
     }
    
 
