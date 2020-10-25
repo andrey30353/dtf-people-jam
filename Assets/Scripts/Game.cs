@@ -1,13 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class AgentProbably
-{
-    public AgentType Type;
-    public float RandomValue;
-}
+
 
 public class Game : MonoBehaviour
 {
@@ -22,9 +20,11 @@ public class Game : MonoBehaviour
 
     public LayerMask AgentMask;
 
-    public static Game Instance;
+    [Space]
+    public GameUI GameUi;
+  
 
-    public List<AgentProbably> AgentProbably;
+    public static Game Instance;
 
     private void Awake()
     {
@@ -49,6 +49,8 @@ public class Game : MonoBehaviour
             }
 
         }
+
+        GameUi.UpdateUI();
 
         Assert.IsTrue(LiveCount != 0);
         Assert.IsTrue(DeadCount != 0);
@@ -89,5 +91,12 @@ public class Game : MonoBehaviour
        // fore
     }
 
+    internal void LiveDead()
+    {
+        Game.Instance.LiveCount--;
 
+        GameUi.UpdateUI();
+
+        CheckGameOver();
+    }
 }

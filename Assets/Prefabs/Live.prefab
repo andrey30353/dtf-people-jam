@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1983694613779854785}
   m_Layer: 9
   m_Name: Live
-  m_TagString: Live
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,9 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   collider: {fileID: 0}
-  startSpeedVector: {x: 3, y: 3}
   Speed: 3
-  startSpeed: 0
   isStoped: 0
 --- !u!114 &1983694613779854785
 MonoBehaviour:
@@ -145,9 +143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Live: 1
-  LiveColor: {r: 0.14509805, g: 0.5294118, b: 0.34901962, a: 1}
-  DeadColor: {r: 0.94509804, g: 0.34901962, b: 0.3254902, a: 1}
+  Color: {r: 0.14509805, g: 0.5294118, b: 0.34901962, a: 1}
   mover: {fileID: 0}
-  kill: 0
-  infect: 0
+  CanKill: 0
+  CanInfect: 0
+  KillTime: 0
+  InfectTime: 0
   killSpritePrefab: {fileID: 3828117436398729496, guid: 8973f25f2296ad9468ad246241dab557, type: 3}

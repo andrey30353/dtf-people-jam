@@ -56,7 +56,7 @@ public class Mover : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
 
-        enabled = false;
+       // enabled = false;
 
         isStoped = true;       
     }
@@ -65,7 +65,7 @@ public class Mover : MonoBehaviour
     {
         SetRandomVelocity();
 
-        enabled = true;
+      //  enabled = true;
 
         isStoped = false;
     }
@@ -74,7 +74,10 @@ public class Mover : MonoBehaviour
     void Update()
     {
         if (isStoped)
+        {
+            rb.velocity = Vector3.zero;
             return;
+        }           
 
         if (managed)
         {
@@ -113,14 +116,21 @@ public class Mover : MonoBehaviour
             }
 
             var currentSpeed = rb.velocity.magnitude;
-            if (currentSpeed < Speed + speedThreshold)
+            if(currentSpeed == 0)
             {
-                rb.velocity *= Speed / currentSpeed;
+                SetRandomVelocity();
             }
-
-            if (currentSpeed > Speed + speedThreshold)
+            else
             {
-                rb.velocity *= Speed / currentSpeed;
+                if (currentSpeed < Speed + speedThreshold)
+                {
+                    rb.velocity *= Speed / currentSpeed;
+                }
+
+                if (currentSpeed > Speed + speedThreshold)
+                {
+                    rb.velocity *= Speed / currentSpeed;
+                }
             }
         }
     }

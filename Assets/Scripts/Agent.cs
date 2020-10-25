@@ -28,19 +28,26 @@ public class Agent : MonoBehaviour
 
     public bool Dead => !Live;
       
-    public Color LiveColor;
-    public Color DeadColor;
+    public Color Color;  
 
     MeshRenderer mr;
     public Mover mover;
+    [UnityEngine.Serialization.FormerlySerializedAs("Kill")]
+    public bool CanKill;
+    [UnityEngine.Serialization.FormerlySerializedAs("Infect")]
+    public bool CanInfect;
 
-    public bool kill;
-    public bool infect;
-    public bool queen;
+    public float KillTime;
+    public float InfectTime;
 
     public GameObject killSpritePrefab;
 
     //public bool BreakDoor ;
+
+        // занят ли сейчас
+    private bool isBusy;
+
+    private bool isInfected;
 
     [ContextMenu("Start")]
     private void Start()
@@ -49,7 +56,7 @@ public class Agent : MonoBehaviour
 
         mr = GetComponent<MeshRenderer>();
 
-        mr.material.color = Live ? LiveColor : DeadColor;
+        mr.material.color = Color ;
 
         // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
@@ -61,7 +68,10 @@ public class Agent : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (mover.isStoped)
-            return;       
+            return;
+
+        if (isBusy)
+            return;
 
         if (collision.gameObject.tag != "Agent")
             return;
@@ -73,46 +83,80 @@ public class Agent : MonoBehaviour
         if (otherAgent.mover.isStoped)
             return;
 
+        if (otherAgent.isBusy)
+            return;
+
         // Debug.Log(collision.gameObject.name);
 
-        if(Live && otherAgent.Dead)
+      /*  if (Live && otherAgent.Dead)
         {
-            if (otherAgent.infect)
+            if (otherAgent.CanInfect)
             {
-                StartCoroutine(InfectCor(otherAgent, this, 0.5f));                
+                StartCoroutine(InfectCor(otherAgent, this, 1));                
             }
 
-            if (otherAgent.kill)
+            if (otherAgent.CanKill)
             {
-                StartCoroutine(KillCor(otherAgent, this, 1f));               
+                StartCoroutine(KillCor(otherAgent, this, KillTime));               
             }
 
-        }
+            return;
+        }*/
 
         if(Dead && otherAgent.Live)
         {
-            if (infect)
+            if (CanInfect && !otherAgent.isInfected)
             {
-                StartCoroutine(InfectCor(this, otherAgent, 0.5f));               
+                StartCoroutine(InfectCor(this, otherAgent, 1));               
             }
-
-            if (kill)
+            // не кушаем инфицированных
+            if (CanKill &&  !otherAgent.isInfected)
             {
-                StartCoroutine(KillCor(this, otherAgent, 1f));               
-            }              
+                StartCoroutine(KillCor(this, otherAgent, KillTime));               
+            }
+            return;
         }              
     }
 
     public IEnumerator KillCor(Agent killer, Agent victim, float time)
     {
         killer.mover.StopMove();
-
         victim.mover.StopMove();
+
+        killer.isBusy = true;
+        victim.isBusy = true;
+
         yield return new WaitForSeconds(time);
+
+        killer.isBusy = false;
+        victim.isBusy = false;
 
         victim.Kill();
 
-        killer.mover.RestoreMove();
+        killer.mover.RestoreMove();       
+    }
+
+   
+    private IEnumerator InfectCor(Agent infector, Agent victim, float time)
+    {
+        // todo
+        //victim.mover.Speed = infector.mover.Speed;
+
+        infector.mover.StopMove();
+        victim.mover.StopMove();
+
+        infector.isBusy = true;
+        victim.isBusy = true;
+
+        yield return new WaitForSeconds(time);
+
+        infector.isBusy = false;
+        victim.isBusy = false;
+
+        victim.Infect(infector);
+
+        victim.mover.RestoreMove();
+        infector.mover.RestoreMove();        
     }
 
     internal void Manage(bool manage)
@@ -125,35 +169,35 @@ public class Agent : MonoBehaviour
         if (Dead)
             return;
 
-        Live = false;
+        //Live = false;
 
-        mr.material.color = DeadColor;
+        isInfected = true;
 
-       // print($"deadSpeed / mover.startSpeed => {deadSpeed}/{mover.startSpeed} = {deadSpeed / mover.startSpeed}")
+        mr.material.color = Settings.Instance.InfectedColor;//infector.Color;
+                       
+        // todo
+        var producer = gameObject.AddComponent<AgentProducer>();
+        var templ = infector.GetComponent<AgentProducer>();
+        producer.AgenContent = templ.AgenContent;
+        producer.AgenPrefab = templ.AgenPrefab;
+        producer.Time = templ.Time;
+        producer.OnTime = templ.OnTime;
+        producer.enabled = true;
+
+        // print($"deadSpeed / mover.startSpeed => {deadSpeed}/{mover.startSpeed} = {deadSpeed / mover.startSpeed}")
         // todo
         //mover.Speed = infector.mover.Speed;
-        kill = infector.kill;
-        infect = infector.infect;
+        //CanKill = infector.CanKill;
+        //CanInfect = infector.CanInfect;
+
+        // это не нужно: оставляем живым
+        /*KillTime = infector.KillTime;
+        InfectTime = infector.InfectTime;
 
         gameObject.layer = infector.gameObject.layer;
-        gameObject.tag = infector.gameObject.tag;
+        gameObject.tag = infector.gameObject.tag;*/
     }
 
-    private IEnumerator InfectCor(Agent infector, Agent victim, float time)
-    {
-        // todo
-        victim.mover.Speed = infector.mover.Speed;
-
-        infector.mover.StopMove();
-
-        victim.mover.StopMove();
-        yield return new WaitForSeconds(time);
-
-        victim.Infect(infector);
-
-        victim.mover.RestoreMove();
-        infector.mover.RestoreMove();        
-    }
 
     public void Kill()
     {
@@ -164,12 +208,16 @@ public class Agent : MonoBehaviour
 
         Instantiate(killSpritePrefab, transform.position, Quaternion.Euler(90, 0 ,0));
 
-        Game.Instance.LiveCount--;
+        Game.Instance.LiveDead();
+       
+
+        Destroy(gameObject);
     }
 
     public void MoveTo(Vector3 point)
     {
-        mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
+        if(mover!=null)
+            mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
     }
 
     

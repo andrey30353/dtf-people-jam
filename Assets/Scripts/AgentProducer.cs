@@ -6,13 +6,19 @@ public class AgentProducer : MonoBehaviour
 {
     public Transform AgenContent;
 
-    public GameObject AgenPrefab;
+    public GameObject[] AgenPrefab;
     public float Time;
+
+    // один раз?
+    public bool OnTime;
 
     void Start()
     {
+        if (AgenContent == null)
+            AgenContent = Settings.Instance.AgentsContent;
+
        // if (queen)
-            StartCoroutine(ProduceCor());
+        StartCoroutine(ProduceCor());
     }
 
     //// Update is called once per frame
@@ -27,9 +33,26 @@ public class AgentProducer : MonoBehaviour
         {
             yield return new WaitForSeconds(Time);
 
-            var newAgent = Instantiate(AgenPrefab, AgenContent);
+            var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
+            var newAgent = Instantiate(randomAgent, AgenContent);
             newAgent.transform.position = transform.position;
-        }       
+
+            if (OnTime)
+                break;
+        }
+
+        if (OnTime)
+        {
+            var agentCarrier = GetComponent<Agent>();
+            if (agentCarrier != null)
+            {
+                agentCarrier.Kill();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }           
+        }
         //Ma
     }
 }

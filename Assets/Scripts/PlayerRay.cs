@@ -12,7 +12,7 @@ public class PlayerRay : MonoBehaviour
     public float Radius;
     private Vector3 point;
 
-    public Agent selectedAgent;
+    public Agent selectedAgent;   
 
     Camera camera;
     void Start()
@@ -42,11 +42,12 @@ public class PlayerRay : MonoBehaviour
                 {
                     if (selectedAgent != null && selectedAgent != agent)
                     {
-                        selectedAgent.Manage(false);
+                        selectedAgent.Manage(false);                      
                     }
-
+                    
                     selectedAgent = agent;                    
-                    agent.Manage(true);                   
+                    agent.Manage(true);
+                  
                 }
             }
         }
@@ -60,7 +61,7 @@ public class PlayerRay : MonoBehaviour
                 point = hit.point;
 
                 Game.Instance.MoveAgents(point, Radius);
-                Debug.DrawLine(point, point + Vector3.up * 5, Color.yellow, 10);              
+                //Debug.DrawLine(point, point + Vector3.up * 5, Color.yellow, 10);              
             }
         }
 
