@@ -26,14 +26,16 @@ public class Mover : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
-       
-        
-        var randomDirection = Random.onUnitSphere;
-
-        rb.velocity = new Vector3(randomDirection.x, 0, randomDirection.z) * Speed;       
+        SetRandomVelocity();       
         //rb.AddForce(new Vector3(3, 0, 3)*100);
 
         speedThreshold = Speed * 0f;
+    }
+
+    private void SetRandomVelocity()
+    {
+        var randomDirection = Random.onUnitSphere;
+        rb.velocity = new Vector3(randomDirection.x, 0, randomDirection.z) * Speed;
     }
 
     internal void Stop()
@@ -46,6 +48,24 @@ public class Mover : MonoBehaviour
 
         rb.isKinematic = true;
         collider.enabled = false;
+    }
+
+    internal void StopMove()
+    {
+        rb.velocity = Vector3.zero;
+
+        enabled = false;
+
+        isStoped = true;       
+    }
+
+    internal void RestoreMove()
+    {
+        SetRandomVelocity();
+
+        enabled = true;
+
+        isStoped = false;
     }
 
     // Update is called once per frame

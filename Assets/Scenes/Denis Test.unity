@@ -2863,7 +2863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1983694613779854785, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
       propertyPath: infect
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983694613779854785, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}
+      propertyPath: kill
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d7c28c8771ff5340b1a1c72d622bfe4, type: 3}

@@ -64,12 +64,12 @@ public class Game : MonoBehaviour
 
     public void MoveAgents(Vector3 point, float radius)
     {
-        var result = new Collider[10];
+       // var result = new Collider[10];
 
-       var res =  Physics.OverlapSphere(point, radius, AgentMask.value);
+        var res =  Physics.OverlapSphere(point, radius, AgentMask.value);
         // Physics.OverlapSphereNonAlloc(point, radius, result, AgentMask.value);
 
-        print(res.Length);
+        //print(res.Length);
 
         foreach (var item in res)
         {

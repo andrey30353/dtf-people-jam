@@ -72,8 +72,11 @@ public class Agent : MonoBehaviour
             if(otherAgent.infect)
                 Infect(otherAgent);
 
-            if(otherAgent.kill)
-                Kill();
+            if (otherAgent.kill)
+            {
+                StartCoroutine(KillCor(otherAgent, this, 1f));               
+            }
+
         }
 
         if(Dead && otherAgent.Live)
@@ -81,9 +84,23 @@ public class Agent : MonoBehaviour
             if (infect)
                 otherAgent.Infect(this);
 
-            if (kill)   
-                otherAgent.Kill();
+            if (kill)
+            {
+                StartCoroutine(KillCor(this, otherAgent, 1f));               
+            }              
         }              
+    }
+
+    public IEnumerator KillCor(Agent killer, Agent victim, float time)
+    {
+        killer.mover.StopMove();
+
+        victim.mover.StopMove();
+        yield return new WaitForSeconds(time);
+
+        victim.Kill();
+
+        killer.mover.RestoreMove();
     }
 
     internal void Manage(bool manage)
