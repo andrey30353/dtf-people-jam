@@ -19,6 +19,8 @@ public class Agent : MonoBehaviour
     public bool kill;
     public bool infect;
 
+    public GameObject killSpritePrefab;
+
     [ContextMenu("Start")]
     private void Start()
     {
@@ -99,6 +101,8 @@ public class Agent : MonoBehaviour
             return;
 
         gameObject.SetActive(false);
+
+        Instantiate(killSpritePrefab, transform.position, Quaternion.Euler(90, 0 ,0));
 
         Game.Instance.LiveCount--;
     }
