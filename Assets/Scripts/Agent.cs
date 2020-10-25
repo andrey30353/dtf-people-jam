@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 public enum AgentType
 {
     Team,
+
     // враги:
     // просто убивает
     Hunter,
@@ -15,7 +16,10 @@ public enum AgentType
     Infector,
 
     // королева - производит новых
-    Queen
+    Queen,
+
+    // из него получаются новые враги
+    Egg
 }
 
 public class Agent : MonoBehaviour
@@ -32,6 +36,7 @@ public class Agent : MonoBehaviour
 
     public bool kill;
     public bool infect;
+    public bool queen;
 
     public GameObject killSpritePrefab;
 
@@ -46,12 +51,13 @@ public class Agent : MonoBehaviour
 
         mr.material.color = Live ? LiveColor : DeadColor;
 
-       // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
+        // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
-       // Assert.IsTrue(Live && !kill && !infect);
-    }
+        // Assert.IsTrue(Live && !kill && !infect);
 
- 
+       
+    }    
+
     private void OnCollisionEnter(Collision collision)
     {
         if (mover.isStoped)
@@ -165,4 +171,6 @@ public class Agent : MonoBehaviour
     {
         mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
     }
+
+    
 }

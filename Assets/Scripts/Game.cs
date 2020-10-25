@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+public class AgentProbably
+{
+    public AgentType Type;
+    public float RandomValue;
+}
+
 public class Game : MonoBehaviour
 {
     public GameObject AgentsContent;
@@ -17,6 +23,8 @@ public class Game : MonoBehaviour
     public LayerMask AgentMask;
 
     public static Game Instance;
+
+    public List<AgentProbably> AgentProbably;
 
     private void Awake()
     {
@@ -80,4 +88,6 @@ public class Game : MonoBehaviour
        
        // fore
     }
+
+
 }
