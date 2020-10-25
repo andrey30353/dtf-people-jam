@@ -10,7 +10,7 @@ public class GameUI : MonoBehaviour
        
     public void UpdateUI()
     {
-        LiveCountText.text = Game.Instance.LiveCount.ToString();
-        DeadCountText.text = Game.Instance.DeadCount.ToString();
+        LiveCountText.text = Game2D.Instance.LiverCount.ToString();
+        DeadCountText.text = Game2D.Instance.EnemiesCount.ToString();
     }
 }

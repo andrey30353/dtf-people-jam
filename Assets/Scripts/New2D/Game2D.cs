@@ -7,16 +7,17 @@ using UnityEngine.Assertions;
 
 
 
-public class Game : MonoBehaviour
+public class Game2D : MonoBehaviour
 {
     public GameObject AgentsContent;
 
     public int AgentCount;
   
-    public int LiveCount;
-    public int DeadCount;
+    public int LiverCount;
+    public int EnemiesCount;
 
-    public List<Agent> LiveAgents;
+    public Liver2D[] Livers;
+    public Enemy2D[] Enemies;
 
     public LayerMask AgentMask;
 
@@ -24,7 +25,7 @@ public class Game : MonoBehaviour
     public GameUI GameUi;
   
 
-    public static Game Instance;
+    public static Game2D Instance;
 
     private void Awake()
     {
@@ -33,39 +34,31 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        var agents = AgentsContent.GetComponentsInChildren<Agent>();
-        Assert.IsTrue(agents.Length != 0);
+        Livers = AgentsContent.GetComponentsInChildren<Liver2D>();
+        Assert.IsTrue(Livers.Length != 0);
 
-        foreach (var agent in agents)
-        {
-            if (agent.Live)
-            {
-                LiveAgents.Add(agent);
-                LiveCount++; 
-            }
-            else
-            { 
-                DeadCount++;
-            }
+        Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();
+        Assert.IsTrue(Enemies.Length != 0);
 
-        }
-
+        LiverCount = Livers.Length;
+        EnemiesCount = Enemies.Length;
+        
         GameUi.UpdateUI();
 
-        Assert.IsTrue(LiveCount != 0);
-        Assert.IsTrue(DeadCount != 0);
+        Assert.IsTrue(LiverCount != 0);
+        Assert.IsTrue(EnemiesCount != 0);
     }
    
 
     private void CheckGameOver()
     {
-        if(LiveCount == 0)
+        if(LiverCount == 0)
         {
             print("Поражение!");
             return;
         }
 
-        if (DeadCount == 0)
+        if (EnemiesCount == 0)
         {
             print("Победа!");
             return;
@@ -76,14 +69,14 @@ public class Game : MonoBehaviour
     {
        // var result = new Collider[10];
 
-        var res =  Physics.OverlapSphere(point, radius, AgentMask.value);
+        var res =  Physics2D.OverlapCircleAll(point, radius, AgentMask.value);
         // Physics.OverlapSphereNonAlloc(point, radius, result, AgentMask.value);
 
         //print(res.Length);
 
         foreach (var item in res)
         {
-           var agent =  item.GetComponent<Agent>();
+           var agent =  item.GetComponent<Liver2D>();
             agent.MoveTo(point);
         }
 
@@ -93,7 +86,7 @@ public class Game : MonoBehaviour
 
     internal void LiverDead()
     {
-        LiveCount--;
+        LiverCount--;
 
         GameUi.UpdateUI();
 

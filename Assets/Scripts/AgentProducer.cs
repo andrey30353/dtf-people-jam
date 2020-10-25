@@ -9,22 +9,21 @@ public class AgentProducer : MonoBehaviour
     public GameObject[] AgenPrefab;
     public float Time;
 
-    // один раз?
-    public bool OnTime;
+    // один раз?   
+    public bool Once;
 
     void Start()
     {
-        if (AgenContent == null)
-            AgenContent = Settings.Instance.AgentsContent;
+        AgenContent = Settings.Instance.AgentsContent;
 
-       // if (queen)
+        // if (queen)
         StartCoroutine(ProduceCor());
     }
 
     //// Update is called once per frame
     //void Update()
     //{
-        
+
     //}
 
     private IEnumerator ProduceCor()
@@ -36,12 +35,13 @@ public class AgentProducer : MonoBehaviour
             var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
             var newAgent = Instantiate(randomAgent, AgenContent);
             newAgent.transform.position = transform.position;
+            newAgent.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
 
-            if (OnTime)
+            if (Once)
                 break;
         }
 
-        if (OnTime)
+        if (Once)
         {
             var agentCarrier = GetComponent<Agent>();
             if (agentCarrier != null)
@@ -51,7 +51,7 @@ public class AgentProducer : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-            }           
+            }
         }
         //Ma
     }

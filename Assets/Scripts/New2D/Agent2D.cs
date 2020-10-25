@@ -4,25 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public enum AgentType
-{
-    Team,
 
-    // враги:
-    // просто убивает
-    Hunter,
-
-    // заразитель, вылупляются разные с разной вероятностью
-    Infector,
-
-    // королева - производит новых
-    Queen,
-
-    // из него получаются новые враги
-    Egg
-}
-
-public class Agent : MonoBehaviour
+public class Agent2D : MonoBehaviour
 {
     public bool Live;
 
@@ -30,11 +13,11 @@ public class Agent : MonoBehaviour
       
     public Color Color;  
 
-    MeshRenderer mr;
+    
     public Mover mover;
-    [UnityEngine.Serialization.FormerlySerializedAs("Kill")]
+   
     public bool CanKill;
-    [UnityEngine.Serialization.FormerlySerializedAs("Infect")]
+  
     public bool CanInfect;
 
     public float KillTime;
@@ -45,18 +28,19 @@ public class Agent : MonoBehaviour
     //public bool BreakDoor ;
 
         // занят ли сейчас
-    private bool isBusy;
+    public bool isBusy;
 
-    private bool isInfected;
+    public bool isInfected;
 
-    [ContextMenu("Start")]
+    SpriteRenderer sr;
+   
     private void Start()
     {
-        mover = GetComponent<Mover>();      
+        mover = GetComponent<Mover>();
 
-        mr = GetComponent<MeshRenderer>();
+        sr = GetComponent<SpriteRenderer>();
 
-        mr.material.color = Color ;
+        sr.material.color = Color ;
 
         // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
@@ -65,7 +49,7 @@ public class Agent : MonoBehaviour
        
     }    
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (mover.isStoped)
             return;
@@ -76,7 +60,7 @@ public class Agent : MonoBehaviour
         if (collision.gameObject.tag != "Agent")
             return;
 
-        var otherAgent = collision.gameObject.GetComponent<Agent>();
+        var otherAgent = collision.gameObject.GetComponent<Agent2D>();
         if (otherAgent == null)
             return;
 
@@ -118,7 +102,7 @@ public class Agent : MonoBehaviour
         }              
     }
 
-    public IEnumerator KillCor(Agent killer, Agent victim, float time)
+    public IEnumerator KillCor(Agent2D killer, Agent2D victim, float time)
     {
         killer.mover.StopMove();
         victim.mover.StopMove();
@@ -137,7 +121,7 @@ public class Agent : MonoBehaviour
     }
 
    
-    private IEnumerator InfectCor(Agent infector, Agent victim, float time)
+    private IEnumerator InfectCor(Agent2D infector, Agent2D victim, float time)
     {
         // todo
         //victim.mover.Speed = infector.mover.Speed;
@@ -164,7 +148,7 @@ public class Agent : MonoBehaviour
         mover.Manage(manage);
     }
 
-    private void Infect(Agent infector)
+    private void Infect(Agent2D infector)
     {
         if (Dead)
             return;
@@ -173,7 +157,7 @@ public class Agent : MonoBehaviour
 
         isInfected = true;
 
-        mr.material.color = Settings.Instance.InfectedColor;//infector.Color;
+        sr.material.color = Settings.Instance.InfectedColor;//infector.Color;
                        
         // todo
         var producer = gameObject.AddComponent<AgentProducer>();
@@ -208,7 +192,7 @@ public class Agent : MonoBehaviour
 
         Instantiate(killSpritePrefab, transform.position, Quaternion.Euler(90, 0 ,0));
 
-        Game.Instance.LiverDead();
+        Game2D.Instance.LiverDead();
        
 
         Destroy(gameObject);
