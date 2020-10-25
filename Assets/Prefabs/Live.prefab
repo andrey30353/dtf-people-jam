@@ -129,6 +129,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   collider: {fileID: 0}
   startSpeedVector: {x: 3, y: 3}
+  Speed: 3
   startSpeed: 0
   isStoped: 0
 --- !u!114 &1983694613779854785

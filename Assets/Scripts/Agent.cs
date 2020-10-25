@@ -4,6 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+public enum AgentType
+{
+    Team,
+    // враги:
+    // просто убивает
+    Hunter,
+
+    // заразитель, вылупляются разные с разной вероятностью
+    Infector,
+
+    // королева - производит новых
+    Queen
+}
+
 public class Agent : MonoBehaviour
 {
     public bool Live;
@@ -67,7 +81,7 @@ public class Agent : MonoBehaviour
             if (infect)
                 otherAgent.Infect(this);
 
-            if (kill)
+            if (kill)   
                 otherAgent.Kill();
         }              
     }
@@ -87,7 +101,7 @@ public class Agent : MonoBehaviour
         mr.material.color = DeadColor;
 
        // print($"deadSpeed / mover.startSpeed => {deadSpeed}/{mover.startSpeed} = {deadSpeed / mover.startSpeed}")
-        mover.startSpeed = infector.mover.startSpeed;
+        mover.Speed = infector.mover.Speed;
         kill = infector.kill;
         infect = infector.infect;
 
@@ -109,6 +123,6 @@ public class Agent : MonoBehaviour
 
     public void MoveTo(Vector3 point)
     {
-        mover.rb.velocity = (point - transform.position).normalized * mover.startSpeed;
+        mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
     }
 }

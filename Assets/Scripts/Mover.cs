@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +10,8 @@ public class Mover : MonoBehaviour
 
     public Vector2 startSpeedVector;
 
-    public float startSpeed;
-
+    public float Speed;
+       
     float speedThreshold;
 
     public bool isStoped;
@@ -26,11 +26,14 @@ public class Mover : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
-        rb.velocity = new Vector3(startSpeedVector.x, 0, startSpeedVector.y);
-        startSpeed = rb.velocity.magnitude;
+       
+        
+        var randomDirection = Random.onUnitSphere;
+
+        rb.velocity = new Vector3(randomDirection.x, 0, randomDirection.z) * Speed;       
         //rb.AddForce(new Vector3(3, 0, 3)*100);
 
-        speedThreshold = startSpeed * 0f;
+        speedThreshold = Speed * 0f;
     }
 
     internal void Stop()
@@ -56,7 +59,7 @@ public class Mover : MonoBehaviour
             var inputX = Input.GetAxis("Horizontal");
             var inputY = Input.GetAxis("Vertical");
 
-            var velocity = new Vector3(inputX, 0, inputY).normalized * startSpeed;
+            var velocity = new Vector3(inputX, 0, inputY).normalized * Speed;
             rb.velocity = velocity;
         }
         else
@@ -88,14 +91,14 @@ public class Mover : MonoBehaviour
             }
 
             var currentSpeed = rb.velocity.magnitude;
-            if (currentSpeed < startSpeed + speedThreshold)
+            if (currentSpeed < Speed + speedThreshold)
             {
-                rb.velocity *= startSpeed / currentSpeed;
+                rb.velocity *= Speed / currentSpeed;
             }
 
-            if (currentSpeed > startSpeed + speedThreshold)
+            if (currentSpeed > Speed + speedThreshold)
             {
-                rb.velocity *= startSpeed / currentSpeed;
+                rb.velocity *= Speed / currentSpeed;
             }
         }
 
