@@ -6,19 +6,19 @@ using UnityEngine;
 public class Mover2D : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public CircleCollider2D collider2d;  
+    public CircleCollider2D collider2d;
 
-   // public float startSpeed;
+    // public float startSpeed;
 
     public float Speed;
-       
+
     float speedThreshold;
 
     public bool isStoped;
 
     public Animator animator;
-      
-    private bool managed = false;   
+
+    private bool managed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class Mover2D : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        SetRandomVelocity();      
+        SetRandomVelocity();
 
         speedThreshold = Speed * 0f;
     }
@@ -53,31 +53,31 @@ public class Mover2D : MonoBehaviour
     }
 
     internal void StopMove()
-    {       
+    {
         rb.velocity = Vector2.zero;
 
-       // enabled = false;
+        // enabled = false;
 
-        isStoped = true;       
+        isStoped = true;
     }
 
     internal void RestoreMove()
     {
         SetRandomVelocity();
 
-      //  enabled = true;
+        //  enabled = true;
 
         isStoped = false;
     }
 
     // Update is called once per frame
     void Update()
-    {      
+    {
         if (isStoped)
         {
             rb.velocity = Vector2.zero;
             return;
-        }           
+        }
 
         if (managed)
         {
@@ -87,18 +87,18 @@ public class Mover2D : MonoBehaviour
             var velocity = new Vector2(inputX, inputY).normalized * Speed;
             rb.velocity = velocity;
 
-            if(rb.velocity == Vector2.zero)
+            if (rb.velocity == Vector2.zero)
             {
                 animator.enabled = false;
             }
             else
             {
                 animator.enabled = true;
-            }               
+            }
         }
         else
-        {           
-           
+        {
+
             var rel = 1f;
             var xVal = Mathf.Abs(rb.velocity.x);
             var yVal = Mathf.Abs(rb.velocity.y);
@@ -125,9 +125,9 @@ public class Mover2D : MonoBehaviour
                 rb.velocity += additional*0.5f;
             }
             */
-                        
+
             var currentSpeed = rb.velocity.magnitude;
-            if(currentSpeed == 0)
+            if (currentSpeed == 0)
             {
                 SetRandomVelocity();
             }
@@ -149,6 +149,13 @@ public class Mover2D : MonoBehaviour
                 SetRandomVelocity();
             }
         }
+
+        if (rb.velocity != Vector2.zero)
+        {
+            var dir = rb.velocity;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
     internal void Manage(bool manage)
@@ -157,7 +164,7 @@ public class Mover2D : MonoBehaviour
 
         animator.enabled = !manage;
 
-        if(!manage)
+        if (!manage)
         {
             SetRandomVelocity();
         }
