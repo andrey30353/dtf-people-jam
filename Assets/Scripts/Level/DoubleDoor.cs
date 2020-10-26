@@ -4,47 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Door2D : MonoBehaviour
+public class DoubleDoor2D : MonoBehaviour
 {
-    public bool IsOpen;
 
-    public bool IsClosed => !IsOpen;
-
-    private bool InProcess;
-
-    public Vector3 OpenPosition;
-    public Vector3 ClosePosition;
-
-    public float time = 0.5f;
-
-    public int Hp = 5;
-
-    public bool Broken => Hp <= 0;
-
-    public List<Door2D> OpeningDepends;
-
-    public Door2D LinkedDoor;
-
+    public Door2D Door1;
+    public Door2D Door2;
+       
     public UnityEvent OpenEvent;
     public UnityEvent CloseEvent;
-
-    private void OnValidate()
-    {
-        if (LinkedDoor != null)
-            LinkedDoor.LinkedDoor = this;
-    }
-
+     
     private void Start()
     {
         //Hp
     }
-
+    /*
     public void Select()
     {
-        if (Broken)
+        if (Door1.Broken && Door2.Broken)
             return;
 
-        if (InProcess)
+        if (Door1.InProcess || Door2.InProcess)
             return;
 
         if (IsOpen)
@@ -55,15 +34,6 @@ public class Door2D : MonoBehaviour
 
     private void Open()
     {
-       /* var canOpen = true;
-        foreach (var door in OpeningDepends)
-        {
-            if (door.IsOpen)
-                return;
-        }
-        */
-        //if()
-
         OpenEvent?.Invoke();
 
         StartCoroutine(OpenCor());
@@ -177,5 +147,5 @@ public class Door2D : MonoBehaviour
     {
         OpenPosition = transform.localPosition;
         ClosePosition = transform.localPosition;
-    }
+    }*/
 }
