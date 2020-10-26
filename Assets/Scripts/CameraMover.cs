@@ -14,6 +14,10 @@ public class CameraMover : MonoBehaviour
     
     private float zoom;
 
+    public float Speed = 1f;
+
+    public float Threshold = 0.2f;
+
     Camera camera;
 
     float z;
@@ -36,8 +40,28 @@ public class CameraMover : MonoBehaviour
             AdjustZoom(zoomDelta);
         }
 
-        float xDelta = Input.GetAxis("Horizontal");
-        float yDelta = Input.GetAxis("Vertical");
+
+
+        //float xDelta = Input.GetAxis("Horizontal");
+        //float yDelta = Input.GetAxis("Vertical");
+
+        float xDelta = 0f;
+        float yDelta = 0f;
+
+        //print(Input.mousePosition.y);
+
+        if (Input.mousePosition.x < Screen.width * Threshold) 
+            xDelta = -1;
+       
+        if (Input.mousePosition.x > Screen.width - Screen.width * Threshold)        
+            xDelta = 1;
+       
+        if (Input.mousePosition.y < Screen.height * Threshold)
+                yDelta = -1;
+        
+        if (Input.mousePosition.y > Screen.height - Screen.height * Threshold)
+                yDelta = 1;        
+
         if (xDelta != 0f || yDelta != 0f)
         {
             AdjustPosition(xDelta, yDelta);

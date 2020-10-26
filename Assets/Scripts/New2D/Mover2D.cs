@@ -15,8 +15,9 @@ public class Mover2D : MonoBehaviour
     float speedThreshold;
 
     public bool isStoped;
-    public bool isVacuumed;
 
+    public Animator animator;
+      
     private bool managed = false;   
 
     // Start is called before the first frame update
@@ -24,6 +25,8 @@ public class Mover2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         collider2d = GetComponent<CircleCollider2D>();
+
+        animator = GetComponent<Animator>();
 
         SetRandomVelocity();      
 
@@ -50,7 +53,7 @@ public class Mover2D : MonoBehaviour
     }
 
     internal void StopMove()
-    {
+    {       
         rb.velocity = Vector2.zero;
 
        // enabled = false;
@@ -69,12 +72,7 @@ public class Mover2D : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (isVacuumed)
-        {           
-            return;
-        }
-
+    {      
         if (isStoped)
         {
             rb.velocity = Vector2.zero;
@@ -88,6 +86,15 @@ public class Mover2D : MonoBehaviour
 
             var velocity = new Vector2(inputX, inputY).normalized * Speed;
             rb.velocity = velocity;
+
+            if(rb.velocity == Vector2.zero)
+            {
+                animator.enabled = false;
+            }
+            else
+            {
+                animator.enabled = true;
+            }               
         }
         else
         {           
@@ -147,6 +154,8 @@ public class Mover2D : MonoBehaviour
     internal void Manage(bool manage)
     {
         managed = manage;
+
+        animator.enabled = !manage;
 
         if(!manage)
         {

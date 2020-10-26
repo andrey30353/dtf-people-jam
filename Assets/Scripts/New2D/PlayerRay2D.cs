@@ -51,6 +51,14 @@ public class PlayerRay2D : MonoBehaviour
                   
                 }
             }
+            else
+            {
+                if (selectedAgent != null )
+                {
+                    selectedAgent.Manage(false);
+                    selectedAgent = null;
+                }
+            }
         }
 
         if (Input.GetMouseButton(1))

@@ -22,12 +22,6 @@ public class Liver2D : MonoBehaviour
 
     public List<Sprite> DeadSprites;
 
-    Animator animator;
-
-   // public GameObject DeadEffectPrefab;
-
-    //public bool BreakDoor ;
-
     // занят ли сейчас
     public bool isBusy;
 
@@ -40,17 +34,13 @@ public class Liver2D : MonoBehaviour
         mover = GetComponent<Mover2D>();
 
         sr = GetComponent<SpriteRenderer>();
-
-        animator = GetComponent<Animator>();
-
+             
        // sr.material.color = Color ;
 
         // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
         // Assert.IsTrue(Live && !kill && !infect);
-
-
-    }    
+                   }    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -200,7 +190,7 @@ public class Liver2D : MonoBehaviour
 
         Game2D.Instance.LiverDead();
 
-        Destroy(animator);
+        Destroy(mover.animator);
         Destroy(mover.rb);
         Destroy(mover.collider2d);      
         Destroy(mover);
