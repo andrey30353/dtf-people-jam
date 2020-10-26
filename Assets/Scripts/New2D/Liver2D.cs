@@ -16,15 +16,16 @@ public class Liver2D : MonoBehaviour
     public float InfectTime;
 
     public GameObject DeadSpritePrefab;
+    public GameObject DeadEffectPrefab;
 
     //public bool BreakDoor ;
 
-        // занят ли сейчас
+    // занят ли сейчас
     public bool isBusy;
 
     public bool isInfected;
 
-    SpriteRenderer sr;
+    SpriteRenderer sr;    
    
     private void Start()
     {
@@ -176,6 +177,8 @@ public class Liver2D : MonoBehaviour
         gameObject.SetActive(false);
 
         Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0 , Random.Range(0, 360)));
+        var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(effect, 1f);
 
         Game2D.Instance.LiverDead();
        

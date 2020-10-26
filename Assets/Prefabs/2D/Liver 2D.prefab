@@ -156,6 +156,7 @@ MonoBehaviour:
   CanKill: 0
   KillTime: 0
   InfectTime: 0
-  DeadSpritePrefab: {fileID: 0}
+  DeadSpritePrefab: {fileID: 3828117436398729496, guid: 8973f25f2296ad9468ad246241dab557, type: 3}
+  DeadEffectPrefab: {fileID: 5368460846223691020, guid: e7b32fdcccf827741a454bafe8cd1beb, type: 3}
   isBusy: 0
   isInfected: 0
