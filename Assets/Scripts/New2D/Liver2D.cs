@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 
 public class Liver2D : MonoBehaviour
 {       
+    // todo del
     public Color Color;  
     
     public Mover2D mover;
@@ -17,6 +18,9 @@ public class Liver2D : MonoBehaviour
 
     public GameObject DeadSpritePrefab;
     public GameObject DeadEffectPrefab;
+
+    public List<Sprite> DeadSprites;
+   // public GameObject DeadEffectPrefab;
 
     //public bool BreakDoor ;
 
@@ -33,7 +37,7 @@ public class Liver2D : MonoBehaviour
 
         sr = GetComponent<SpriteRenderer>();
 
-        sr.material.color = Color ;
+       // sr.material.color = Color ;
 
         // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
@@ -174,10 +178,13 @@ public class Liver2D : MonoBehaviour
 
     public void Dead( bool needCorpse = true)
     {     
-        gameObject.SetActive(false);
+       // gameObject.SetActive(false);
 
         if (needCorpse)
-            Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0 , Random.Range(0, 360)));
+        {
+            sr.sprite = DeadSprites[Random.Range(0, DeadSprites.Count)];
+            //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        }
 
         if (needCorpse)
         {
@@ -187,7 +194,11 @@ public class Liver2D : MonoBehaviour
 
         Game2D.Instance.LiverDead();
 
-        Destroy(gameObject);
+        Destroy(mover.rb);
+        Destroy(mover.collider2d);      
+        Destroy(mover);
+        Destroy(this);
+        // Destroy(gameObject);
     }
 
     public void MoveTo(Vector3 point)
