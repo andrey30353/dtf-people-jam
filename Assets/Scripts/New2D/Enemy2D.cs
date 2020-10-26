@@ -12,11 +12,12 @@ public class Enemy2D : MonoBehaviour
     public Mover2D mover;
 
     public bool CanKill;
-
     public bool CanInfect;
+    public bool CanUseHatch;
 
     public float KillTime;
     public float InfectTime;
+    public float HatchTime = 1f;
 
     public GameObject DeadSpritePrefab;
 
@@ -141,10 +142,10 @@ public class Enemy2D : MonoBehaviour
     }
 
     public void Dead(bool needCorpse = true)
-    {       
+    {
         gameObject.SetActive(false);
-               
-        if(needCorpse)
+
+        if (needCorpse)
             Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
 
         Game2D.Instance.EnemyDead();
