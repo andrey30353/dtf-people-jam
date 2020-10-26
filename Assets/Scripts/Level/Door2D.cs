@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door2D : MonoBehaviour
 {
@@ -19,6 +20,17 @@ public class Door2D : MonoBehaviour
     public int Hp = 5;
 
     public bool Broken => Hp <= 0;
+
+    public Door2D LinkedDoor;
+
+    public UnityEvent OpenEvent;
+    public UnityEvent CloseEvent;
+
+    private void OnValidate()
+    {
+        if (LinkedDoor != null)
+            LinkedDoor.LinkedDoor = this;
+    }
 
     private void Start()
     {
@@ -41,7 +53,13 @@ public class Door2D : MonoBehaviour
 
     private void Open()
     {
+        OpenEvent?.Invoke();
+
         StartCoroutine(OpenCor());
+        if (LinkedDoor != null)
+        {
+            StartCoroutine(LinkedDoor.OpenCor());
+        }
     }
 
     private IEnumerator OpenCor()
@@ -64,7 +82,13 @@ public class Door2D : MonoBehaviour
 
     private void Close()
     {
+        CloseEvent?.Invoke();
+
         StartCoroutine(CloseCor());
+        if (LinkedDoor != null)
+        {
+            StartCoroutine(LinkedDoor.CloseCor());
+        }
     }
 
     private IEnumerator CloseCor()
@@ -132,6 +156,15 @@ public class Door2D : MonoBehaviour
 
     private void Break()
     {
+        OpenEvent?.Invoke();
+
         gameObject.SetActive(false);
+    }
+
+    [ContextMenu("Reset")]
+    private void Reset()
+    {
+        OpenPosition = transform.localPosition;
+        ClosePosition = transform.localPosition;
     }
 }

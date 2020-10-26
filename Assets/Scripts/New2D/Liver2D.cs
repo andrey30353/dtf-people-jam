@@ -172,16 +172,20 @@ public class Liver2D : MonoBehaviour
     }
 
 
-    public void Dead()
+    public void Dead( bool needCorpse = true)
     {     
         gameObject.SetActive(false);
 
-        Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0 , Random.Range(0, 360)));
-        var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-        Destroy(effect, 1f);
+        if (needCorpse)
+            Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0 , Random.Range(0, 360)));
+
+        if (needCorpse)
+        {
+            var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(effect, 1f);
+        }
 
         Game2D.Instance.LiverDead();
-       
 
         Destroy(gameObject);
     }

@@ -92,6 +92,10 @@ public class Game2D : MonoBehaviour
 
     internal void EnemyDead()
     {
-        throw new NotImplementedException();
+        EnemiesCount--;
+
+        GameUi.UpdateUI();
+
+        CheckGameOver();
     }
 }

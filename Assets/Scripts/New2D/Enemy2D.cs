@@ -7,12 +7,7 @@ using UnityEngine.Assertions;
 
 public class Enemy2D : MonoBehaviour
 {
-    public bool Live;
-
-    public bool Dead => !Live;
-
     public Color Color;
-
 
     public Mover2D mover;
 
@@ -145,20 +140,28 @@ public class Enemy2D : MonoBehaviour
         mover.Manage(manage);
     }
 
-    public void Kill()
-    {
-        if (Dead)
-            return;
+    public void Dead(bool needCorpse = true)
+    {       
+        gameObject.SetActive(false);
+               
+        if(needCorpse)
+            Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
 
+        Game2D.Instance.EnemyDead();
+
+        Destroy(gameObject);
+    }
+    /*
+    public void DeadCor(float timer = 0)
+    {        
         gameObject.SetActive(false);
 
         Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
 
         Game2D.Instance.EnemyDead();
 
-
-        Destroy(gameObject);
-    }
+        Destroy(gameObject, timer);
+    }*/
 
     public void MoveTo(Vector3 point)
     {

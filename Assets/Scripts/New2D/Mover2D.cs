@@ -15,6 +15,7 @@ public class Mover2D : MonoBehaviour
     float speedThreshold;
 
     public bool isStoped;
+    public bool isVacuumed;
 
     private bool managed = false;   
 
@@ -69,6 +70,11 @@ public class Mover2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isVacuumed)
+        {           
+            return;
+        }
+
         if (isStoped)
         {
             rb.velocity = Vector2.zero;
