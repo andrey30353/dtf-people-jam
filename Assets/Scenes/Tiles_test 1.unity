@@ -52162,7 +52162,7 @@ MonoBehaviour:
   MaxY_MinZoom: 0
   MinY_MaxZoom: -23
   MaxY_MaxZoom: 23
-  Speed: 1
+  Speed: 10
   Threshold: 0.2
 --- !u!1 &2042005136
 GameObject:

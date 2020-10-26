@@ -89,7 +89,7 @@ public class CameraMover : MonoBehaviour
         var minY = Mathf.Lerp(MinY_MinZoom, MinY_MaxZoom, zoom);
         var maxY = Mathf.Lerp(MaxY_MinZoom, MaxY_MaxZoom, zoom);
 
-        var distance = Mathf.Lerp(MinZoom, MaxZoom, zoom) * damping * Time.deltaTime;
+        var distance = /*Mathf.Lerp(MinZoom, MaxZoom, zoom) * damping **/Speed * Time.deltaTime;
 
         Vector3 position = camera.transform.localPosition;
         position += direction * distance;
