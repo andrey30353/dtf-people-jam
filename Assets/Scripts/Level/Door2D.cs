@@ -6,7 +6,13 @@ using UnityEngine.Events;
 
 public class Door2D : MonoBehaviour
 {
-    public bool IsOpen;
+    public Sprite DamagedSprite;
+    public Sprite BrokenSprite;
+
+    public BoxCollider2D BaseCollider;
+    public List<BoxCollider2D> BrokenColliders;
+
+    public bool IsOpen;  
 
     public bool IsClosed => !IsOpen;
 
@@ -28,6 +34,9 @@ public class Door2D : MonoBehaviour
     public UnityEvent OpenEvent;
     public UnityEvent CloseEvent;
 
+  
+    private SpriteRenderer sr;
+
     private void OnValidate()
     {
         if (LinkedDoor != null)
@@ -36,7 +45,8 @@ public class Door2D : MonoBehaviour
 
     private void Start()
     {
-        //Hp
+        //Hp       
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public void Select()
@@ -169,7 +179,16 @@ public class Door2D : MonoBehaviour
     {
         OpenEvent?.Invoke();
 
-        gameObject.SetActive(false);
+        BaseCollider.enabled = false;
+        
+        foreach (var brokenColl in BrokenColliders)
+        {
+            brokenColl.enabled = true;
+        }     
+
+        sr.sprite = BrokenSprite;
+
+        //gameObject.SetActive(false);
     }
 
     [ContextMenu("Reset")]
