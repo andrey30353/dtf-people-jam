@@ -28,7 +28,7 @@ public class Equipment : MonoBehaviour
         
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("OnCollisionEnter2D " + collision.gameObject.name);
+        //print("OnCollisionEnter2D " + collision.gameObject.name);
 
         var liver = collision.gameObject.GetComponent<Liver2D>();
         if (liver != null)
@@ -42,7 +42,7 @@ public class Equipment : MonoBehaviour
 
     public void Take(Liver2D liver)
     {
-        print("Take " + Type);
+        //print("Take " + Type);
 
         rb.simulated = false;
         collider2d.enabled = false;       
@@ -57,7 +57,7 @@ public class Equipment : MonoBehaviour
 
     public void TakeOff()
     {
-        print("TakeOff " + Type);
+        //print("TakeOff " + Type);
 
         collider2d.enabled = true;
         rb.simulated = true;

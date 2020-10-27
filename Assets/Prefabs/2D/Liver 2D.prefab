@@ -155,6 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 1
   WeaponDamage: 1
+  AttackRange: 2
+  AttackMask:
+    serializedVersion: 2
+    m_Bits: 1024
   mover: {fileID: 0}
   Equipment: {fileID: 0}
   Key: {fileID: 0}
