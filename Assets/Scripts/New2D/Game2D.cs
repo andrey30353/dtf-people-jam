@@ -22,8 +22,7 @@ public class Game2D : MonoBehaviour
     public LayerMask AgentMask;
 
     [Space]
-    public GameUI GameUi;
-  
+    public GameUI GameUi;   
 
     public static Game2D Instance;
 

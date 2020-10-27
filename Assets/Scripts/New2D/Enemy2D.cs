@@ -6,9 +6,7 @@ using UnityEngine.Assertions;
 
 
 public class Enemy2D : MonoBehaviour
-{
-    public Color Color;
-
+{  
     public Mover2D mover;
 
     public bool CanKill;
@@ -19,7 +17,17 @@ public class Enemy2D : MonoBehaviour
     public float InfectTime;
     public float HatchTime = 1f;
 
-    public GameObject DeadSpritePrefab;
+    public Sprite HatchSprite;
+    public float HatchSizeKoef;
+    public Color HatchColor;
+
+    private Sprite defaultSprite;
+    private Vector3 defaultScale;
+    private Color defaultColor;
+
+    public GameObject DeadEffectPrefab;
+
+    public List<Sprite> DeadSprites;   
 
     //public bool BreakDoor ;
 
@@ -33,16 +41,15 @@ public class Enemy2D : MonoBehaviour
         mover = GetComponent<Mover2D>();
 
         sr = GetComponent<SpriteRenderer>();
-
-        sr.material.color = Color;
+        defaultSprite = sr.sprite;
+        defaultScale = transform.localScale;
+        defaultColor = sr.color;
 
         // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
 
         // Assert.IsTrue(Live && !kill && !infect);
-
-
     }
-
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (mover.isStoped)
@@ -143,14 +150,32 @@ public class Enemy2D : MonoBehaviour
 
     public void Dead(bool needCorpse = true)
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+
+       // if (needCorpse)
+       //     Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
 
         if (needCorpse)
-            Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
+        {
+            sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
+            //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+        }
+
+        if (needCorpse)
+        {
+            var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+            Destroy(effect, 1f);
+        }
 
         Game2D.Instance.EnemyDead();
 
-        Destroy(gameObject);
+        Destroy(mover.animator);
+        Destroy(mover.rb);
+        Destroy(mover.collider2d);
+        Destroy(mover);
+        Destroy(this);
+
+        //Destroy(gameObject);
     }
     /*
     public void DeadCor(float timer = 0)
@@ -164,9 +189,45 @@ public class Enemy2D : MonoBehaviour
         Destroy(gameObject, timer);
     }*/
 
-    public void MoveTo(Vector3 point)
+  
+
+    internal void UseHatch(Hatch enter)
+    {      
+        StartCoroutine(UseHatchCor(enter));
+    }
+
+
+    internal IEnumerator UseHatchCor(Hatch enter)
     {
-        if (mover != null)
-            mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
+        HatchList.Instance.Use(true);
+
+        isBusy = true;
+        mover.UseHatch(true);
+
+        sr.sprite = HatchSprite;
+        transform.localScale = Vector3.one * HatchSizeKoef;
+        sr.color = HatchColor;
+
+        var targetHatch = HatchList.Instance.GetRandomHatch(enter);
+        var targetPos = targetHatch.transform.position;
+        var startPos = enter.transform.position;
+        var time = (startPos - targetPos).magnitude / (mover.Speed * HatchList.Instance.SpeedKoefInHatch);
+
+        var elapsedTime = 0f;
+        while (elapsedTime < time)
+        {
+            transform.position = Vector3.Lerp(startPos, targetPos, (elapsedTime / time));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        sr.sprite = defaultSprite;
+        transform.localScale = defaultScale;
+        sr.color = defaultColor;
+
+        isBusy = false;
+        mover.UseHatch(false);      
+
+        HatchList.Instance.Use(false);
     }
 }

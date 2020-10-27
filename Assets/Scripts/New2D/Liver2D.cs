@@ -5,19 +5,14 @@ using UnityEngine.Assertions;
 
 
 public class Liver2D : MonoBehaviour
-{       
-
-    // todo del
-    public Color Color;  
-    
+{    
     public Mover2D mover;
    
     public bool CanKill;  
    
     public float KillTime;
     public float InfectTime;
-
-    public GameObject DeadSpritePrefab;
+     
     public GameObject DeadEffectPrefab;
 
     public List<Sprite> DeadSprites;

@@ -108,7 +108,7 @@ MonoBehaviour:
   OpenPosition: {x: -3, y: 0, z: 0}
   ClosePosition: {x: 0, y: 0, z: 0}
   time: 0.5
-  Hp: 5
+  Hp: 20
   OpeningDepends: []
   LinkedDoor: {fileID: 0}
   OpenEvent:

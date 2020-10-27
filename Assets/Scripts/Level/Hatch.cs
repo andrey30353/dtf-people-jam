@@ -6,33 +6,22 @@ public class Hatch : MonoBehaviour
 {
     public Sprite BrokenSprite;
 
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject.name);
+        //print(collision.gameObject.name);
 
-        var rb = collision.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (!HatchList.Instance.CanUse)
+            return;
+
+        var enemy = collision.GetComponent<Enemy2D>();
+        if (enemy != null && enemy.CanUseHatch)
         {
-            var mover = collision.GetComponent<Mover2D>();
-            if (mover != null)
-            {
-                mover.enabled = false;
-            }
-
-            var force = (AttractPoint.position - collision.transform.position).normalized * Force;
-            //print(direction);
-            //rb.velocity = direction * Force;
-            rb.AddForce(force);
-
+            enemy.UseHatch(this);
         }
-
-
-    }*/
+    }
 
     public void Broke()
     {
-
+        // поменять спрайт
     }
-
 }

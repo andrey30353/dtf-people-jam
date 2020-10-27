@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class Mover2D : MonoBehaviour
 
     private void SetRandomVelocity()
     {
-        var randomDirection = Random.insideUnitCircle.normalized;
+        var randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
         //print(randomDirection);
         rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * Speed;
     }
@@ -169,4 +170,13 @@ public class Mover2D : MonoBehaviour
             SetRandomVelocity();
         }
     }
+
+    internal void UseHatch(bool use)
+    {
+        collider2d.enabled = !use;
+        rb.simulated = !use;
+        animator.enabled = !use;
+    }
 }
+
+

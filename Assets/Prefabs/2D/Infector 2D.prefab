@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 288909363144373039}
   - component: {fileID: 288909363144373037}
   - component: {fileID: 288909363144373036}
+  - component: {fileID: 3628857951876742400}
   m_Layer: 10
   m_Name: Infector 2D
   m_TagString: Agent
@@ -75,9 +76,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6be58e094cdf4314a93ab1354b19a579, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 4851455166573753226, guid: 04098985708a1e74a8a4bb0c99e02aa2, type: 3}
+  m_Color: {r: 1, g: 0.9647059, b: 0.4862745, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -140,6 +141,7 @@ MonoBehaviour:
   collider2d: {fileID: 0}
   Speed: 6
   isStoped: 0
+  animator: {fileID: 0}
 --- !u!114 &288909363144373037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,14 +154,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f3742719bcba749a7f1c46f323800e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Live: 0
-  Color: {r: 0.60784316, g: 0.2784314, b: 0.62352943, a: 1}
   mover: {fileID: 0}
   CanKill: 0
   CanInfect: 1
+  CanUseHatch: 1
   KillTime: 1
   InfectTime: 1
-  DeadSpritePrefab: {fileID: 0}
+  HatchTime: 1
+  HatchSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  HatchSizeKoef: 3
+  HatchColor: {r: 0.3647059, g: 0.4666667, b: 0.14509805, a: 1}
+  DeadEffectPrefab: {fileID: 5368460846223691020, guid: 32769896f7a0fec43ac223ee4ab31fc7, type: 3}
+  DeadSprites:
+  - {fileID: 21300000, guid: ea2bb944f5f171e4ba6c4ebb6694dc7a, type: 3}
+  - {fileID: 21300000, guid: b84e76b2d2fb2254ba23dffc255f52b4, type: 3}
+  - {fileID: 21300000, guid: 85aec77fb6be83542bba7383a56916f3, type: 3}
   isBusy: 0
 --- !u!114 &288909363144373036
 MonoBehaviour:
@@ -179,3 +188,22 @@ MonoBehaviour:
   - {fileID: 288909363144373026, guid: 91d2be5ba85e09d419b12fe83b7e2b7b, type: 3}
   Time: 10
   Once: 1
+--- !u!95 &3628857951876742400
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288909363144373026}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 347633073c0c15c4792e9b0d4a9e26e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

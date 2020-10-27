@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 536021651889056480, guid: 70f1e4cc1f2d18942bc3f5e6936790eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   collider2d: {fileID: 0}
   Speed: 3
   isStoped: 0
-  isVacuumed: 0
+  animator: {fileID: 0}
 --- !u!114 &7589721539931355027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,12 +153,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4e9d5f0985d5d49a7615732c6389d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 0.14509805, g: 0.5294118, b: 0.34901962, a: 1}
   mover: {fileID: 0}
   CanKill: 0
   KillTime: 0
   InfectTime: 0
-  DeadSpritePrefab: {fileID: 3828117436398729496, guid: 8973f25f2296ad9468ad246241dab557, type: 3}
   DeadEffectPrefab: {fileID: 5368460846223691020, guid: e7b32fdcccf827741a454bafe8cd1beb, type: 3}
   DeadSprites:
   - {fileID: 21300000, guid: 26ef328d4075d194799dd7db99bdcee6, type: 3}

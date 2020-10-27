@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 288909363144373036}
   - component: {fileID: 4767435197238004623}
   m_Layer: 10
-  m_Name: Egg 2D
+  m_Name: Start Egg 2D
   m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 288909363144373026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,8 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AgenContent: {fileID: 0}
   AgenPrefab:
-  - {fileID: 288909363144373026, guid: 91d2be5ba85e09d419b12fe83b7e2b7b, type: 3}
-  - {fileID: 288909363144373026, guid: 9046cbaae654b9b43b5346864245518e, type: 3}
+  - {fileID: 288909363144373026, guid: bca44e24b37b99d45a1c3a357a4461b9, type: 3}
   Time: 10
   Once: 1
 --- !u!114 &4767435197238004623
@@ -114,5 +113,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a05105be38996439baee27e8c124a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetScale: {x: 0.8, y: 0.8, z: 0.8}
+  TargetScale: {x: 1, y: 1, z: 1}
   GrowTime: 10

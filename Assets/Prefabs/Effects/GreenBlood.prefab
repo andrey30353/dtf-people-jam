@@ -225,8 +225,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
-        key1: {r: 0.2830189, g: 0.084104665, b: 0.084104665, a: 1}
+        key0: {r: 0.18245173, g: 1, b: 0, a: 1}
+        key1: {r: 0.051575292, g: 0.1792453, b: 0.06794734, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4880,7 +4880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877832618876740187}
   m_Layer: 0
-  m_Name: RedBlood
+  m_Name: GreenBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
