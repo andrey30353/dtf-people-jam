@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &288909363144373026
+--- !u!1 &6884937826920752414
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 288909363144373027}
-  - component: {fileID: 288909363144373024}
-  - component: {fileID: 288909363144373036}
-  - component: {fileID: 4767435197238004623}
-  - component: {fileID: 3858771126972742159}
-  m_Layer: 10
-  m_Name: Egg 2D
-  m_TagString: Agent
+  - component: {fileID: 6884937826920752402}
+  - component: {fileID: 6884937826920752401}
+  - component: {fileID: 6884937826920752403}
+  - component: {fileID: 6884937826920752415}
+  - component: {fileID: 6884937826920752400}
+  m_Layer: 0
+  m_Name: Weapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &288909363144373027
+--- !u!4 &6884937826920752402
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288909363144373026}
+  m_GameObject: {fileID: 6884937826920752414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 2.5, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &288909363144373024
+--- !u!212 &6884937826920752401
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288909363144373026}
+  m_GameObject: {fileID: 6884937826920752414}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,9 +73,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: af4e8c47aca015340b97a6bc131d886d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 97e498f82fc0d074d8ae409219e3c3a0, type: 3}
+  m_Color: {r: 0.6981132, g: 0.20653106, b: 0.06915272, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,65 +85,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &288909363144373036
+--- !u!50 &6884937826920752403
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884937826920752414}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 2
+  m_AngularDrag: 0.3
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &6884937826920752415
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6884937826920752414}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &6884937826920752400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288909363144373026}
+  m_GameObject: {fileID: 6884937826920752414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a858a8a2f5849f24892f218a25cfeb31, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c0bccc463ab87e43a847b26e6ebead6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AgenContent: {fileID: 0}
-  AgenPrefab:
-  - {fileID: 288909363144373026, guid: 91d2be5ba85e09d419b12fe83b7e2b7b, type: 3}
-  - {fileID: 288909363144373026, guid: 9046cbaae654b9b43b5346864245518e, type: 3}
-  Time: 10
-  Once: 1
---- !u!114 &4767435197238004623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288909363144373026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a05105be38996439baee27e8c124a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetScale: {x: 0.8, y: 0.8, z: 0.8}
-  GrowTime: 10
---- !u!114 &3858771126972742159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288909363144373026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4f3742719bcba749a7f1c46f323800e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp: 1
-  Damage: 0
-  mover: {fileID: 0}
-  CanKill: 0
-  CanInfect: 0
-  CanUseHatch: 0
-  KillTime: 0
-  InfectTime: 0
-  HatchTime: 1
-  HatchSprite: {fileID: 0}
-  HatchSizeKoef: 0
-  HatchColor: {r: 0, g: 0, b: 0, a: 0}
-  DeadEffectPrefab: {fileID: 5368460846223691020, guid: 32769896f7a0fec43ac223ee4ab31fc7, type: 3}
-  DeadSprites:
-  - {fileID: 21300000, guid: ea2bb944f5f171e4ba6c4ebb6694dc7a, type: 3}
-  - {fileID: 21300000, guid: b84e76b2d2fb2254ba23dffc255f52b4, type: 3}
-  - {fileID: 21300000, guid: 85aec77fb6be83542bba7383a56916f3, type: 3}
-  isBusy: 0
+  Type: 1

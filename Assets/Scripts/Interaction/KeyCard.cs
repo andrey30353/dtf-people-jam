@@ -1,0 +1,105 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum KeyCardType
+{   
+    None = 0,
+    WorkerKey = 1,
+    LabKey = 2,
+    ArmoryKey = 3
+}
+
+public class KeyCard : MonoBehaviour
+{    
+    public KeyCardType Type;
+ 
+    CircleCollider2D collider2d;
+    SpriteRenderer sr;
+
+    private void Start()
+    {      
+        collider2d = GetComponent<CircleCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("OnTriggerEnter2D " + collision.gameObject.name);
+
+        var liver = collision.gameObject.GetComponent<Liver2D>();
+        if (liver != null)
+        {
+            if (liver.Key == null)
+            {
+                Take(liver);
+            }
+        }
+
+        /*
+        switch (Type)
+        {
+
+
+            case WearingType.Weapon:
+                if(liver.HasWeapon || liver.HasRepairKit)                    
+                    return;
+
+                liver.HasWeapon = true;
+                break;
+
+            case WearingType.RepairKit:
+                if (liver.HasWeapon || liver.HasRepairKit)
+                    return;
+
+                liver.HasRepairKit = true;
+                break;
+            case WearingType.Key:
+                if (liver.Key != KeyRoomType.None)
+                    return;
+                break;
+
+            default:
+                break;
+        }*/
+    //}
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("OnCollisionEnter2D " + collision.gameObject.name);
+
+        var liver = collision.gameObject.GetComponent<Liver2D>();
+        if (liver != null)
+        {
+            if (liver.Key == null)
+            {
+                Take(liver);
+            }           
+        }
+    }
+
+    public void Take(Liver2D liver)
+    {
+        print("Take " + Type);
+       
+        collider2d.enabled = false;        
+
+        transform.SetParent(liver.transform);
+        transform.localPosition = Vector3.zero;
+
+        liver.Key = this;
+    }
+
+    public void TakeOff()
+    {
+        print("TakeOff key");
+       
+    }
+
+    public void UseCard()
+    {
+        Destroy(gameObject);
+    }
+}

@@ -12,7 +12,10 @@ public class Door2D : MonoBehaviour
     public BoxCollider2D BaseCollider;
     public List<BoxCollider2D> BrokenColliders;
 
-    public bool IsOpen;  
+    public bool IsOpen;
+      
+    public KeyCardType RequireKey;
+    private bool blocked;
 
     public bool IsClosed => !IsOpen;
 
@@ -47,15 +50,20 @@ public class Door2D : MonoBehaviour
     {
         //Hp       
         sr = GetComponent<SpriteRenderer>();
+        if (RequireKey != KeyCardType.None)
+            blocked = true;
     }
 
     public void Select()
     {
+        if (blocked)
+            return;
+
         if (Broken)
             return;
 
         if (InProcess)
-            return;
+            return;       
 
         if (IsOpen)
             Close();
@@ -136,6 +144,7 @@ public class Door2D : MonoBehaviour
             return;
 
         // Kill()
+              
 
         if (InProcess)
         {
@@ -143,25 +152,27 @@ public class Door2D : MonoBehaviour
             if (IsClosed)
                 return;
 
-            //if (collision.gameObject.tag != "Agent")
-            //    return;
-
             var agent = collision.gameObject.GetComponent<Liver2D>();
-            if (agent == null)
-                return;
-
-            agent.Dead();
+            if (agent != null)
+                agent.Dead();
         }
         else
         {   // ломается только закрытая дверь
             if (IsClosed)
             {
                 var agent = collision.gameObject.GetComponent<Enemy2D>();
-                if (agent == null)
-                    return;
+                if (agent != null)
+                {
+                    Hp--;
+                    CheckDoorHp();
+                }
 
-                Hp--;
-                CheckDoorHp();
+                if (blocked)
+                {
+                    var liver = collision.gameObject.GetComponent<Liver2D>();
+                    if (liver != null && liver.Key != null && liver.Key.Type == RequireKey)
+                        Unblock();
+                }
             }
         }
 
@@ -189,6 +200,11 @@ public class Door2D : MonoBehaviour
         sr.sprite = BrokenSprite;
 
         //gameObject.SetActive(false);
+    }
+
+    private void Unblock()
+    {
+        blocked = false;
     }
 
     [ContextMenu("Reset")]

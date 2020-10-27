@@ -1,18 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 
+
 public class Liver2D : MonoBehaviour
-{    
+{
+    public int Hp = 1;
+    //public int HpWithWeapon = 2;
+
+    public int WeaponDamage = 1;
+
     public Mover2D mover;
    
-    public bool CanKill;  
+    public bool HasWeapon => Equipment != null && Equipment.Type == EquipmentType.Weapon;    
+    public bool HasRepairKit => Equipment != null && Equipment.Type == EquipmentType.RepairKit; 
    
-    public float KillTime;
-    public float InfectTime;
-     
+    public Equipment Equipment;
+    public KeyCard Key;
+
     public GameObject DeadEffectPrefab;
 
     public List<Sprite> DeadSprites;
@@ -28,66 +36,7 @@ public class Liver2D : MonoBehaviour
     {
         mover = GetComponent<Mover2D>();
 
-        sr = GetComponent<SpriteRenderer>();
-             
-       // sr.material.color = Color ;
-
-        // Assert.IsTrue(Live || (Dead && kill) || (Dead && infect));
-
-        // Assert.IsTrue(Live && !kill && !infect);
-                   }    
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (mover.isStoped)
-            return;
-
-        if (isBusy)
-            return;
-
-        if (collision.gameObject.tag != "Agent")
-            return;
-
-        var otherAgent = collision.gameObject.GetComponent<Agent2D>();
-        if (otherAgent == null)
-            return;
-
-        if (otherAgent.mover.isStoped)
-            return;
-
-        if (otherAgent.isBusy)
-            return;
-
-        // Debug.Log(collision.gameObject.name);
-
-      /*  if (Live && otherAgent.Dead)
-        {
-            if (otherAgent.CanInfect)
-            {
-                StartCoroutine(InfectCor(otherAgent, this, 1));                
-            }
-
-            if (otherAgent.CanKill)
-            {
-                StartCoroutine(KillCor(otherAgent, this, KillTime));               
-            }
-
-            return;
-        }*/
-        /*
-        if(Dead && otherAgent.Live)
-        {
-            if (CanInfect && !otherAgent.isInfected)
-            {
-                StartCoroutine(InfectCor(this, otherAgent, 1));               
-            }
-            // не кушаем инфицированных
-            if (CanKill &&  !otherAgent.isInfected)
-            {
-                StartCoroutine(KillCor(this, otherAgent, KillTime));               
-            }
-            return;
-        }    */          
+        sr = GetComponent<SpriteRenderer>();  
     }
 
     public IEnumerator KillCor(Agent2D killer, Agent2D victim, float time)
@@ -108,7 +57,15 @@ public class Liver2D : MonoBehaviour
         killer.mover.RestoreMove();       
     }
 
-   
+    internal void Equip(Equipment equipment)
+    {
+        Equipment = equipment;
+        /*if(equipment.Type == EquipmentType.Weapon)
+        {
+            Hp = HpWithWeapon;
+        }*/
+    }
+
     private IEnumerator InfectCor(Enemy2D infector, Liver2D victim, float time)
     {
         // todo
@@ -166,6 +123,14 @@ public class Liver2D : MonoBehaviour
         gameObject.tag = infector.gameObject.tag;*/
     }
 
+    public void TakeDamage(int value)
+    {
+        Hp -= value;
+        if(Hp <= 0)
+        {
+            Dead();
+        }
+    }
 
     public void Dead( bool needCorpse = true)
     {     
@@ -173,7 +138,8 @@ public class Liver2D : MonoBehaviour
 
         if (needCorpse)
         {
-            sr.sprite = DeadSprites[Random.Range(0, DeadSprites.Count)];
+            sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
+            sr.sortingOrder = 0;
             //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
         }
 
@@ -185,7 +151,7 @@ public class Liver2D : MonoBehaviour
 
         Game2D.Instance.LiverDead();
 
-        Destroy(mover.animator);
+        Destroy(mover.animator);       
         Destroy(mover.rb);
         Destroy(mover.collider2d);      
         Destroy(mover);

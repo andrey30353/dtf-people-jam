@@ -43,10 +43,10 @@ public class AgentProducer : MonoBehaviour
 
         if (Once)
         {
-            var agentCarrier = GetComponent<Agent>();
+            var agentCarrier = GetComponent<Liver2D>();
             if (agentCarrier != null)
             {
-                agentCarrier.Kill();
+                agentCarrier.Dead();
             }
             else
             {

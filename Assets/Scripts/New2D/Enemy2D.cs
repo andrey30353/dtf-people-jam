@@ -6,7 +6,10 @@ using UnityEngine.Assertions;
 
 
 public class Enemy2D : MonoBehaviour
-{  
+{
+    public int Hp;
+    public int Damage;
+
     public Mover2D mover;
 
     public bool CanKill;
@@ -115,7 +118,7 @@ public class Enemy2D : MonoBehaviour
         killer.isBusy = false;
         victim.isBusy = false;
 
-        victim.Dead();
+        victim.TakeDamage(Damage);
 
         killer.mover.RestoreMove();
     }
@@ -158,6 +161,7 @@ public class Enemy2D : MonoBehaviour
         if (needCorpse)
         {
             sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
+            sr.sortingOrder = 0;
             //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
         }
 
@@ -169,10 +173,14 @@ public class Enemy2D : MonoBehaviour
 
         Game2D.Instance.EnemyDead();
 
-        Destroy(mover.animator);
-        Destroy(mover.rb);
-        Destroy(mover.collider2d);
-        Destroy(mover);
+        if(mover != null)
+        {
+            Destroy(mover.animator);
+            Destroy(mover.rb);
+            Destroy(mover.collider2d);
+            Destroy(mover);
+        }
+       
         Destroy(this);
 
         //Destroy(gameObject);
@@ -225,9 +233,20 @@ public class Enemy2D : MonoBehaviour
         transform.localScale = defaultScale;
         sr.color = defaultColor;
 
+        targetHatch.Break();
+
         isBusy = false;
         mover.UseHatch(false);      
 
         HatchList.Instance.Use(false);
+    }
+
+    public void TakeDamage(int value)
+    {
+        Hp -= value;
+        if (Hp <= 0)
+        {
+            Dead();
+        }
     }
 }
