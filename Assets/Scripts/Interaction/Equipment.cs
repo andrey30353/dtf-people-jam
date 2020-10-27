@@ -15,11 +15,15 @@ public class Equipment : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
 
+    Transform defaultParent;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider2d = GetComponent<CircleCollider2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        defaultParent = transform.parent;
     }
         
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,7 +57,12 @@ public class Equipment : MonoBehaviour
 
     public void TakeOff()
     {
-        print("TakeOff");
-        //sr.sortingOrder = 0;
+        print("TakeOff " + Type);
+
+        collider2d.enabled = true;
+        rb.simulated = true;
+
+        transform.SetParent(defaultParent);
+
     }
 }

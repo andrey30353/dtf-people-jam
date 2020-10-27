@@ -149,6 +149,8 @@ public class Liver2D : MonoBehaviour
             Destroy(effect, 1f);
         }
 
+        LostItems();
+
         Game2D.Instance.LiverDead();
 
         Destroy(mover.animator);       
@@ -157,6 +159,15 @@ public class Liver2D : MonoBehaviour
         Destroy(mover);
         Destroy(this);
         // Destroy(gameObject);
+    }
+
+    private void LostItems()
+    {
+        if (Equipment != null)
+            Equipment.TakeOff();
+
+        if (Key != null)
+            Key.TakeOff();
     }
 
     public void MoveTo(Vector3 point)
