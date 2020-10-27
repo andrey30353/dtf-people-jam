@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 288909363144373024}
   - component: {fileID: 288909363144373036}
   - component: {fileID: 4767435197238004623}
+  - component: {fileID: 993264241877482466}
+  - component: {fileID: 2948148156119567758}
   m_Layer: 10
   m_Name: Start Egg 2D
   m_TagString: Agent
@@ -99,7 +101,7 @@ MonoBehaviour:
   AgenContent: {fileID: 0}
   AgenPrefab:
   - {fileID: 288909363144373026, guid: bca44e24b37b99d45a1c3a357a4461b9, type: 3}
-  Time: 10
+  Timeout: 10
   Once: 1
 --- !u!114 &4767435197238004623
 MonoBehaviour:
@@ -115,3 +117,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetScale: {x: 1, y: 1, z: 1}
   GrowTime: 10
+--- !u!114 &993264241877482466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288909363144373026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f3742719bcba749a7f1c46f323800e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 10
+  Damage: 0
+  mover: {fileID: 0}
+  CanKill: 0
+  CanInfect: 0
+  CanUseHatch: 0
+  KillTime: 0
+  InfectTime: 0
+  HatchTime: 1
+  HatchSprite: {fileID: 0}
+  HatchSizeKoef: 0
+  HatchColor: {r: 0, g: 0, b: 0, a: 0}
+  TakeDamageEffectPrefab: {fileID: 5368460846223691020, guid: 32769896f7a0fec43ac223ee4ab31fc7, type: 3}
+  TakeDamageEffect: {fileID: 0}
+  DeadSprites:
+  - {fileID: 21300000, guid: ea2bb944f5f171e4ba6c4ebb6694dc7a, type: 3}
+  - {fileID: 21300000, guid: b84e76b2d2fb2254ba23dffc255f52b4, type: 3}
+  - {fileID: 21300000, guid: 85aec77fb6be83542bba7383a56916f3, type: 3}
+  isBusy: 0
+--- !u!58 &2948148156119567758
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288909363144373026}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.35

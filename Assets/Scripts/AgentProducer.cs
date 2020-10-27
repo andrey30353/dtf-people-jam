@@ -7,7 +7,9 @@ public class AgentProducer : MonoBehaviour
     public Transform AgenContent;
 
     public GameObject[] AgenPrefab;
-    public float Time;
+    [UnityEngine.Serialization.FormerlySerializedAs("Time")]
+    public float Timeout;
+    private float timeoutProcess;
 
     // один раз?   
     public bool Once;
@@ -15,22 +17,24 @@ public class AgentProducer : MonoBehaviour
     void Start()
     {
         AgenContent = Settings.Instance.AgentsContent;
+        timeoutProcess = Timeout;
 
-        // if (queen)
-        StartCoroutine(ProduceCor());
+        //StartCoroutine(ProduceCor());
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
+    
+    void Update()
+    {
+        timeoutProcess -= Time.deltaTime;
+        if (timeoutProcess <= 0)
+            Produce();
+    }
 
     private IEnumerator ProduceCor()
     {
         while (true)
         {
-            yield return new WaitForSeconds(Time);
+            yield return new WaitForSeconds(Timeout);
 
             var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
             var newAgent = Instantiate(randomAgent, AgenContent);
@@ -54,5 +58,31 @@ public class AgentProducer : MonoBehaviour
             }
         }
         //Ma
+    }
+
+    private void Produce()
+    {
+       
+            var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
+            var newAgent = Instantiate(randomAgent, AgenContent);
+            newAgent.transform.position = transform.position;
+            newAgent.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+
+            timeoutProcess = Timeout;
+          
+
+        if (Once)
+        {
+            var agentCarrier = GetComponent<Liver2D>();
+            if (agentCarrier != null)
+            {
+                agentCarrier.Dead();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+     
     }
 }

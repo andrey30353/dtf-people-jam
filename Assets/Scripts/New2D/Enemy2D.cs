@@ -41,10 +41,12 @@ public class Enemy2D : MonoBehaviour
     public bool isBusy;
 
     SpriteRenderer sr;
+    AgentProducer producer;
 
     private void Start()
     {
         mover = GetComponent<Mover2D>();
+        producer = GetComponent<AgentProducer>();
 
         sr = GetComponent<SpriteRenderer>();
         defaultSprite = sr.sprite;
@@ -183,6 +185,12 @@ public class Enemy2D : MonoBehaviour
             Destroy(mover.collider2d);
             Destroy(mover);
         }
+
+        if (producer != null)
+        {
+            Destroy(producer);
+        }
+           
        
         Destroy(this);
 

@@ -33,6 +33,7 @@ public class Hatch : MonoBehaviour
             }
             else
             {
+                //TakeDamage();
                 StartCoroutine(BreakCor(enemy));                
             }
         }
@@ -53,13 +54,21 @@ public class Hatch : MonoBehaviour
 
         yield return new WaitForSeconds(HatchList.Instance.BreakTime);
 
-        enemy.mover.RestoreMove();
-        enemy.isBusy = false;
+        if(enemy != null)
+        {
+            enemy.mover.RestoreMove();
+            enemy.isBusy = false;
 
+            TakeDamage();
+        } 
+    }
+
+    private void TakeDamage()
+    {
         Hp--;
         if (Hp <= 0)
         {
             Break();
-        }       
+        }
     }
 }

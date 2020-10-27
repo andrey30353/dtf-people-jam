@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(Damage);
         }
 
-        print(collision.gameObject.name);
+        //print(collision.gameObject.name);
         //// игнорируем своих
         //var liver = collision.gameObject.GetComponent<Liver2D>();
         //if (liver != null)

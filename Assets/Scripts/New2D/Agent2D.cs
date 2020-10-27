@@ -164,7 +164,7 @@ public class Agent2D : MonoBehaviour
         var templ = infector.GetComponent<AgentProducer>();
         producer.AgenContent = templ.AgenContent;
         producer.AgenPrefab = templ.AgenPrefab;
-        producer.Time = templ.Time;
+        producer.Timeout = templ.Timeout;
         producer.Once = templ.Once;
         producer.enabled = true;
 
