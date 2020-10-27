@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-
-
 public class Liver2D : MonoBehaviour
 {
     public int Hp = 1;
@@ -13,6 +11,7 @@ public class Liver2D : MonoBehaviour
     public float AttackRange = 1;
     public float AttackTimeout = 1;    
     public LayerMask AttackMask;
+    public LayerMask AttackCheckMask;
     public Bullet BulletPrefab;
     private float attackTimeoutProcess;
 
@@ -53,20 +52,35 @@ public class Liver2D : MonoBehaviour
         {
            var targets = Physics2D.OverlapCircleAll(transform.position, AttackRange, AttackMask.value);
        
-           print(targets.Length);
-            if (targets.Length > 0)
-            { 
-                Shoot(targets[0].GetComponent<Enemy2D>()); 
-            }
+           //print(targets.Length);
+           if (targets.Length > 0)
+           {
+                foreach (var target in targets)
+                {
+                    var targetPosition = target.gameObject.transform.position;
+                    var direction = (targetPosition - transform.position).normalized;
+                    var hit = Physics2D.Raycast(transform.position, direction, AttackRange, AttackCheckMask.value);
+                    //print(hit.collider.name);
+                    
+                    if (hit.collider == target)
+                    {
+                       // Debug.DrawLine(transform.position, hit.point, Color.green, 10f);
+                        Shoot(targetPosition);
+                        return;
+                    }    
+                    /*else
+                        Debug.DrawLine(transform.position, hit.point, Color.red, 10f);*/
+                }               
+           }          
         }
     }
 
-    private void Shoot(Enemy2D target)
+    private void Shoot(Vector3 targetPosition)
     {
         var bullet = Instantiate(BulletPrefab);
         bullet.transform.position = transform.position;
-        //bullet.Direction = (target.transform.position - transform.position).normalized;
-        bullet.rb.velocity = (target.transform.position - transform.position).normalized * bullet.Speed;
+        //bullet.Direction = (targetPosition - transform.position).normalized;
+        bullet.rb.velocity = (targetPosition - transform.position).normalized * bullet.Speed;
         attackTimeoutProcess = AttackTimeout;
     }
 
