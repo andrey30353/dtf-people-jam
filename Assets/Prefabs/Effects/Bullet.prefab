@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
-  Speed: 7
+  Speed: 10
   Direction: {x: 0, y: 0, z: 0}
   rb: {fileID: 6317073888498030477}
 --- !u!50 &6317073888498030477

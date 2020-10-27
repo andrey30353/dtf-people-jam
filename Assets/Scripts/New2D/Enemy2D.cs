@@ -28,7 +28,10 @@ public class Enemy2D : MonoBehaviour
     private Vector3 defaultScale;
     private Color defaultColor;
 
-    public GameObject DeadEffectPrefab;
+    [UnityEngine.Serialization.FormerlySerializedAs("DeadEffectPrefab")]
+    public GameObject TakeDamageEffectPrefab;
+
+    public ParticleSystem TakeDamageEffect;
 
     public List<Sprite> DeadSprites;   
 
@@ -165,11 +168,11 @@ public class Enemy2D : MonoBehaviour
             //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
         }
 
-        if (needCorpse)
-        {
-            var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
-            Destroy(effect, 1f);
-        }
+        //if (needCorpse)
+        //{
+        //    var effect = Instantiate(TakeDamageEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+        //    Destroy(effect, 1f);
+        //}
 
         Game2D.Instance.EnemyDead();
 
@@ -243,7 +246,12 @@ public class Enemy2D : MonoBehaviour
 
     public void TakeDamage(int value)
     {
+        //TakeDamageEffect.Play();
+        var effect = Instantiate(TakeDamageEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
+        Destroy(effect, 0.1f);
+
         Hp -= value;
+
         if (Hp <= 0)
         {
             Dead();
