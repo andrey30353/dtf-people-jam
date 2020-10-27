@@ -156,8 +156,8 @@ MonoBehaviour:
   Hp: 30
   Damage: 1
   mover: {fileID: 0}
-  CanKill: 0
-  CanInfect: 1
+  CanKill: 1
+  CanInfect: 0
   CanUseHatch: 0
   KillTime: 0.7
   InfectTime: 1
