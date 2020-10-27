@@ -6,9 +6,7 @@ public class DeadZone : MonoBehaviour
     public float Timer = 5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        print(collision.gameObject.name);
-
+    {   
         var enemy = collision.GetComponent<Enemy2D>();
         if (enemy != null)
         {
@@ -25,7 +23,6 @@ public class DeadZone : MonoBehaviour
         }
 
         Destroy(collision.gameObject, Timer);
-
     }
 
     private IEnumerator EnemyDeadCor(float time, Enemy2D enemy)
