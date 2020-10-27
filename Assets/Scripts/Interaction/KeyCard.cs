@@ -17,10 +17,14 @@ public class KeyCard : MonoBehaviour
     CircleCollider2D collider2d;
     SpriteRenderer sr;
 
+    Transform defaultParent;
+
     private void Start()
     {      
         collider2d = GetComponent<CircleCollider2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        defaultParent = transform.parent;
     }
 
    
@@ -95,7 +99,10 @@ public class KeyCard : MonoBehaviour
     public void TakeOff()
     {
         print("TakeOff key");
-       
+
+        collider2d.enabled = true;
+
+        transform.SetParent(defaultParent);
     }
 
     public void UseCard()

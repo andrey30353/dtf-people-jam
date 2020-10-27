@@ -73,7 +73,9 @@ public class Game2D : MonoBehaviour
         foreach (var item in res)
         {
            var agent =  item.GetComponent<Liver2D>();
-            agent.MoveTo(point);
+            // todo
+            if(!agent.isBusy)
+                agent.MoveTo(point);
         }
 
        
