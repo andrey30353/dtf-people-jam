@@ -25,13 +25,11 @@ public class KeyCard : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         defaultParent = transform.parent;
-    }
-
-   
+    }   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("OnTriggerEnter2D " + collision.gameObject.name);
+       // print("OnTriggerEnter2D " + collision.gameObject.name);
 
         var liver = collision.gameObject.GetComponent<Liver2D>();
         if (liver != null)
@@ -40,53 +38,12 @@ public class KeyCard : MonoBehaviour
             {
                 Take(liver);
             }
-        }
-
-        /*
-        switch (Type)
-        {
-
-
-            case WearingType.Weapon:
-                if(liver.HasWeapon || liver.HasRepairKit)                    
-                    return;
-
-                liver.HasWeapon = true;
-                break;
-
-            case WearingType.RepairKit:
-                if (liver.HasWeapon || liver.HasRepairKit)
-                    return;
-
-                liver.HasRepairKit = true;
-                break;
-            case WearingType.Key:
-                if (liver.Key != KeyRoomType.None)
-                    return;
-                break;
-
-            default:
-                break;
-        }*/
-    //}
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        print("OnCollisionEnter2D " + collision.gameObject.name);
-
-        var liver = collision.gameObject.GetComponent<Liver2D>();
-        if (liver != null)
-        {
-            if (liver.Key == null)
-            {
-                Take(liver);
-            }           
-        }
+        }       
     }
 
     public void Take(Liver2D liver)
     {
-        print("Take " + Type);
+       // print("Take " + Type);
        
         collider2d.enabled = false;        
 
@@ -98,7 +55,7 @@ public class KeyCard : MonoBehaviour
 
     public void TakeOff()
     {
-        print("TakeOff key");
+       // print("TakeOff key");
 
         collider2d.enabled = true;
 

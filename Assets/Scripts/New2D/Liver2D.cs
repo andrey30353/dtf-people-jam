@@ -9,22 +9,25 @@ using UnityEngine.Assertions;
 public class Liver2D : MonoBehaviour
 {
     public int Hp = 1;
-    //public int HpWithWeapon = 2;
+    //public int HpWithWeapon = 2;    
+    public float AttackRange = 1;
+    public float AttackTimeout = 1;    
+    public LayerMask AttackMask;
+    public Bullet BulletPrefab;
+    private float attackTimeoutProcess;
 
-    public int WeaponDamage = 1;
-
-    public Mover2D mover;
-   
-    public bool HasWeapon => Equipment != null && Equipment.Type == EquipmentType.Weapon;    
-    public bool HasRepairKit => Equipment != null && Equipment.Type == EquipmentType.RepairKit; 
-   
+    [Space]
     public Equipment Equipment;
     public KeyCard Key;
+    public bool HasWeapon => Equipment != null && Equipment.Type == EquipmentType.Weapon;
+    public bool HasRepairKit => Equipment != null && Equipment.Type == EquipmentType.RepairKit;
 
+    [Space]
     public GameObject DeadEffectPrefab;
-
     public List<Sprite> DeadSprites;
 
+    [Space]
+    public Mover2D mover;
     // занят ли сейчас
     public bool isBusy;
 
@@ -37,6 +40,34 @@ public class Liver2D : MonoBehaviour
         mover = GetComponent<Mover2D>();
 
         sr = GetComponent<SpriteRenderer>();  
+    }
+
+    private void FixedUpdate()
+    {
+        if (isBusy)
+            return;
+
+        attackTimeoutProcess -= Time.deltaTime;
+
+        if (HasWeapon && attackTimeoutProcess <= 0)
+        {
+           var targets = Physics2D.OverlapCircleAll(transform.position, AttackRange, AttackMask.value);
+       
+           print(targets.Length);
+            if (targets.Length > 0)
+            { 
+                Shoot(targets[0].GetComponent<Enemy2D>()); 
+            }
+        }
+    }
+
+    private void Shoot(Enemy2D target)
+    {
+        var bullet = Instantiate(BulletPrefab);
+        bullet.transform.position = transform.position;
+        //bullet.Direction = (target.transform.position - transform.position).normalized;
+        bullet.rb.velocity = (target.transform.position - transform.position).normalized * bullet.Speed;
+        attackTimeoutProcess = AttackTimeout;
     }
 
     public IEnumerator KillCor(Agent2D killer, Agent2D victim, float time)
@@ -176,5 +207,12 @@ public class Liver2D : MonoBehaviour
             mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
     }
 
-    
+    private void OnDrawGizmos()
+    {
+        if (HasWeapon)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, AttackRange);
+        }
+    }
 }
