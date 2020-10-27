@@ -33,11 +33,7 @@ public class Hatch : MonoBehaviour
             }
             else
             {
-                Hp--;
-                if(Hp <= 0)
-                {
-                    Break();
-                }
+                StartCoroutine(BreakCor(enemy));                
             }
         }
     }
@@ -48,5 +44,22 @@ public class Hatch : MonoBehaviour
         IsOpen = true;
 
         sr.sprite = BrokenSprite;
+    }
+
+    public IEnumerator BreakCor(Enemy2D enemy)
+    {
+        enemy.mover.StopMove();
+        enemy.isBusy = true;
+
+        yield return new WaitForSeconds(HatchList.Instance.BreakTime);
+
+        enemy.mover.RestoreMove();
+        enemy.isBusy = false;
+
+        Hp--;
+        if (Hp <= 0)
+        {
+            Break();
+        }       
     }
 }

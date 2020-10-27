@@ -14,12 +14,14 @@ public class HatchList : MonoBehaviour
     public float HatchTimeout = 10f;
     private float hatchTimeoutProcess;
 
+    public float BreakTime = 1f;
 
     public bool CanUse => !Using && hatchTimeoutProcess > HatchTimeout;
 
     public Hatch[] Hatches;
 
     public static HatchList Instance;
+  
 
     private void Awake()
     {
