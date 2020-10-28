@@ -14,6 +14,8 @@ public class AgentProducer : MonoBehaviour
     // один раз?   
     public bool Once;
 
+    //public bool CheckCount;
+
     void Start()
     {
         AgenContent = Settings.Instance.AgentsContent;
@@ -22,11 +24,11 @@ public class AgentProducer : MonoBehaviour
         //StartCoroutine(ProduceCor());
     }
 
-    
+
     void Update()
     {
         timeoutProcess -= Time.deltaTime;
-        if (timeoutProcess <= 0)
+        if (timeoutProcess <= 0 && Game2D.Instance.CanAgentProduce)
             Produce();
     }
 
@@ -54,6 +56,7 @@ public class AgentProducer : MonoBehaviour
             }
             else
             {
+                // Game2D.Instance.AgentCount
                 Destroy(gameObject);
             }
         }
@@ -62,14 +65,15 @@ public class AgentProducer : MonoBehaviour
 
     private void Produce()
     {
-       
-            var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
-            var newAgent = Instantiate(randomAgent, AgenContent);
-            newAgent.transform.position = transform.position;
-            newAgent.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
 
-            timeoutProcess = Timeout;
-          
+        var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
+        var newAgent = Instantiate(randomAgent, AgenContent);
+        newAgent.transform.position = transform.position;
+        newAgent.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+
+        timeoutProcess = Timeout;
+
+        Game2D.Instance.AddEnemy();
 
         if (Once)
         {
@@ -80,9 +84,10 @@ public class AgentProducer : MonoBehaviour
             }
             else
             {
+                Game2D.Instance.EnemyDead();
                 Destroy(gameObject);
             }
         }
-     
+
     }
 }

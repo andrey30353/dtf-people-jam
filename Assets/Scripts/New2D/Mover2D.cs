@@ -39,22 +39,12 @@ public class Mover2D : MonoBehaviour
         var randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
         //print(randomDirection);
         rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * Speed;
-    }
-
-    internal void Stop()
-    {
-        rb.velocity = Vector2.zero;
-
-        enabled = false;
-
-        isStoped = true;
-
-        rb.isKinematic = true;
-        collider2d.enabled = false;
-    }
+    }   
 
     internal void StopMove()
     {
+        animator.enabled = false;
+        //rb.simulated = false;
         rb.velocity = Vector2.zero;
 
         // enabled = false;
@@ -64,6 +54,8 @@ public class Mover2D : MonoBehaviour
 
     internal void RestoreMove()
     {
+        animator.enabled = true;
+        //rb.simulated = true;
         SetRandomVelocity();
 
         //  enabled = true;
@@ -76,6 +68,7 @@ public class Mover2D : MonoBehaviour
     {
         if (isStoped)
         {
+            //rb.angularVelocity = 0;
             rb.velocity = Vector2.zero;
             return;
         }

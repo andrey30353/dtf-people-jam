@@ -27,8 +27,10 @@ public class Door2D : MonoBehaviour
     public float time = 0.5f;
 
     public int Hp = 5;
+    private int startHp;
 
     public bool Broken => Hp <= 0;
+    public bool Damaged => Hp <= startHp / 2;
 
     public List<Door2D> OpeningDepends;
 
@@ -44,14 +46,25 @@ public class Door2D : MonoBehaviour
     {
         if (LinkedDoor != null)
             LinkedDoor.LinkedDoor = this;
+
+        //var settings = Settings.Instance;
+        //if (settings == null)
+        //{
+        //    settings = GameObject.Find("Settings").GetComponent<Settings>();
+        //}      
+        //sr.color = settings.GetDoorColor(RequireKey);
     }
 
     private void Start()
     {
-        //Hp       
+        startHp = Hp;
         sr = GetComponent<SpriteRenderer>();
         if (RequireKey != KeyCardType.None)
+        { 
             blocked = true;
+
+            sr.color = Settings.Instance.GetDoorColor(RequireKey);
+        }
     }
 
     public void Select()
@@ -171,7 +184,7 @@ public class Door2D : MonoBehaviour
                 {
                     var liver = collision.gameObject.GetComponent<Liver2D>();
                     if (liver != null && liver.Key != null && liver.Key.Type == RequireKey)
-                        Unblock();
+                        Unblock(liver);
                 }
             }
         }
@@ -179,10 +192,16 @@ public class Door2D : MonoBehaviour
     }
 
     private void CheckDoorHp()
-    {
+    {    
         if (Broken)
         {
             Break();
+            return;
+        }
+
+        if (Damaged)
+        {
+            sr.sprite = DamagedSprite;
         }
     }
 
@@ -202,9 +221,23 @@ public class Door2D : MonoBehaviour
         //gameObject.SetActive(false);
     }
 
-    private void Unblock()
+    private void Unblock(Liver2D liver, bool withLinked = true)
     {
         blocked = false;
+
+        if (liver != null)
+        {
+            Destroy(liver.Key.gameObject);
+            liver.Key = null;
+        }
+
+        // withLinked - чтобы убрать зацикливание
+        if (LinkedDoor != null && withLinked)
+        {
+            LinkedDoor.Unblock(null, false);
+        }
+
+        sr.color = Settings.Instance.GetDoorColor(KeyCardType.None);
     }
 
     [ContextMenu("Reset")]

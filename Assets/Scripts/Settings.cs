@@ -20,6 +20,12 @@ public class Settings : MonoBehaviour
     [Space]
     public Color InfectedColor;
 
+    [Header("Двери")]
+    public Color DefaultDoorColor;
+    public Color WorkerDoorColor;
+    public Color LabDoorColor;
+    public Color ArmoryDoorColor;
+
     public Transform AgentsContent;
 
     public static Settings Instance;
@@ -31,5 +37,25 @@ public class Settings : MonoBehaviour
         Instance = this;
     }
 
+    public Color GetDoorColor(KeyCardType key)
+    {
+        switch (key)
+        {
+            case KeyCardType.None:
+                return DefaultDoorColor;
+                
+            case KeyCardType.WorkerKey:
+                return WorkerDoorColor;
+                
+            case KeyCardType.LabKey:
+                return LabDoorColor;
+
+            case KeyCardType.ArmoryKey:
+                return ArmoryDoorColor;
+
+            default:
+                return DefaultDoorColor;
+        }
+    }
     
 }

@@ -98,13 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1cbc99fe45508548b31903624bc47c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamagedSprite: {fileID: 0}
+  DamagedSprite: {fileID: 21300000, guid: e8bd833194a5bc042bb5cf030bd29989, type: 3}
   BrokenSprite: {fileID: 21300000, guid: 48d77e9c3b5690e4aa1ad5f415473cfa, type: 3}
   BaseCollider: {fileID: 7675013972713245346}
   BrokenColliders:
   - {fileID: 6776040470061920197}
   - {fileID: 373894168907361899}
   IsOpen: 0
+  RequireKey: 0
   OpenPosition: {x: -3, y: 0, z: 0}
   ClosePosition: {x: 0, y: 0, z: 0}
   time: 0.5

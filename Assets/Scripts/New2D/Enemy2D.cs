@@ -33,7 +33,8 @@ public class Enemy2D : MonoBehaviour
 
     public ParticleSystem TakeDamageEffect;
 
-    public List<Sprite> DeadSprites;   
+    public List<Sprite> DeadSprites;
+    public List<GameObject> DeadPrefabs;
 
     //public bool BreakDoor ;
 
@@ -42,10 +43,14 @@ public class Enemy2D : MonoBehaviour
 
     SpriteRenderer sr;
     AgentProducer producer;
+    private CircleCollider2D collider2d;
+
+    public Liver2D LiverInteract;
 
     private void Start()
     {
         mover = GetComponent<Mover2D>();
+        collider2d = GetComponent<CircleCollider2D>();
         producer = GetComponent<AgentProducer>();
 
         sr = GetComponent<SpriteRenderer>();
@@ -60,8 +65,8 @@ public class Enemy2D : MonoBehaviour
    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (mover.isStoped)
-            return;
+        //if (mover.isStoped)
+        //    return;
 
         if (isBusy)
             return;
@@ -73,82 +78,71 @@ public class Enemy2D : MonoBehaviour
         if (otherAgent == null)
             return;
 
-        if (otherAgent.mover.isStoped)
-            return;
+        //if (otherAgent.mover.isStoped)
+        //    return;
 
-        if (otherAgent.isBusy)
-            return;
+        //if (otherAgent.isBusy)
+        //    return;      
 
-        // Debug.Log(collision.gameObject.name);
-
-        /*  if (Live && otherAgent.Dead)
-          {
-              if (otherAgent.CanInfect)
-              {
-                  StartCoroutine(InfectCor(otherAgent, this, 1));                
-              }
-
-              if (otherAgent.CanKill)
-              {
-                  StartCoroutine(KillCor(otherAgent, this, KillTime));               
-              }
-
-              return;
-          }*/
-
-
+        
         if (CanInfect && !otherAgent.isInfected)
-        {
-            StartCoroutine(InfectCor(this, otherAgent, 1));
+        {       
+            StartCoroutine(InfectCor(otherAgent, 1));
         }
-        // не кушаем инфицированных
+        // не кушаем инфицированных ?
         if (CanKill && !otherAgent.isInfected)
         {
-            StartCoroutine(KillCor(this, otherAgent, KillTime));
+            StartCoroutine(KillCor(otherAgent, KillTime));
         }
         return;
 
     }
 
-    public IEnumerator KillCor(Enemy2D killer, Liver2D victim, float time)
+    public IEnumerator KillCor(Liver2D victim, float time)
     {
-        killer.mover.StopMove();
+        LiverInteract = victim;
+        victim.EnemyInteract = this;
+
+        mover.StopMove();
         victim.mover.StopMove();
 
-        killer.isBusy = true;
+        isBusy = true;
         victim.isBusy = true;
 
         yield return new WaitForSeconds(time);
 
-        killer.isBusy = false;
+        isBusy = false;
         victim.isBusy = false;
 
         victim.TakeDamage(Damage);
 
-        killer.mover.RestoreMove();
+        mover.RestoreMove();
     }
 
 
-    private IEnumerator InfectCor(Enemy2D infector, Liver2D victim, float time)
+    private IEnumerator InfectCor(Liver2D victim, float time)
     {
         // todo
         //victim.mover.Speed = infector.mover.Speed;
 
-        infector.mover.StopMove();
+        LiverInteract = victim;
+        victim.EnemyInteract = this;
+
+        mover.StopMove();
         victim.mover.StopMove();
 
-        infector.isBusy = true;
+        isBusy = true;
         victim.isBusy = true;
 
         yield return new WaitForSeconds(time);
 
-        infector.isBusy = false;
+        isBusy = false;
         victim.isBusy = false;
 
-        victim.Infect(infector);
+        victim.InfectedBy(this);
 
         victim.mover.RestoreMove();
-        infector.mover.RestoreMove();
+        this.mover.RestoreMove();
     }
 
     internal void Manage(bool manage)
@@ -165,9 +159,10 @@ public class Enemy2D : MonoBehaviour
 
         if (needCorpse)
         {
-            sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
-            sr.sortingOrder = 0;
-            //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            /*sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
+            sr.sortingOrder = 0;*/
+            var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
+            Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
         }
 
         //if (needCorpse)
@@ -175,14 +170,15 @@ public class Enemy2D : MonoBehaviour
         //    var effect = Instantiate(TakeDamageEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
         //    Destroy(effect, 1f);
         //}
-
+        
         Game2D.Instance.EnemyDead();
-
-        if(mover != null)
+/*
+        Destroy(collider2d); 
+        if (mover != null)
         {
             Destroy(mover.animator);
             Destroy(mover.rb);
-            Destroy(mover.collider2d);
+            //Destroy(mover.collider2d);
             Destroy(mover);
         }
 
@@ -190,11 +186,17 @@ public class Enemy2D : MonoBehaviour
         {
             Destroy(producer);
         }
-           
        
-        Destroy(this);
+        Destroy(this);*/
 
-        //Destroy(gameObject);
+        if (LiverInteract != null && LiverInteract.EnemyInteract == this)
+        {
+            LiverInteract.EnemyInteract = null;
+            LiverInteract.isBusy = false;
+            LiverInteract.mover.RestoreMove();
+        }
+
+        Destroy(gameObject);
     }
     /*
     public void DeadCor(float timer = 0)

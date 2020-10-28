@@ -24,6 +24,7 @@ public class Liver2D : MonoBehaviour
     [Space]
     public GameObject DeadEffectPrefab;
     public List<Sprite> DeadSprites;
+    public List<GameObject> DeadPrefabs;
 
     [Space]
     public Mover2D mover;
@@ -31,6 +32,9 @@ public class Liver2D : MonoBehaviour
     public bool isBusy;
 
     public bool isInfected;
+
+    public StopZone ManageObject;
+    public Enemy2D EnemyInteract;
 
     SpriteRenderer sr;    
    
@@ -72,35 +76,23 @@ public class Liver2D : MonoBehaviour
                         Debug.DrawLine(transform.position, hit.point, Color.red, 10f);*/
                 }               
            }          
-        }
+        }       
     }
 
     private void Shoot(Vector3 targetPosition)
     {
         var bullet = Instantiate(BulletPrefab);
         bullet.transform.position = transform.position;
+
         //bullet.Direction = (targetPosition - transform.position).normalized;
-        bullet.rb.velocity = (targetPosition - transform.position).normalized * bullet.Speed;
+        Vector3 dir = (targetPosition - transform.position);
+        bullet.rb.velocity = dir.normalized * bullet.Speed;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         attackTimeoutProcess = AttackTimeout;
-    }
-
-    public IEnumerator KillCor(Agent2D killer, Agent2D victim, float time)
-    {
-        killer.mover.StopMove();
-        victim.mover.StopMove();
-
-        killer.isBusy = true;
-        victim.isBusy = true;
-
-        yield return new WaitForSeconds(time);
-
-        killer.isBusy = false;
-        victim.isBusy = false;
-
-        victim.Kill();
-
-        killer.mover.RestoreMove();       
-    }
+    }    
 
     internal void Equip(Equipment equipment)
     {
@@ -111,36 +103,13 @@ public class Liver2D : MonoBehaviour
         }*/
     }
 
-    private IEnumerator InfectCor(Enemy2D infector, Liver2D victim, float time)
-    {
-        // todo
-        //victim.mover.Speed = infector.mover.Speed;
-
-        infector.mover.StopMove();
-        victim.mover.StopMove();
-
-        infector.isBusy = true;
-        victim.isBusy = true;
-
-        yield return new WaitForSeconds(time);
-
-        infector.isBusy = false;
-        victim.isBusy = false;
-
-        victim.Infect(infector);
-
-        victim.mover.RestoreMove();
-        infector.mover.RestoreMove();        
-    }
-
     internal void Manage(bool manage)
     {
         mover.Manage(manage);
     }
 
-    public void Infect(Enemy2D infector)
-    {     
-
+    public void InfectedBy(Enemy2D infector)
+    {  
         isInfected = true;
 
         sr.material.color = Settings.Instance.InfectedColor;//infector.Color;
@@ -183,9 +152,12 @@ public class Liver2D : MonoBehaviour
 
         if (needCorpse)
         {
-            sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
-            sr.sortingOrder = 0;
+           // sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
+           // sr.sortingOrder = 0;
             //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+
+            var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
+            Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
         }
 
         if (needCorpse)
@@ -197,13 +169,25 @@ public class Liver2D : MonoBehaviour
         LostItems();
 
         Game2D.Instance.LiverDead();
-
+        /*
         Destroy(mover.animator);       
         Destroy(mover.rb);
         Destroy(mover.collider2d);      
         Destroy(mover);
-        Destroy(this);
-        // Destroy(gameObject);
+        Destroy(this);*/
+        if(ManageObject != null && ManageObject.Visitor == this)
+        {
+            ManageObject.Visitor = null;
+        }
+
+        if (EnemyInteract != null && EnemyInteract.LiverInteract == this)
+        {
+            EnemyInteract.LiverInteract = null;
+            EnemyInteract.isBusy = false;
+            EnemyInteract.mover.RestoreMove();
+        }
+
+        Destroy(gameObject);
     }
 
     private void LostItems()

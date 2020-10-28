@@ -50,7 +50,7 @@ public class Game : MonoBehaviour
 
         }
 
-        GameUi.UpdateUI();
+        GameUi.UpdateAgentCount();
 
         Assert.IsTrue(LiveCount != 0);
         Assert.IsTrue(DeadCount != 0);
@@ -95,7 +95,7 @@ public class Game : MonoBehaviour
     {
         LiveCount--;
 
-        GameUi.UpdateUI();
+        GameUi.UpdateAgentCount();
 
         CheckGameOver();
     }

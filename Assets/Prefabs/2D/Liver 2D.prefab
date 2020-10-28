@@ -170,6 +170,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 26ef328d4075d194799dd7db99bdcee6, type: 3}
   - {fileID: 21300000, guid: e1df97cf4bcbc4a46ba4a3ef5347f144, type: 3}
   - {fileID: 21300000, guid: 88460f00ea0498c4787cd10654b68197, type: 3}
+  DeadPrefabs:
+  - {fileID: 3828117436398729496, guid: 6103f29b97ab39148a9c90a847c4aa1a, type: 3}
+  - {fileID: 3828117436398729496, guid: 7373cf5d515f5e94894c154b13cb9762, type: 3}
+  - {fileID: 3828117436398729496, guid: 8973f25f2296ad9468ad246241dab557, type: 3}
   mover: {fileID: 0}
   isBusy: 0
   isInfected: 0
