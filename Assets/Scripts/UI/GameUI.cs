@@ -11,6 +11,8 @@ public class GameUI : MonoBehaviour
 
     public TMP_Text SpeedText;
 
+    public TMP_Text DestroyTimerText;
+
     public Slider DistanceSlider;
 
     public void UpdateAgentCount()
@@ -35,5 +37,17 @@ public class GameUI : MonoBehaviour
         //print("UpdateDistance");
         SpeedText.text = $"Скорость: {Mathf.RoundToInt(currentSpeed * 100).ToString()}%";
         //SpeedText.text = $"Скорость: {currentSpeed.ToString("F1")}";
+    }
+
+    public void UpdateDestroyTimer(int time, bool enable)
+    {
+        //DestroyTimerText.text = $"{time / 60}:{time % 60}";
+        var timeSec = Mathf.RoundToInt(time);
+       
+        DestroyTimerText.enabled = enable;
+
+        //DestroyTimerText.text = $"Время до уничтожения: {timeSec}";
+        var str = time < 10 ? $"0{time}" : time.ToString();
+        DestroyTimerText.text = str;
     }
 }

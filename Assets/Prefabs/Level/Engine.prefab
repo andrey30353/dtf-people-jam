@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8107094919866040580}
   - component: {fileID: 2336832565591206518}
-  - component: {fileID: 4232314705566871807}
-  - component: {fileID: 6521689304701207458}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -84,46 +82,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4232314705566871807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788204154472768382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5d73f65c570c5544a49e564dbbdc083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamagedSprite: {fileID: 0}
-  BrokenSprite: {fileID: 21300000, guid: e926b00c3ae53354aa0dd12269056528, type: 3}
-  Hp: 20
-  Repaired: 1
-  RepairSpeedKoef: 0.2
---- !u!61 &6521689304701207458
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788204154472768382}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.1875, y: 2.59375}
-    newSize: {x: 3.1875, y: 2.59375}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.1875, y: 2.59375}
-  m_EdgeRadius: 0

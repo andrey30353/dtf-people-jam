@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2909032339590624676}
   - component: {fileID: -4389154322239127971}
   m_Layer: 0
-  m_Name: Generator
+  m_Name: Reactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Destructible : MonoBehaviour
 {
@@ -12,12 +13,17 @@ public class Destructible : MonoBehaviour
     public float StartHp  => startHp; 
 
     public bool Repaired;
+
+    //public UnityEvent OnBrokenEvent;
+    //public UnityEvent OnRepairedEvent;
+
     public bool NeedRepair => Repaired && Hp < StartHp;
     public float RepairSpeedKoef= 0.1f;
     private float RepairSpeed => StartHp * RepairSpeedKoef;
 
     public bool Broken => Hp <= 0;
     public bool Damaged => Hp <= StartHp / 2;
+    public bool HasFullHp => Hp == StartHp;
 
     public float CurrentState => (float) Hp / StartHp;
 
@@ -90,10 +96,12 @@ public class Destructible : MonoBehaviour
 
     private void Break()
     {
-        if (animator != null)
-        { 
+
+
+        if (animator != null)         
             animator.enabled = false; 
-        }
-        sr.sprite = BrokenSprite;
+        
+        if(BrokenSprite != null)
+            sr.sprite = BrokenSprite;
     }
 }

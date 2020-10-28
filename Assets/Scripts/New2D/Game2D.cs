@@ -24,6 +24,11 @@ public class Game2D : MonoBehaviour
 
     public LayerMask AgentMask;
 
+    public int DestroyTime = 60;
+    private int lastDestroyTime;
+    private float currentDestroyTime;
+
+
     [Space]
     public GameUI GameUi;
 
@@ -32,6 +37,7 @@ public class Game2D : MonoBehaviour
     [Header("Системы корабля")]
     public StopZone CapitanPlace;
     public List<Destructible> Engines;
+    public Destructible Reactor;
 
     [Space]
     public float currentSpeed;
@@ -53,6 +59,8 @@ public class Game2D : MonoBehaviour
         // скорость в секундах
         maxSpeed = 1;
         currentSpeed = 0;
+        
+        currentDestroyTime = DestroyTime;
 
         Livers = AgentsContent.GetComponentsInChildren<Liver2D>(); 
         Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();        
@@ -66,6 +74,7 @@ public class Game2D : MonoBehaviour
         GameUi.UpdateDistance(distanceProgress);
         GameUi.UpdateSpeed(currentSpeed);
         GameUi.SetMaxDistance(maxDistanceInSeconds);
+        GameUi.UpdateDestroyTimer((int)currentDestroyTime, false);
 
         Time.timeScale = 1;
 
@@ -87,7 +96,24 @@ public class Game2D : MonoBehaviour
         if(currentSpeed != lastCurrentSpeed)
             GameUi.UpdateSpeed(currentSpeed);
 
+        // самоуничтожение
+        if (Reactor.Broken)
+        { 
+            currentDestroyTime -= Time.deltaTime;         
+        }
+        if (Reactor.HasFullHp)
+        {
+            currentDestroyTime = DestroyTime;
+        }
+
+        var roundedTime = Mathf.RoundToInt(currentDestroyTime);
+        if (currentDestroyTime != roundedTime)
+        {
+            GameUi.UpdateDestroyTimer(roundedTime, currentDestroyTime < DestroyTime);
+        }
+     
         lastDistanceProgress = distanceProgress;
+        lastDestroyTime = roundedTime;
     }
 
     private void CheckGameOver()
@@ -95,6 +121,13 @@ public class Game2D : MonoBehaviour
         if(LiverCount == 0)
         {
             print("Поражение!");
+            GameOver();
+            return;
+        }
+
+        if (currentDestroyTime <= 0)
+        {
+            print("Поражение! Самоуничтожение!");
             GameOver();
             return;
         }
