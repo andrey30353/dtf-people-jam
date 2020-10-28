@@ -13,7 +13,9 @@ public enum KeyCardType
 public class KeyCard : MonoBehaviour
 {    
     public KeyCardType Type;
- 
+
+    public Color Color => sr.color;
+
     CircleCollider2D collider2d;
     SpriteRenderer sr;
 
@@ -50,6 +52,8 @@ public class KeyCard : MonoBehaviour
         transform.SetParent(liver.transform);
         transform.localPosition = Vector3.zero;
 
+        sr.enabled = false;
+
         liver.TakeKey(this);       
     }
 
@@ -58,6 +62,8 @@ public class KeyCard : MonoBehaviour
        // print("TakeOff key");
 
         collider2d.enabled = true;
+
+        sr.enabled = true;
 
         transform.SetParent(defaultParent);
     }

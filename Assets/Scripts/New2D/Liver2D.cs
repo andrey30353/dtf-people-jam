@@ -215,7 +215,7 @@ public class Liver2D : MonoBehaviour
     {
         Key = keyCard;
         KeyMark.enabled = true;
-        KeyMark.color = Settings.Instance.GetMarkColor(keyCard.Type);
+        KeyMark.color = keyCard.Color;// Settings.Instance.GetMarkColor(keyCard.Type);
     }
 
     private void LostItems()
