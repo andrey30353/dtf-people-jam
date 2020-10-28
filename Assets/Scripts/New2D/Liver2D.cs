@@ -22,8 +22,15 @@ public class Liver2D : MonoBehaviour
     public bool HasRepairKit => Equipment != null && Equipment.Type == EquipmentType.RepairKit;
 
     [Space]
+    public SpriteRenderer WeaponMark;
+    public SpriteRenderer RepairKitMark;
+    public SpriteRenderer KeyMark;
+    public SpriteRenderer SelectionMark;
+
+    [Space]
     public GameObject DeadEffectPrefab;
     public List<Sprite> DeadSprites;
+    public GameObject CorpsePrefab;
     public List<GameObject> DeadPrefabs;
 
     [Space]
@@ -31,7 +38,7 @@ public class Liver2D : MonoBehaviour
     // занят ли сейчас
     public bool isBusy;
 
-    public bool isInfected;
+    public bool isInfected;     
 
     public StopZone ManageObject;
     public Enemy2D EnemyInteract;
@@ -97,6 +104,11 @@ public class Liver2D : MonoBehaviour
     internal void Equip(Equipment equipment)
     {
         Equipment = equipment;
+        if (equipment.Type == EquipmentType.Weapon)
+            WeaponMark.enabled = true;
+
+        if (equipment.Type == EquipmentType.RepairKit)
+            RepairKitMark.enabled = true;
         /*if(equipment.Type == EquipmentType.Weapon)
         {
             Hp = HpWithWeapon;
@@ -105,6 +117,7 @@ public class Liver2D : MonoBehaviour
 
     internal void Manage(bool manage)
     {
+        SelectionMark.enabled = manage;
         mover.Manage(manage);
     }
 
@@ -158,13 +171,14 @@ public class Liver2D : MonoBehaviour
 
             var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
             Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+            Instantiate(CorpsePrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
         }
 
         if (needCorpse)
         {
             var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(effect, 1f);
-        }
+        }   
 
         LostItems();
 
@@ -188,6 +202,20 @@ public class Liver2D : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    internal void UseKey()
+    {
+        Destroy(Key.gameObject);
+        Key = null;
+        KeyMark.enabled = false;        
+    }
+
+    internal void TakeKey(KeyCard keyCard)
+    {
+        Key = keyCard;
+        KeyMark.enabled = true;
+        KeyMark.color = Settings.Instance.GetMarkColor(keyCard.Type);
     }
 
     private void LostItems()

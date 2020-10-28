@@ -26,6 +26,12 @@ public class Settings : MonoBehaviour
     public Color LabDoorColor;
     public Color ArmoryDoorColor;
 
+    [Header("Ключ карточка")]
+    public Color DefaultKeyColor;
+    public Color WorkerKeyColor;
+    public Color LabKeyColor;
+    public Color ArmoryKeyColor;
+
     public Transform AgentsContent;
 
     public static Settings Instance;
@@ -57,5 +63,26 @@ public class Settings : MonoBehaviour
                 return DefaultDoorColor;
         }
     }
-    
+
+    public Color GetMarkColor(KeyCardType key)
+    {
+        switch (key)
+        {
+            case KeyCardType.None:
+                return DefaultKeyColor;
+
+            case KeyCardType.WorkerKey:
+                return WorkerKeyColor;
+
+            case KeyCardType.LabKey:
+                return LabKeyColor;
+
+            case KeyCardType.ArmoryKey:
+                return ArmoryKeyColor;
+
+            default:
+                return DefaultKeyColor;
+        }
+    }
+
 }
