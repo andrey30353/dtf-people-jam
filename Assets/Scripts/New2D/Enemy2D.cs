@@ -166,11 +166,13 @@ public class Enemy2D : MonoBehaviour
             /*sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
             sr.sortingOrder = 0;*/
             var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
-            Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+            var blood = Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+            blood.transform.localScale = transform.localScale;
 
-            if(CorpsePrefab!=null)
+            if (CorpsePrefab!=null)
             {
                 var corpse = Instantiate(CorpsePrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+                corpse.transform.localScale = transform.localScale;
                 corpse.GetComponent<SpriteRenderer>().color = sr.color;
             }          
         }

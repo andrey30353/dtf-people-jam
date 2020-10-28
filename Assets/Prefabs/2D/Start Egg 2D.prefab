@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4767435197238004623}
   - component: {fileID: 993264241877482466}
   - component: {fileID: 2948148156119567758}
+  - component: {fileID: 8218701611376353401}
   m_Layer: 10
   m_Name: Start Egg 2D
   m_TagString: Agent
@@ -147,11 +148,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ea2bb944f5f171e4ba6c4ebb6694dc7a, type: 3}
   - {fileID: 21300000, guid: b84e76b2d2fb2254ba23dffc255f52b4, type: 3}
   - {fileID: 21300000, guid: 85aec77fb6be83542bba7383a56916f3, type: 3}
+  CorpsePrefab: {fileID: 0}
   DeadPrefabs:
   - {fileID: 3828117436398729496, guid: 69b99aab07940cd4d905a01efd3f565c, type: 3}
   - {fileID: 3828117436398729496, guid: e30b7917439abae40897303e9cd0a35d, type: 3}
   - {fileID: 3828117436398729496, guid: 0772fb40a03dae947a899e61971c0d8d, type: 3}
   isBusy: 0
+  LiverInteract: {fileID: 0}
 --- !u!58 &2948148156119567758
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,3 +171,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
+--- !u!95 &8218701611376353401
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288909363144373026}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f25078b6ae4cef448869e6ae16ae0a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
