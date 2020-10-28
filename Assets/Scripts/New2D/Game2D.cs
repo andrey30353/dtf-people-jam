@@ -31,8 +31,9 @@ public class Game2D : MonoBehaviour
 
     [Header("Системы корабля")]
     public StopZone CapitanPlace;
-    public List<Destructible> Engines;    
+    public List<Destructible> Engines;
 
+    [Space]
     public float currentSpeed;
     public float lastCurrentSpeed;    
 

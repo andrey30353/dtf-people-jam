@@ -50,7 +50,7 @@ public class KeyCard : MonoBehaviour
         transform.SetParent(liver.transform);
         transform.localPosition = Vector3.zero;
 
-        liver.Key = this;
+        liver.TakeKey(this);       
     }
 
     public void TakeOff()

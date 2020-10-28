@@ -50,6 +50,8 @@ public class Equipment : MonoBehaviour
         transform.SetParent(liver.transform);
         transform.localPosition = Vector3.zero;
 
+        sr.enabled = false;
+
         liver.Equip(this);
 
         //sr.sortingOrder = 0;
@@ -61,6 +63,8 @@ public class Equipment : MonoBehaviour
 
         collider2d.enabled = true;
         rb.simulated = true;
+
+        sr.enabled = true;
 
         transform.SetParent(defaultParent);
 

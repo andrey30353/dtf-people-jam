@@ -227,8 +227,7 @@ public class Door2D : MonoBehaviour
 
         if (liver != null)
         {
-            Destroy(liver.Key.gameObject);
-            liver.Key = null;
+            liver.UseKey();           
         }
 
         // withLinked - чтобы убрать зацикливание

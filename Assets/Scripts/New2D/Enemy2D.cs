@@ -34,6 +34,7 @@ public class Enemy2D : MonoBehaviour
     public ParticleSystem TakeDamageEffect;
 
     public List<Sprite> DeadSprites;
+    public GameObject CorpsePrefab;
     public List<GameObject> DeadPrefabs;
 
     //public bool BreakDoor ;
@@ -112,9 +113,12 @@ public class Enemy2D : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         isBusy = false;
-        victim.isBusy = false;
 
-        victim.TakeDamage(Damage);
+        if (victim != null)
+        {
+            victim.isBusy = false;
+            victim.TakeDamage(Damage);
+        }
 
         mover.RestoreMove();
     }
@@ -163,6 +167,12 @@ public class Enemy2D : MonoBehaviour
             sr.sortingOrder = 0;*/
             var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
             Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+
+            if(CorpsePrefab!=null)
+            {
+                var corpse = Instantiate(CorpsePrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+                corpse.GetComponent<SpriteRenderer>().color = sr.color;
+            }          
         }
 
         //if (needCorpse)
