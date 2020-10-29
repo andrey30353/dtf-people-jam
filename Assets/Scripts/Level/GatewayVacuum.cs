@@ -30,7 +30,8 @@ public class GatewayVacuum : MonoBehaviour
                 var res = Physics2D.OverlapBoxAll(item.bounds.center, item.bounds.size, 0, enviromentMask.value);
                 foreach (var coll in res)
                 {
-                    coll.gameObject.AddComponent<Rigidbody2D>();
+                    var rb = coll.gameObject.AddComponent<Rigidbody2D>();
+                    rb.gravityScale = 0;
                     // print(coll.name);
                 }
             }           
