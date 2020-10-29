@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: floor_darg
+  m_Name: floor_darg_5
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 12d81b4288a6f5d45bcd738218e8d4bc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.38431373}
+  m_Sprite: {fileID: 21300000, guid: 8b47c20e71dc57b40bdb8ae800c2cf71, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
