@@ -14,7 +14,10 @@ public class Enemy2D : MonoBehaviour
 
     public bool CanKill;
     public bool CanInfect;
+    public bool DeadAfterInfect;
     public bool CanUseHatch;
+
+    public bool AggressionToDamage;
 
     public float KillTime;
     public float InfectTime;
@@ -63,7 +66,7 @@ public class Enemy2D : MonoBehaviour
 
         // Assert.IsTrue(Live && !kill && !infect);
     }
-   
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //if (mover.isStoped)
@@ -85,9 +88,9 @@ public class Enemy2D : MonoBehaviour
         //if (otherAgent.isBusy)
         //    return;      
 
-        
+
         if (CanInfect && !otherAgent.isInfected)
-        {       
+        {
             StartCoroutine(InfectCor(otherAgent, 1));
         }
         // не кушаем инфицированных ?
@@ -141,12 +144,20 @@ public class Enemy2D : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         isBusy = false;
-        victim.isBusy = false;
 
-        victim.InfectedBy(this);
+        if (victim != null)
+        {
+            victim.isBusy = false;
+
+            victim.InfectedBy(this);
+        }
 
         victim.mover.RestoreMove();
-        this.mover.RestoreMove();
+
+        if (DeadAfterInfect)
+            this.Dead();
+        else
+            this.mover.RestoreMove();
     }
 
     internal void Manage(bool manage)
@@ -158,8 +169,8 @@ public class Enemy2D : MonoBehaviour
     {
         //gameObject.SetActive(false);
 
-       // if (needCorpse)
-       //     Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
+        // if (needCorpse)
+        //     Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
 
         if (needCorpse)
         {
@@ -169,12 +180,12 @@ public class Enemy2D : MonoBehaviour
             var blood = Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
             blood.transform.localScale = transform.localScale;
 
-            if (CorpsePrefab!=null)
+            if (CorpsePrefab != null)
             {
                 var corpse = Instantiate(CorpsePrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
                 corpse.transform.localScale = transform.localScale;
                 corpse.GetComponent<SpriteRenderer>().color = sr.color;
-            }          
+            }
         }
 
         //if (needCorpse)
@@ -182,24 +193,24 @@ public class Enemy2D : MonoBehaviour
         //    var effect = Instantiate(TakeDamageEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
         //    Destroy(effect, 1f);
         //}
-        
-        Game2D.Instance.EnemyDead();
-/*
-        Destroy(collider2d); 
-        if (mover != null)
-        {
-            Destroy(mover.animator);
-            Destroy(mover.rb);
-            //Destroy(mover.collider2d);
-            Destroy(mover);
-        }
 
-        if (producer != null)
-        {
-            Destroy(producer);
-        }
-       
-        Destroy(this);*/
+        Game2D.Instance.EnemyDead();
+        /*
+                Destroy(collider2d); 
+                if (mover != null)
+                {
+                    Destroy(mover.animator);
+                    Destroy(mover.rb);
+                    //Destroy(mover.collider2d);
+                    Destroy(mover);
+                }
+
+                if (producer != null)
+                {
+                    Destroy(producer);
+                }
+
+                Destroy(this);*/
 
         if (LiverInteract != null && LiverInteract.EnemyInteract == this)
         {
@@ -222,10 +233,10 @@ public class Enemy2D : MonoBehaviour
         Destroy(gameObject, timer);
     }*/
 
-  
+
 
     internal void UseHatch(Hatch enter)
-    {      
+    {
         StartCoroutine(UseHatchCor(enter));
     }
 
@@ -261,12 +272,12 @@ public class Enemy2D : MonoBehaviour
         targetHatch.Break();
 
         isBusy = false;
-        mover.UseHatch(false);      
+        mover.UseHatch(false);
 
         HatchList.Instance.Use(false);
     }
 
-    public void TakeDamage(int value)
+    public void TakeDamage(int value, Vector2 agresstionPoint)
     {
         //TakeDamageEffect.Play();
         var effect = Instantiate(TakeDamageEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
@@ -277,6 +288,11 @@ public class Enemy2D : MonoBehaviour
         if (Hp <= 0)
         {
             Dead();
+        }
+
+        if (AggressionToDamage)
+        {
+            mover.rb.velocity = -agresstionPoint.normalized * mover.Speed;
         }
     }
 }

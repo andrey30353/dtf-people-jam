@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 public class Game2D : MonoBehaviour
 {
@@ -189,5 +190,18 @@ public class Game2D : MonoBehaviour
         EnemiesCount++;
 
         GameUi.UpdateAgentCount();        
+    }
+
+    public void PauseGame(bool pause)
+    {
+        if(pause )
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 }

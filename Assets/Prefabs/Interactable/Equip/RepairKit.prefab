@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2745054314763968067}
   - component: {fileID: 2745054314763968066}
   - component: {fileID: 2745054314763968065}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RepairKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3f91332b0283daf4e8dca1a4ec75cccc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8706176779247584784}
   - component: {fileID: 3510656160915508360}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1bea7ea3184c53b45a7e7be166001bff, type: 3}
   m_Color: {r: 0.9829346, g: 1, b: 0, a: 1}
   m_FlipX: 0
