@@ -46,7 +46,7 @@ public class Game2D : MonoBehaviour
 
     public float maxDistanceInSeconds;
     private float distanceProgress;
-    private float lastDistanceProgress;
+    private int lastDistanceProgress;
 
     private float lastEngineHp1;
     private float lastEngineHp2;
@@ -77,7 +77,7 @@ public class Game2D : MonoBehaviour
         maxDistanceInSeconds = DistanceInMinutes * 60;
 
         GameUi.UpdateAgentCount();
-        GameUi.UpdateDistance(distanceProgress);
+        GameUi.UpdateDistance((int)distanceProgress);
         GameUi.UpdateSpeed(currentSpeed);
         GameUi.SetMaxDistance(maxDistanceInSeconds);
         GameUi.UpdateDestroyTimer(DestroyTime, false);
@@ -120,8 +120,8 @@ public class Game2D : MonoBehaviour
             currentSpeed = Engines.Sum(t => t.CurrentState) / Engines.Count;
 
         distanceProgress += Time.deltaTime * currentSpeed;
-        if (distanceProgress != lastDistanceProgress)
-            GameUi.UpdateDistance(distanceProgress);
+        if ((int)distanceProgress != lastDistanceProgress)
+            GameUi.UpdateDistance((int)distanceProgress);
 
         if (currentSpeed != lastCurrentSpeed)
             GameUi.UpdateSpeed(currentSpeed);
@@ -159,7 +159,7 @@ public class Game2D : MonoBehaviour
             GameUi.UpdateSpeed(currentSpeed);
         };
 
-        lastDistanceProgress = distanceProgress;
+        lastDistanceProgress = (int)distanceProgress;
         lastDestroyTime = roundedTime;
 
         lastEngineHp1 = Engines[0].Hp;

@@ -42,7 +42,7 @@ public class GameUI : MonoBehaviour
         DistanceSlider.maxValue = maxDistanceSec;
     }
 
-    public void UpdateDistance(float progressDistance)
+    public void UpdateDistance(int progressDistance)
     {
         //print("UpdateDistance");
         DistanceSlider.value = progressDistance;
