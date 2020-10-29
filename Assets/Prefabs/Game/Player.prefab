@@ -94,10 +94,10 @@ MonoBehaviour:
   MaxX_MinZoom: 6
   MinX_MaxZoom: -18
   MaxX_MaxZoom: 20
-  MinY_MinZoom: -3
-  MaxY_MinZoom: 3
-  MinY_MaxZoom: -15
-  MaxY_MaxZoom: 15
+  MinY_MinZoom: -5
+  MaxY_MinZoom: 5
+  MinY_MaxZoom: -17
+  MaxY_MaxZoom: 17
   Speed: 15
   SpeedZoom: 100
   Threshold: 0.1
