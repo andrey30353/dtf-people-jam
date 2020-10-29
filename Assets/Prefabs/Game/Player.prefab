@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7133898600018692375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7133898600018692361}
+  - component: {fileID: 7133898600018692360}
+  - component: {fileID: 7133898600018692362}
+  - component: {fileID: 7133898600018692363}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7133898600018692361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133898600018692375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7133898600018692360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133898600018692375}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8dbc987b5d8da4aaeee7a520a84e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Distance: 100
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 768
+  FloorLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  Radius: 5
+  selectedAgent: {fileID: 0}
+--- !u!114 &7133898600018692362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133898600018692375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629dccb94de465a45b8eaf26b3f38d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Distance: 100
+  InteractionMask:
+    serializedVersion: 2
+    m_Bits: 768
+  FloorLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  Radius: 3
+  point: {x: 0, y: 0, z: 0}
+  selectedAgent: {fileID: 0}
+--- !u!114 &7133898600018692363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133898600018692375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65de88edaa3fc1a458479364c2ab1fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinZoom: 8
+  MaxZoom: 22
+  MinX_MinZoom: 0
+  MaxX_MinZoom: 0
+  MinX_MaxZoom: -15
+  MaxX_MaxZoom: 17
+  MinY_MinZoom: 0
+  MaxY_MinZoom: 0
+  MinY_MaxZoom: -15
+  MaxY_MaxZoom: 15
+  Speed: 15
+  Threshold: 0.1
