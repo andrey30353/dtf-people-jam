@@ -81,16 +81,39 @@ public class Game2D : MonoBehaviour
         GameUi.UpdateSpeed(currentSpeed);
         GameUi.SetMaxDistance(maxDistanceInSeconds);
         GameUi.UpdateDestroyTimer(DestroyTime, false);
+        lastCapitanPlace = CapitanPlace.Visitor == null;
         GameUi.SetSpaceModules(Engines[0].Hp, Engines[1].Hp, Reactor.Hp, CapitanPlace.Visitor == null);
 
         Time.timeScale = 1;
 
         // Assert.IsTrue(LiverCount != 0);
         // Assert.IsTrue(EnemiesCount != 0);
+
+
+      /*  foreach (var liver in Livers)
+        {
+            liver.mover?.StopMove();
+        }
+
+        StartGame();*/
+    }
+
+    public bool started = false;
+    public void StartGame()
+    {
+        started = true;
+
+        foreach (var liver in Livers)
+        {
+            liver.mover.RestoreMove();
+        }
     }
 
     private void Update()
     {
+        //if (!started)
+        //    return;
+
         if (CapitanPlace.Visitor == null)
             currentSpeed = 0;
         else

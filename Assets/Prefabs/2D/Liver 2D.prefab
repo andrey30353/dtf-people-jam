@@ -222,11 +222,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d660e739fcfebd43ad4119ad3cd6ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  collider2d: {fileID: 0}
+  rb: {fileID: 288909363144373025}
+  collider2d: {fileID: 288909363144373038}
   Speed: 3
   isStoped: 0
-  animator: {fileID: 0}
+  animator: {fileID: 3281543005485726809}
 --- !u!114 &7589721539931355027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   - {fileID: 3828117436398729496, guid: 6103f29b97ab39148a9c90a847c4aa1a, type: 3}
   - {fileID: 3828117436398729496, guid: 7373cf5d515f5e94894c154b13cb9762, type: 3}
   - {fileID: 3828117436398729496, guid: 8973f25f2296ad9468ad246241dab557, type: 3}
-  mover: {fileID: 0}
+  mover: {fileID: 288909363144373039}
   isBusy: 0
   isInfected: 0
   ManageObject: {fileID: 0}

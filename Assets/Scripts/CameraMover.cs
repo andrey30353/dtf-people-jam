@@ -11,7 +11,7 @@ public class CameraMover : MonoBehaviour
 
     public float MinY_MinZoom, MaxY_MinZoom;
     public float MinY_MaxZoom, MaxY_MaxZoom;
-    
+
     private float zoom;
 
     public float Speed = 1f;
@@ -21,7 +21,7 @@ public class CameraMover : MonoBehaviour
 
     public Liver2D folowLiver;
 
-    Camera camera;   
+    Camera camera;
 
     float z;
 
@@ -31,30 +31,32 @@ public class CameraMover : MonoBehaviour
 
         z = camera.transform.localPosition.z;
 
-        AdjustZoom(0);
+       // AdjustZoom(1);
+        //AdjustPosition(-4,-4) ;
+       // camera.transform.localPosition = new Vector3(-4, -4, z);
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
 
         float zoomDelta = Input.GetAxis("Mouse ScrollWheel");
         if (zoomDelta != 0f)
         {
             AdjustZoom(zoomDelta);
-           
 
-          //  AdjustPosition(camera.ScreenToWorldPoint(Input.mousePosition));
+
+            //  AdjustPosition(camera.ScreenToWorldPoint(Input.mousePosition));
         }
 
 
 
 
-        
+
         float xDelta = 0f;
         float yDelta = 0f;
-               
+
         /*
         if (Input.mousePosition.x < Screen.width * Threshold) 
             xDelta = -1;
@@ -70,13 +72,13 @@ public class CameraMover : MonoBehaviour
         */
 
 
-       
+
 
         if (folowLiver != null)
         {
             var dir = (folowLiver.transform.position - camera.transform.position).normalized;
             xDelta = dir.x;
-            yDelta = dir.y; 
+            yDelta = dir.y;
         }
         else
         {
@@ -128,7 +130,7 @@ public class CameraMover : MonoBehaviour
 
         Vector3 position = camera.transform.localPosition;
         position += direction * distance;
-          
+
         var x = Mathf.Clamp(position.x, minX, maxX);
         var y = Mathf.Clamp(position.y, minY, maxY);
 
@@ -147,7 +149,7 @@ public class CameraMover : MonoBehaviour
         var maxY = Mathf.Lerp(MaxY_MinZoom, MaxY_MaxZoom, zoom);
 
         //var distance = /*Mathf.Lerp(MinZoom, MaxZoom, zoom) * damping **/Speed * Time.deltaTime;
-         
+
         //Vector3 position = camera.transform.localPosition;
         //position += direction * distance;
 
