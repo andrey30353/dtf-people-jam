@@ -59,8 +59,6 @@ public class Destructible : MonoBehaviour
                     animator.enabled = false;
             }
         }
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -103,8 +101,6 @@ public class Destructible : MonoBehaviour
 
     private void Break()
     {
-
-
         if (animator != null)         
             animator.enabled = false; 
         

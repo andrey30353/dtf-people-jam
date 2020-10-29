@@ -11,9 +11,7 @@ public class VacuumForce : MonoBehaviour
     public float Force = 7;
 
     private void OnTriggerStay2D(Collider2D collision)
-    {
-        print(collision.gameObject.name);
-
+    {   
         var rb = collision.GetComponent<Rigidbody2D>();
         if (rb != null)
         {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4503502816552346054}
   - component: {fileID: 7411504047639640933}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
