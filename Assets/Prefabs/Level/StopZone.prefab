@@ -71,3 +71,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Visitor: {fileID: 0}
+  collider2d: {fileID: 1812282877878476127}
