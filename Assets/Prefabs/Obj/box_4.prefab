@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2952523242143372166}
   - component: {fileID: -2021641029995972002}
   - component: {fileID: 2331796796200041800}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: box_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,3 +128,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f4c36e110ed58bc4aabcd246176aea5c, type: 3}
   - {fileID: 21300000, guid: 905abf8b72647784db40c21d05229f4b, type: 3}
   Hp: 1
+  BrokenScaleMin: 1
+  BrokenScaleMax: 2

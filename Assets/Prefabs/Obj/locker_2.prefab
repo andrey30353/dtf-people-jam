@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6627933950604397082}
   - component: {fileID: 2927576115366410176}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: locker_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
