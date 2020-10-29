@@ -7,14 +7,15 @@ public class GatewayVacuum : MonoBehaviour
     public BoxCollider2D[] triggers;
 
     public LayerMask enviromentMask;
-
-    public bool Enabled;
-
+       
     public bool UseEnviroment;
 
     private void Start()
     {
-        Switch(Enabled);
+        foreach (var item in triggers)
+        {
+            item.enabled = false;
+        }
     }
 
 
@@ -24,7 +25,7 @@ public class GatewayVacuum : MonoBehaviour
         {
             item.enabled = enable;
 
-            if (UseEnviroment)
+            if (UseEnviroment )
             {
                 var res = Physics2D.OverlapBoxAll(item.bounds.center, item.bounds.size, 0, enviromentMask.value);
                 foreach (var coll in res)

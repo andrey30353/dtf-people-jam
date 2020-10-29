@@ -91,9 +91,9 @@ MonoBehaviour:
   MinZoom: 8
   MaxZoom: 22
   MinX_MinZoom: -6
-  MaxX_MinZoom: 6
+  MaxX_MinZoom: 9
   MinX_MaxZoom: -18
-  MaxX_MaxZoom: 20
+  MaxX_MaxZoom: 23
   MinY_MinZoom: -5
   MaxY_MinZoom: 5
   MinY_MaxZoom: -17
