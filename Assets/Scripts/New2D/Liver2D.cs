@@ -122,7 +122,10 @@ public class Liver2D : MonoBehaviour
     }
 
     public void InfectedBy(Enemy2D infector)
-    {  
+    {
+        if (infector == null)
+            return;
+
         isInfected = true;
 
         sr.material.color = Settings.Instance.InfectedColor;//infector.Color;

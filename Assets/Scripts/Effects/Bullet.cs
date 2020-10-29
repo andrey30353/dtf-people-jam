@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
     public int Speed = 5;
     
     public Vector3 Direction;
-
+     
     public Rigidbody2D rb;
     //private void Start()
     //{
@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         var enemy = collision.gameObject.GetComponent<Enemy2D>();
         if (enemy != null)
         {
-            enemy.TakeDamage(Damage);
+            enemy.TakeDamage(Damage, rb.velocity);
         }
 
         //print(collision.gameObject.name);

@@ -159,7 +159,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   CanKill: 1
   CanInfect: 0
+  DeadAfterInfect: 0
   CanUseHatch: 0
+  AggressionToDamage: 1
   KillTime: 0.7
   InfectTime: 1
   HatchTime: 1

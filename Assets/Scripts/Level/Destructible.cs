@@ -7,7 +7,8 @@ public class Destructible : MonoBehaviour
 {
     public Sprite DamagedSprite;
     public Sprite BrokenSprite;
-            
+    private Sprite defaultSprite;
+
     public float Hp = 5;
     private float startHp;
     public float StartHp  => startHp; 
@@ -37,6 +38,8 @@ public class Destructible : MonoBehaviour
         startHp = Hp;
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        defaultSprite = sr.sprite;
     }
 
     private void Update()
@@ -50,6 +53,10 @@ public class Destructible : MonoBehaviour
                 Worker.mover.RestoreMove();
                 Worker.isBusy = false;
                 Worker = null;
+
+                sr.sprite = defaultSprite;
+                if (animator != null)
+                    animator.enabled = false;
             }
         }
 
