@@ -47,6 +47,9 @@ public class GameUI : MonoBehaviour
         DestroyTimerText.enabled = enable;
 
         //DestroyTimerText.text = $"Время до уничтожения: {timeSec}";
+        if (time < 0)
+            time = 0;
+
         var str = time < 10 ? $"0{time}" : time.ToString();
         DestroyTimerText.text = str;
     }

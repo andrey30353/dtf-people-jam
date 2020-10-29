@@ -5,6 +5,7 @@ using UnityEngine;
 public class StopZone : MonoBehaviour
 {
     public Liver2D Visitor;
+    public BoxCollider2D collider2d;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,5 +20,11 @@ public class StopZone : MonoBehaviour
                 liver.ManageObject = this;
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;        
+        Gizmos.DrawWireCube(collider2d.bounds.center, collider2d.bounds.size);
     }
 }

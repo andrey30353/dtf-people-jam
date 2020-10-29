@@ -13,7 +13,7 @@ public class Door2D : MonoBehaviour
     public List<BoxCollider2D> BrokenColliders;
 
     public bool IsOpen;
-      
+
     public KeyCardType RequireKey;
     private bool blocked;
 
@@ -34,12 +34,13 @@ public class Door2D : MonoBehaviour
 
     public List<Door2D> OpeningDepends;
 
+    //public List<Door2D> CloseDoorIfOpen;
+
     public Door2D LinkedDoor;
 
     public UnityEvent OpenEvent;
     public UnityEvent CloseEvent;
 
-  
     private SpriteRenderer sr;
 
     private void OnValidate()
@@ -53,6 +54,22 @@ public class Door2D : MonoBehaviour
         //    settings = GameObject.Find("Settings").GetComponent<Settings>();
         //}      
         //sr.color = settings.GetDoorColor(RequireKey);
+
+        if (OpeningDepends != null)
+        {
+            foreach (var door in OpeningDepends)
+            {
+                if (door == null)
+                    continue;
+
+                if (door.OpeningDepends == null)
+                    continue;
+
+                if (!door.OpeningDepends.Contains(this))
+                    door.OpeningDepends.Add(this);
+                //OpenEvent += Close;
+            }
+        }
     }
 
     private void Start()
@@ -60,23 +77,22 @@ public class Door2D : MonoBehaviour
         startHp = Hp;
         sr = GetComponent<SpriteRenderer>();
         if (RequireKey != KeyCardType.None)
-        { 
+        {
             blocked = true;
 
             sr.color = Settings.Instance.GetDoorColor(RequireKey);
+        }
+
+        foreach (var item in OpeningDepends)
+        {
+            //OpenEvent += Close;
         }
     }
 
     public void Select()
     {
-        if (blocked)
+        if (blocked || Broken || InProcess)
             return;
-
-        if (Broken)
-            return;
-
-        if (InProcess)
-            return;       
 
         if (IsOpen)
             Close();
@@ -86,14 +102,18 @@ public class Door2D : MonoBehaviour
 
     private void Open()
     {
-       /* var canOpen = true;
+        // нельзя, если они в процессе открывания
+        foreach (var door in OpeningDepends)
+        {
+            if (door.IsClosed && door.InProcess)
+                return;
+        }
+        // закрываем зависимые открытые двери
         foreach (var door in OpeningDepends)
         {
             if (door.IsOpen)
-                return;
+                door.Close();
         }
-        */
-        //if()
 
         OpenEvent?.Invoke();
 
@@ -157,7 +177,7 @@ public class Door2D : MonoBehaviour
             return;
 
         // Kill()
-              
+
 
         if (InProcess)
         {
@@ -192,7 +212,7 @@ public class Door2D : MonoBehaviour
     }
 
     private void CheckDoorHp()
-    {    
+    {
         if (Broken)
         {
             Break();
@@ -210,11 +230,11 @@ public class Door2D : MonoBehaviour
         OpenEvent?.Invoke();
 
         BaseCollider.enabled = false;
-        
+
         foreach (var brokenColl in BrokenColliders)
         {
             brokenColl.enabled = true;
-        }     
+        }
 
         sr.sprite = BrokenSprite;
 
@@ -227,7 +247,7 @@ public class Door2D : MonoBehaviour
 
         if (liver != null)
         {
-            liver.UseKey();           
+            liver.UseKey();
         }
 
         // withLinked - чтобы убрать зацикливание

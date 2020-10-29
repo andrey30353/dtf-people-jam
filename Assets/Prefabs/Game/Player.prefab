@@ -90,13 +90,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinZoom: 8
   MaxZoom: 22
-  MinX_MinZoom: 0
-  MaxX_MinZoom: 0
+  MinX_MinZoom: -3
+  MaxX_MinZoom: 3
   MinX_MaxZoom: -15
   MaxX_MaxZoom: 17
-  MinY_MinZoom: 0
-  MaxY_MinZoom: 0
+  MinY_MinZoom: -3
+  MaxY_MinZoom: 3
   MinY_MaxZoom: -15
   MaxY_MaxZoom: 15
   Speed: 15
+  SpeedZoom: 100
   Threshold: 0.1
+  folowLiver: {fileID: 0}

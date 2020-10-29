@@ -13,13 +13,17 @@ public class PlayerRay2D : MonoBehaviour
     public float Radius;
     public Vector3 point;
  
-    public Liver2D selectedAgent;   
+    public Liver2D selectedAgent;
+
+    private CameraMover cameraMover;
 
     Camera camera;
     void Start()
     {
         camera = Camera.main;
         point = Vector3.up;
+
+        cameraMover = GetComponent<CameraMover>();
     }
 
     // Update is called once per frame 
@@ -44,11 +48,12 @@ public class PlayerRay2D : MonoBehaviour
                     if (selectedAgent != null && selectedAgent != agent)
                     {
                         selectedAgent.Manage(false);                      
-                    }
-                    
+                    }                    
+
                     selectedAgent = agent;                    
                     agent.Manage(true);
-                  
+
+                    //cameraMover.SetZoom(0.5f);
                 }
             }
             else
@@ -70,6 +75,7 @@ public class PlayerRay2D : MonoBehaviour
             Game2D.Instance.MoveAgents(origin, Radius);           
         }
 
+        cameraMover.folowLiver = selectedAgent;
     }
 
     private void OnDrawGizmos()
