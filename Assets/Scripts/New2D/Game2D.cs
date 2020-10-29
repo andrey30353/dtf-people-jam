@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class Game2D : MonoBehaviour
 {
     [Header("Дистанция в минутах")]
-    public int DistanceInMinutes;   
+    public int DistanceInMinutes;
 
     public GameObject AgentsContent;
 
@@ -42,11 +42,16 @@ public class Game2D : MonoBehaviour
 
     [Space]
     public float currentSpeed;
-    public float lastCurrentSpeed;    
+    public float lastCurrentSpeed;
 
     public float maxDistanceInSeconds;
     private float distanceProgress;
-    private float lastDistanceProgress;   
+    private float lastDistanceProgress;
+
+    private float lastEngineHp1;
+    private float lastEngineHp2;
+    private float lastReactorHp;
+    private bool lastCapitanPlace;
 
     public static Game2D Instance;
 
@@ -60,22 +65,23 @@ public class Game2D : MonoBehaviour
         // скорость в секундах
         maxSpeed = 1;
         currentSpeed = 0;
-        
+
         currentDestroyTime = DestroyTime;
 
-        Livers = AgentsContent.GetComponentsInChildren<Liver2D>(); 
-        Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();        
+        Livers = AgentsContent.GetComponentsInChildren<Liver2D>();
+        Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();
 
         LiverCount = Livers.Length;
         EnemiesCount = Enemies.Length;
-              
-        maxDistanceInSeconds = DistanceInMinutes * 60;      
+
+        maxDistanceInSeconds = DistanceInMinutes * 60;
 
         GameUi.UpdateAgentCount();
         GameUi.UpdateDistance(distanceProgress);
         GameUi.UpdateSpeed(currentSpeed);
         GameUi.SetMaxDistance(maxDistanceInSeconds);
-        GameUi.UpdateDestroyTimer((int)currentDestroyTime, false);
+        GameUi.UpdateDestroyTimer(DestroyTime, false);
+        GameUi.SetSpaceModules(Engines[0].Hp, Engines[1].Hp, Reactor.Hp);
 
         Time.timeScale = 1;
 
@@ -91,16 +97,16 @@ public class Game2D : MonoBehaviour
             currentSpeed = Engines.Sum(t => t.CurrentState) / Engines.Count;
 
         distanceProgress += Time.deltaTime * currentSpeed;
-        if(distanceProgress != lastDistanceProgress)
+        if (distanceProgress != lastDistanceProgress)
             GameUi.UpdateDistance(distanceProgress);
 
-        if(currentSpeed != lastCurrentSpeed)
+        if (currentSpeed != lastCurrentSpeed)
             GameUi.UpdateSpeed(currentSpeed);
 
         // самоуничтожение
         if (Reactor.Broken)
-        { 
-            currentDestroyTime -= Time.deltaTime;         
+        {
+            currentDestroyTime -= Time.deltaTime;
         }
         if (Reactor.HasFullHp)
         {
@@ -108,18 +114,40 @@ public class Game2D : MonoBehaviour
         }
 
         var roundedTime = Mathf.RoundToInt(currentDestroyTime);
-        if (currentDestroyTime != roundedTime)
+        if (roundedTime != lastDestroyTime)
         {
-            GameUi.UpdateDestroyTimer(roundedTime, currentDestroyTime < DestroyTime);
+            GameUi.UpdateDestroyTimer(roundedTime, !Reactor.HasFullHp);
         }
-     
+
+        // модули корабля
+        if (Engines[0].Hp != lastEngineHp1)
+            GameUi.UpdateEngine1(Engines[0].Hp);
+
+        if (Engines[1].Hp != lastEngineHp2)
+            GameUi.UpdateEngine2(Engines[1].Hp);
+
+        if (Reactor.Hp != lastReactorHp)
+            GameUi.UpdateReactor(Reactor.Hp);
+
+        var capitanPlace = CapitanPlace.Visitor == null;
+        if (capitanPlace != lastCapitanPlace)
+        {
+            GameUi.UpdateCapitan(capitanPlace);
+            GameUi.UpdateSpeed(currentSpeed);
+        };
+
         lastDistanceProgress = distanceProgress;
         lastDestroyTime = roundedTime;
+
+        lastEngineHp1 = Engines[0].Hp;
+        lastEngineHp2 = Engines[1].Hp;
+        lastReactorHp = Reactor.Hp;
+        lastCapitanPlace = capitanPlace;
     }
 
     private void CheckGameOver()
     {
-        if(LiverCount == 0)
+        if (LiverCount == 0)
         {
             print("Поражение!");
             GameOver();
@@ -148,23 +176,23 @@ public class Game2D : MonoBehaviour
 
     public void MoveAgents(Vector3 point, float radius)
     {
-       // var result = new Collider[10];
+        // var result = new Collider[10];
 
-        var res =  Physics2D.OverlapCircleAll(point, radius, AgentMask.value);
+        var res = Physics2D.OverlapCircleAll(point, radius, AgentMask.value);
         // Physics.OverlapSphereNonAlloc(point, radius, result, AgentMask.value);
 
         //print(res.Length);
 
         foreach (var item in res)
         {
-           var agent =  item.GetComponent<Liver2D>();
+            var agent = item.GetComponent<Liver2D>();
             // todo
-            if(!agent.isBusy)
+            if (!agent.isBusy)
                 agent.MoveTo(point);
         }
 
-       
-       // fore
+
+        // fore
     }
 
     internal void LiverDead()
@@ -174,7 +202,7 @@ public class Game2D : MonoBehaviour
         GameUi.UpdateAgentCount();
 
         CheckGameOver();
-    }   
+    }
 
     internal void EnemyDead()
     {
@@ -189,19 +217,6 @@ public class Game2D : MonoBehaviour
     {
         EnemiesCount++;
 
-        GameUi.UpdateAgentCount();        
-    }
-
-    public void PauseGame(bool pause)
-    {
-        if(pause )
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(0);
+        GameUi.UpdateAgentCount();
     }
 }

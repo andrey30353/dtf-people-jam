@@ -24,7 +24,7 @@ public class Destructible : MonoBehaviour
 
     public bool Broken => Hp <= 0;
     public bool Damaged => Hp <= StartHp / 2;
-    public bool HasFullHp => Hp == StartHp;
+    public bool HasFullHp => Hp >= StartHp;
 
     public float CurrentState => (float) Hp / StartHp;
 
