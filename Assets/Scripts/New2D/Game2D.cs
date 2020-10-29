@@ -81,7 +81,7 @@ public class Game2D : MonoBehaviour
         GameUi.UpdateSpeed(currentSpeed);
         GameUi.SetMaxDistance(maxDistanceInSeconds);
         GameUi.UpdateDestroyTimer(DestroyTime, false);
-        GameUi.SetSpaceModules(Engines[0].Hp, Engines[1].Hp, Reactor.Hp);
+        GameUi.SetSpaceModules(Engines[0].Hp, Engines[1].Hp, Reactor.Hp, CapitanPlace.Visitor == null);
 
         Time.timeScale = 1;
 

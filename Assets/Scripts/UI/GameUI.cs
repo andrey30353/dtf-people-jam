@@ -89,20 +89,20 @@ public class GameUI : MonoBehaviour
     public void UpdateCapitan(bool error)
     {
         CapitanImage.color = error ? errorColor : normColor;
-        EngineImageMap1.color = error ? errorColor : normColor;        
+        CapitanImageMap.color = error ? errorColor : normColor;        
     }
 
-    public void SetSpaceModules(float engineHp1, float engineHp2, float reactorHp1 )
+    public void SetSpaceModules(float engineHp1, float engineHp2, float reactorHp1, bool error )
     {
         EngineSlider1.maxValue = engineHp1;    
         EngineSlider2.maxValue = engineHp2;   
-        ReactorSlider.maxValue = reactorHp1;
-        CapitanImage.color = normColor;
-
+        ReactorSlider.maxValue = reactorHp1;     
 
         EngineSlider1.value = engineHp1;
         EngineSlider2.value = engineHp2;
         ReactorSlider.value = reactorHp1;
+
+        UpdateCapitan(error);
     }
 
 
