@@ -166,30 +166,58 @@ public class Game2D : MonoBehaviour
         lastEngineHp2 = Engines[1].Hp;
         lastReactorHp = Reactor.Hp;
         lastCapitanPlace = capitanPlace;
+
+        CheckGameOver();
     }
 
+    private bool EnemiesDeadMessageShown;
     private void CheckGameOver()
     {
         if (LiverCount == 0)
         {
-            print("Поражение!");
+            GameUi.LiverDeadMessage.SetActive(true);
+
             GameOver();
             return;
         }
 
         if (currentDestroyTime <= 0)
         {
-            print("Поражение! Самоуничтожение!");
+            // todo
+            print("Бабах!");
+            GameUi.DefeatMessage.SetActive(true);
+
             GameOver();
             return;
         }
 
-        if (EnemiesCount == 0 || distanceProgress >= maxDistanceInSeconds)
+        if (EnemiesCount == 0 && !EnemiesDeadMessageShown)
         {
-            print("Победа!");
+            GameUi.EnemiesDeadMessage.SetActive(true);
+            //EnemiesDeadMessageShown = true;
             GameOver();
             return;
         }
+
+        if (distanceProgress >= maxDistanceInSeconds)
+        {
+            if (EnemiesCount == 0)
+            {
+                GameUi.VictoryMessage.SetActive(true);
+
+                GameOver();
+                return;
+            }
+            else
+            {
+                GameUi.DefeatMessage.SetActive(true);
+
+                GameOver();
+                return;
+            }
+        }
+
+       
     }
 
     private void GameOver()
@@ -224,7 +252,7 @@ public class Game2D : MonoBehaviour
 
         GameUi.UpdateAgentCount();
 
-        CheckGameOver();
+        //CheckGameOver();
     }
 
     internal void EnemyDead()
@@ -233,7 +261,7 @@ public class Game2D : MonoBehaviour
 
         GameUi.UpdateAgentCount();
 
-        CheckGameOver();
+        //CheckGameOver();
     }
 
     internal void AddEnemy()
