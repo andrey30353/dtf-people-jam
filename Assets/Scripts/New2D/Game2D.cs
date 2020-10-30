@@ -166,33 +166,97 @@ public class Game2D : MonoBehaviour
         lastEngineHp2 = Engines[1].Hp;
         lastReactorHp = Reactor.Hp;
         lastCapitanPlace = capitanPlace;
+
+        CheckGameOver();
     }
 
+    private bool EnemiesDeadMessageShown;
+    public bool gameOver;
     private void CheckGameOver()
     {
+        if (Time.timeScale == 0)
+            return;
+
+        // поражение
         if (LiverCount == 0)
         {
             print("Поражение!");
-            GameOver();
+            GameUi.LiverDeadMessage.SetActive(true);
+
+            PauseGame();
             return;
         }
 
         if (currentDestroyTime <= 0)
         {
-            print("Поражение! Самоуничтожение!");
-            GameOver();
+            // todo
+            print("Бабах!");
+            GameUi.DefeatMessage.SetActive(true);
+
+            PauseGame();
             return;
         }
 
-        if (EnemiesCount == 0 || distanceProgress >= maxDistanceInSeconds)
+        if (EnemiesCount == 0 )
         {
-            print("Победа!");
-            GameOver();
-            return;
+            // нужно починить реактор
+            if (Reactor.Hp <=0)
+            {
+                print("Почините реактор!");
+                GameUi.EnemiesDeadMessage.SetActive(true);
+                //EnemiesDeadMessageShown = true;
+                PauseGame();
+                // возврат в игру
+                // todo
+                return;
+            }
+            else
+            {
+                // победа
+                print("Чистая победа!");
+                GameUi.EnemiesDeadMessage.SetActive(true);
+                //EnemiesDeadMessageShown = true;
+                PauseGame();
+                return;
+            }           
         }
+
+        // долетели
+        if (distanceProgress >= maxDistanceInSeconds)
+        {
+            if (Reactor.Hp <= 0)
+            {
+                // взрыв на земле
+                print("взрыв на земле");
+                PauseGame();
+                return;
+            }
+
+            if (EnemiesCount != 0)
+            {
+
+                // чистая победа
+                print("Чистая победа!");
+                GameUi.VictoryMessage.SetActive(true);
+
+                PauseGame();
+                return;
+            }
+            else
+            {
+                // заразили землю
+                print("заразили землю");
+                GameUi.DefeatMessage.SetActive(true);
+
+                PauseGame();
+                return;
+            }
+        }
+
+       
     }
 
-    private void GameOver()
+    private void PauseGame()
     {
         Time.timeScale = 0;
     }
@@ -224,7 +288,7 @@ public class Game2D : MonoBehaviour
 
         GameUi.UpdateAgentCount();
 
-        CheckGameOver();
+        //CheckGameOver();
     }
 
     internal void EnemyDead()
@@ -233,7 +297,7 @@ public class Game2D : MonoBehaviour
 
         GameUi.UpdateAgentCount();
 
-        CheckGameOver();
+        //CheckGameOver();
     }
 
     internal void AddEnemy()

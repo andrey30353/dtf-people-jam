@@ -17,11 +17,13 @@ public class GameUI : MonoBehaviour
 
     public Slider DistanceSlider;
 
+    [Space]
     public Slider EngineSlider1;
     public Slider EngineSlider2;
     public Slider ReactorSlider;
     public Image CapitanImage;
 
+    [Space]
     public Image EngineImageMap1;
     public Image EngineImageMap2;
     public Image ReactorImageMap;
@@ -30,6 +32,15 @@ public class GameUI : MonoBehaviour
     public Color normColor;
     public Color errorColor;
 
+    [Space]
+    public GameObject StartMessage;
+    public GameObject WarningMessage;
+    public GameObject RubkaMessage;
+    public GameObject ReactorMessage;
+    public GameObject EnemiesDeadMessage;
+    public GameObject LiverDeadMessage;
+    public GameObject DefeatMessage;
+    public GameObject VictoryMessage;
 
     public void UpdateAgentCount()
     {

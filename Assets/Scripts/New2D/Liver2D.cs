@@ -105,7 +105,11 @@ public class Liver2D : MonoBehaviour
     {
         Equipment = equipment;
         if (equipment.Type == EquipmentType.Weapon)
+        {
             WeaponMark.enabled = true;
+            mover.animator.SetBool("Weapon", true);
+        }
+           
 
         if (equipment.Type == EquipmentType.RepairKit)
             RepairKitMark.enabled = true;
