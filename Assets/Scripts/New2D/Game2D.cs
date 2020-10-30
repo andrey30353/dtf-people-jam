@@ -101,7 +101,7 @@ public class Game2D : MonoBehaviour
         lastCapitanPlace = CapitanPlace.Visitor == null;
         GameUi.SetSpaceModules(Engines[0].Hp, Engines[1].Hp, Reactor.Hp, CapitanPlace.Visitor == null);
 
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
 
         // Assert.IsTrue(LiverCount != 0);
         // Assert.IsTrue(EnemiesCount != 0);

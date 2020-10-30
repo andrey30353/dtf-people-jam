@@ -48,6 +48,19 @@ public class GameUI : MonoBehaviour
     [Header("Почти конец игры")]
     public GameObject ReactorWarningMessage;
 
+    public void Start()
+    {
+        PauseGame(true);
+    }
+
+    bool showed;
+    public void ShowStartMessage()
+    {
+        if(!showed)        
+            StartMessage.SetActive(true);
+
+        showed = true;
+    }
 
     public void UpdateAgentCount()
     {

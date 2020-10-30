@@ -31,9 +31,15 @@ public class CameraMover : MonoBehaviour
 
         z = camera.transform.localPosition.z;
 
-       // AdjustZoom(1);
-        //AdjustPosition(-4,-4) ;
-       // camera.transform.localPosition = new Vector3(-4, -4, z);
+        SetStartPosition();
+    }
+
+    public void SetStartPosition()
+    {
+        //print("SetStartPosition");
+        //float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
+        camera.orthographicSize = MinZoom;
+        camera.transform.localPosition = new Vector3(-4, -4, z);
     }
 
     // Update is called once per frame
@@ -99,7 +105,7 @@ public class CameraMover : MonoBehaviour
     {
         delta *= SpeedZoom * Time.deltaTime;
         zoom = Mathf.Clamp01(zoom + delta);
-
+               
         float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
         camera.orthographicSize = distance;
     }
