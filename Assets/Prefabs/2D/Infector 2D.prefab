@@ -179,6 +179,7 @@ MonoBehaviour:
   - {fileID: 3828117436398729496, guid: 69b99aab07940cd4d905a01efd3f565c, type: 3}
   - {fileID: 3828117436398729496, guid: e30b7917439abae40897303e9cd0a35d, type: 3}
   - {fileID: 3828117436398729496, guid: 0772fb40a03dae947a899e61971c0d8d, type: 3}
+  DeadSound: {fileID: 0}
   isBusy: 0
   LiverInteract: {fileID: 0}
 --- !u!114 &288909363144373036

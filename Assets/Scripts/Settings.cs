@@ -32,6 +32,12 @@ public class Settings : MonoBehaviour
     public Color LabKeyColor;
     public Color ArmoryKeyColor;
 
+    [Header("Звуки")]  
+    public AudioSource EnemyDeadSound;
+    public AudioSource LiverDeadSound;
+    public AudioSource DoorSound;
+    public AudioSource ShotSound;
+
     public Transform AgentsContent;
 
     public static Settings Instance;

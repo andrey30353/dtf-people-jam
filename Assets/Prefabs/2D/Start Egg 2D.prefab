@@ -135,7 +135,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   CanKill: 0
   CanInfect: 0
+  DeadAfterInfect: 0
   CanUseHatch: 0
+  AggressionToDamage: 0
   KillTime: 0
   InfectTime: 0
   HatchTime: 1
@@ -153,6 +155,7 @@ MonoBehaviour:
   - {fileID: 3828117436398729496, guid: 69b99aab07940cd4d905a01efd3f565c, type: 3}
   - {fileID: 3828117436398729496, guid: e30b7917439abae40897303e9cd0a35d, type: 3}
   - {fileID: 3828117436398729496, guid: 0772fb40a03dae947a899e61971c0d8d, type: 3}
+  DeadSound: {fileID: 0}
   isBusy: 0
   LiverInteract: {fileID: 0}
 --- !u!58 &2948148156119567758
