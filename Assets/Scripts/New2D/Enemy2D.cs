@@ -39,6 +39,8 @@ public class Enemy2D : MonoBehaviour
     public List<Sprite> DeadSprites;
     public GameObject CorpsePrefab;
     public List<GameObject> DeadPrefabs;
+      
+   // public AudioSource DeadSound;
 
     //public bool BreakDoor ;
 
@@ -143,7 +145,7 @@ public class Enemy2D : MonoBehaviour
         if (victim != null)
         {
             victim.isBusy = false;
-            victim.TakeDamage(Damage);
+            victim.TakeDamage(Damage);           
         }
 
         mover.RestoreMove();
@@ -224,6 +226,9 @@ public class Enemy2D : MonoBehaviour
         //}
 
         Game2D.Instance.EnemyDead();
+
+        if (needCorpse)
+            Settings.Instance.EnemyDeadSound.Play();
         /*
                 Destroy(collider2d); 
                 if (mover != null)

@@ -98,6 +98,8 @@ public class Door2D : MonoBehaviour
             Close();
         else
             Open();
+
+        Settings.Instance.DoorSound.Play();
     }
 
     private void Open()

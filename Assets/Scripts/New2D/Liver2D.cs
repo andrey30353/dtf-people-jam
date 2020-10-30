@@ -43,6 +43,9 @@ public class Liver2D : MonoBehaviour
     public StopZone ManageObject;
     public Enemy2D EnemyInteract;
 
+    //public AudioSource ShotSound;
+    //public AudioSource DeadSound;
+
     SpriteRenderer sr;    
    
     private void Start()
@@ -99,6 +102,9 @@ public class Liver2D : MonoBehaviour
         bullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         attackTimeoutProcess = AttackTimeout;
+
+      
+        Settings.Instance.ShotSound.Play();
     }    
 
     internal void Equip(Equipment equipment)
@@ -190,13 +196,17 @@ public class Liver2D : MonoBehaviour
         LostItems();
 
         Game2D.Instance.LiverDead();
+
+        if (needCorpse)
+            Settings.Instance.LiverDeadSound.Play();
+
         /*
         Destroy(mover.animator);       
         Destroy(mover.rb);
         Destroy(mover.collider2d);      
         Destroy(mover);
         Destroy(this);*/
-        if(ManageObject != null && ManageObject.Visitor == this)
+        if (ManageObject != null && ManageObject.Visitor == this)
         {
             ManageObject.Visitor = null;
         }

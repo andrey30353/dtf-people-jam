@@ -270,6 +270,8 @@ MonoBehaviour:
   isInfected: 0
   ManageObject: {fileID: 0}
   EnemyInteract: {fileID: 0}
+  ShotSound: {fileID: 0}
+  DeadSound: {fileID: 0}
 --- !u!95 &3281543005485726809
 Animator:
   serializedVersion: 3
