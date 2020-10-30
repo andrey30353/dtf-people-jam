@@ -159,13 +159,15 @@ MonoBehaviour:
   mover: {fileID: 0}
   CanKill: 1
   CanInfect: 0
+  DeadAfterInfect: 0
   CanUseHatch: 1
+  AggressionToDamage: 0
   KillTime: 1
   InfectTime: 1
   HatchTime: 1
-  HatchSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  HatchSizeKoef: 3
-  HatchColor: {r: 0.64705884, g: 0.35686275, b: 0.45098042, a: 1}
+  HatchSprite: {fileID: 21300000, guid: e2303e809aa7e7c48aaa5b8dd2d0f9d2, type: 3}
+  HatchSizeKoef: 1
+  HatchColor: {r: 1, g: 1, b: 1, a: 1}
   TakeDamageEffectPrefab: {fileID: 5368460846223691020, guid: 32769896f7a0fec43ac223ee4ab31fc7, type: 3}
   TakeDamageEffect: {fileID: 3147679647188712392}
   DeadSprites:

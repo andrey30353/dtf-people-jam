@@ -270,12 +270,17 @@ public class Enemy2D : MonoBehaviour
 
         sr.sprite = HatchSprite;
         transform.localScale = Vector3.one * HatchSizeKoef;
+        
         sr.color = HatchColor;
 
         var targetHatch = HatchList.Instance.GetRandomHatch(enter);
         var targetPos = targetHatch.transform.position;
         var startPos = enter.transform.position;
-        var time = (startPos - targetPos).magnitude / (mover.Speed * HatchList.Instance.SpeedKoefInHatch);
+        var dir = startPos - targetPos;
+        var time = dir.magnitude / (mover.Speed * HatchList.Instance.SpeedKoefInHatch);
+
+        // для направления значка в решетке
+        mover.rb.velocity = dir;        
 
         var elapsedTime = 0f;
         while (elapsedTime < time)
