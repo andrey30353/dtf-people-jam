@@ -188,6 +188,14 @@ public class Door2D : MonoBehaviour
             var agent = collision.gameObject.GetComponent<Liver2D>();
             if (agent != null)
                 agent.Dead();
+
+            var enemy = collision.gameObject.GetComponent<Enemy2D>();
+            if (enemy != null)
+            {
+                print(enemy);
+                enemy.TakeDamage(1, Vector3.zero);
+            }
+                
         }
         else
         {   // ломается только закрытая дверь

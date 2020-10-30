@@ -37,10 +37,17 @@ public class GameUI : MonoBehaviour
     public GameObject WarningMessage;
     public GameObject RubkaMessage;
     public GameObject ReactorMessage;
-    public GameObject EnemiesDeadMessage;
-    public GameObject LiverDeadMessage;
-    public GameObject DefeatMessage;
-    public GameObject VictoryMessage;
+
+
+    [Header("Концовки игры")]
+    public GameObject LiversDiedMessage;
+    public GameObject ReactorExplosionMessage;
+    public GameObject ReactorExplosionOnEarthMessage;
+    public GameObject EnemiesDeadVictoryMessage;
+    public GameObject InfectEarthMessage;
+    [Header("Почти конец игры")]
+    public GameObject ReactorWarningMessage;
+
 
     public void UpdateAgentCount()
     {
@@ -83,7 +90,7 @@ public class GameUI : MonoBehaviour
     }
 
     public void UpdateEngine1(float hp)
-    { 
+    {
         EngineSlider1.value = hp;
         EngineImageMap1.color = hp > 0 ? normColor : errorColor;
     }
@@ -100,14 +107,14 @@ public class GameUI : MonoBehaviour
     public void UpdateCapitan(bool error)
     {
         CapitanImage.color = error ? errorColor : normColor;
-        CapitanImageMap.color = error ? errorColor : normColor;        
+        CapitanImageMap.color = error ? errorColor : normColor;
     }
 
-    public void SetSpaceModules(float engineHp1, float engineHp2, float reactorHp1, bool error )
+    public void SetSpaceModules(float engineHp1, float engineHp2, float reactorHp1, bool error)
     {
-        EngineSlider1.maxValue = engineHp1;    
-        EngineSlider2.maxValue = engineHp2;   
-        ReactorSlider.maxValue = reactorHp1;     
+        EngineSlider1.maxValue = engineHp1;
+        EngineSlider2.maxValue = engineHp2;
+        ReactorSlider.maxValue = reactorHp1;
 
         EngineSlider1.value = engineHp1;
         EngineSlider2.value = engineHp2;
@@ -116,6 +123,57 @@ public class GameUI : MonoBehaviour
         UpdateCapitan(error);
     }
 
+    public void UpdateMessage(GameState gameOverState)
+    {
+        LiversDiedMessage.SetActive(false);
+        ReactorExplosionMessage.SetActive(false);
+        ReactorExplosionOnEarthMessage.SetActive(false);
+        EnemiesDeadVictoryMessage.SetActive(false);
+        InfectEarthMessage.SetActive(false);
+        ReactorWarningMessage.SetActive(false);
+
+        switch (gameOverState)
+        {
+            case GameState.LiversDiedDefeat:
+                print("Поражение!");
+                PauseGame(true);
+                LiversDiedMessage.SetActive(true);
+                break;
+
+            case GameState.ReactorExplosion:
+                print("Бабах!");
+                PauseGame(true);
+                ReactorExplosionMessage.SetActive(true);
+                break;
+
+            case GameState.ReactorExplosionOnEarth:
+                print("взрыв на земле");
+                PauseGame(true);
+                ReactorExplosionMessage.SetActive(true);
+                break;
+
+            case GameState.EnemiesDeadVictory:              
+                print("Чистая победа!");
+                EnemiesDeadVictoryMessage.SetActive(true);                
+                PauseGame(true);
+                break;
+
+            case GameState.InfectEarth:             
+                print("заразили землю");
+                InfectEarthMessage.SetActive(true);
+                PauseGame(true);
+                break;
+
+            case GameState.ReactorWarning:
+                print("Почините реактор!");
+                ReactorWarningMessage.SetActive(true);                
+                PauseGame(true); 
+                break;
+
+            default:
+                return;
+        }
+    }
 
     public void PauseGame(bool pause)
     {

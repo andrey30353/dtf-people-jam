@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3858771126972742159}
   - component: {fileID: 2029370428248140722}
   - component: {fileID: 2916399467041594911}
+  - component: {fileID: -3921463393490689558}
   m_Layer: 10
   m_Name: Egg 2D
   m_TagString: Agent
@@ -136,7 +137,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   CanKill: 0
   CanInfect: 0
+  DeadAfterInfect: 0
   CanUseHatch: 0
+  AggressionToDamage: 0
   KillTime: 0
   InfectTime: 0
   HatchTime: 1
@@ -191,3 +194,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &-3921463393490689558
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288909363144373026}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10
+  m_LinearDrag: 1
+  m_AngularDrag: 1
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

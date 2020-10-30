@@ -7,6 +7,20 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
+public enum GameState
+{
+    Unknown,
+
+    LiversDiedDefeat,
+    ReactorExplosion,
+    ReactorExplosionOnEarth,
+
+    EnemiesDeadVictory,
+    InfectEarth,
+
+    ReactorWarning
+}
+
 public class Game2D : MonoBehaviour
 {
     [Header("Дистанция в минутах")]
@@ -52,6 +66,9 @@ public class Game2D : MonoBehaviour
     private float lastEngineHp2;
     private float lastReactorHp;
     private bool lastCapitanPlace;
+
+    public GameState lastState;
+    public GameState state;
 
     public static Game2D Instance;
 
@@ -170,55 +187,40 @@ public class Game2D : MonoBehaviour
         CheckGameOver();
     }
 
-    private bool EnemiesDeadMessageShown;
-    public bool gameOver;
     private void CheckGameOver()
-    {
-        if (Time.timeScale == 0)
-            return;
+    {       
+        state = DefineStatus();
 
+        if(state != lastState)
+            GameUi.UpdateMessage(state);
+
+        lastState = state;
+    }
+
+    private GameState DefineStatus()
+    {
         // поражение
         if (LiverCount == 0)
         {
-            print("Поражение!");
-            GameUi.LiverDeadMessage.SetActive(true);
-
-            PauseGame();
-            return;
+            return GameState.LiversDiedDefeat;  
         }
 
         if (currentDestroyTime <= 0)
-        {
-            // todo
-            print("Бабах!");
-            GameUi.DefeatMessage.SetActive(true);
-
-            PauseGame();
-            return;
+        {          
+            return GameState.ReactorExplosion; 
         }
 
-        if (EnemiesCount == 0 )
+        if (EnemiesCount == 0)
         {
-            // нужно починить реактор
-            if (Reactor.Hp <=0)
+            // нужно починить реактор хотя бы до половины
+            if (Reactor.Hp < Reactor.StartHp / 2)
             {
-                print("Почините реактор!");
-                GameUi.EnemiesDeadMessage.SetActive(true);
-                //EnemiesDeadMessageShown = true;
-                PauseGame();
-                // возврат в игру
-                // todo
-                return;
+                return GameState.ReactorWarning;               
             }
             else
             {
-                // победа
-                print("Чистая победа!");
-                GameUi.EnemiesDeadMessage.SetActive(true);
-                //EnemiesDeadMessageShown = true;
-                PauseGame();
-                return;
-            }           
+                return GameState.EnemiesDeadVictory;               
+            }
         }
 
         // долетели
@@ -226,34 +228,20 @@ public class Game2D : MonoBehaviour
         {
             if (Reactor.Hp <= 0)
             {
-                // взрыв на земле
-                print("взрыв на земле");
-                PauseGame();
-                return;
+                return GameState.ReactorExplosionOnEarth;               
             }
 
-            if (EnemiesCount != 0)
+            if (EnemiesCount == 0)
             {
-
-                // чистая победа
-                print("Чистая победа!");
-                GameUi.VictoryMessage.SetActive(true);
-
-                PauseGame();
-                return;
+                return GameState.EnemiesDeadVictory;               
             }
             else
             {
-                // заразили землю
-                print("заразили землю");
-                GameUi.DefeatMessage.SetActive(true);
-
-                PauseGame();
-                return;
+                return GameState.InfectEarth;               
             }
         }
 
-       
+        return GameState.Unknown;
     }
 
     private void PauseGame()
