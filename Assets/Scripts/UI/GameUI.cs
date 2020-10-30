@@ -148,37 +148,37 @@ public class GameUI : MonoBehaviour
         switch (gameOverState)
         {
             case GameState.LiversDiedDefeat:
-                print("Поражение!");
+                //print("Поражение!");
                 PauseGame(true);
                 LiversDiedMessage.SetActive(true);
                 break;
 
             case GameState.ReactorExplosion:
-                print("Бабах!");
+                //print("Бабах!");
                 PauseGame(true);
                 ReactorExplosionMessage.SetActive(true);
                 break;
 
             case GameState.ReactorExplosionOnEarth:
-                print("взрыв на земле");
+                //print("взрыв на земле");
                 PauseGame(true);
                 ReactorExplosionMessage.SetActive(true);
                 break;
 
             case GameState.EnemiesDeadVictory:              
-                print("Чистая победа!");
+                //print("Чистая победа!");
                 EnemiesDeadVictoryMessage.SetActive(true);                
                 PauseGame(true);
                 break;
 
             case GameState.InfectEarth:             
-                print("заразили землю");
+                //print("заразили землю");
                 InfectEarthMessage.SetActive(true);
                 PauseGame(true);
                 break;
 
             case GameState.ReactorWarning:
-                print("Почините реактор!");
+                //print("Почините реактор!");
                 ReactorWarningMessage.SetActive(true);                
                 PauseGame(true); 
                 break;
