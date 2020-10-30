@@ -274,6 +274,15 @@ public class Game2D : MonoBehaviour
     {
         LiverCount--;
 
+        /*if(LiverCount == 1)
+        {
+            var livers = AgentsContent.GetComponentsInChildren<Liver2D>();
+            if(livers.Length == 1)
+            {
+                livers[0].Manage(true);
+            }               
+        }*/
+
         GameUi.UpdateAgentCount();
 
         //CheckGameOver();
