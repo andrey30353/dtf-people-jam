@@ -3897,7 +3897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5627731000220502825, guid: 49dc96c8a799cb1479f825be703a024c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.992886
+      value: -15.03
       objectReference: {fileID: 0}
     - target: {fileID: 5627731000220502825, guid: 49dc96c8a799cb1479f825be703a024c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22407,6 +22407,10 @@ PrefabInstance:
     - target: {fileID: 531407326361872467, guid: c3e90af0d23cada49814189cbe320187, type: 3}
       propertyPath: m_Name
       value: locker_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 531407326361872467, guid: c3e90af0d23cada49814189cbe320187, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6627933950604397082, guid: c3e90af0d23cada49814189cbe320187, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55470,6 +55474,10 @@ PrefabInstance:
     - target: {fileID: 531407326361872467, guid: c3e90af0d23cada49814189cbe320187, type: 3}
       propertyPath: m_Name
       value: locker_2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 531407326361872467, guid: c3e90af0d23cada49814189cbe320187, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6627933950604397082, guid: c3e90af0d23cada49814189cbe320187, type: 3}
       propertyPath: m_LocalPosition.x
