@@ -52,6 +52,9 @@ public class Hatch : MonoBehaviour
         enemy.mover.StopMove();
         enemy.isBusy = true;
 
+        // направление 
+        enemy.mover.RotateTo(transform.position);
+
         yield return new WaitForSeconds(HatchList.Instance.BreakTime);
 
         if(enemy != null)

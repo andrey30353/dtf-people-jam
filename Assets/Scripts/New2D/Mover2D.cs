@@ -170,6 +170,13 @@ public class Mover2D : MonoBehaviour
         rb.simulated = !use;
         animator.enabled = !use;
     }
+
+    public void RotateTo(Vector3 point)
+    {
+        var dir = point - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
 }
 
 

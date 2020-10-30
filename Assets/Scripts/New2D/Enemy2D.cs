@@ -133,6 +133,9 @@ public class Enemy2D : MonoBehaviour
         isBusy = true;
         victim.isBusy = true;
 
+        // направление 
+        mover.RotateTo(victim.transform.position);
+       
         yield return new WaitForSeconds(time);
 
         isBusy = false;
@@ -160,6 +163,12 @@ public class Enemy2D : MonoBehaviour
 
         isBusy = true;
         victim.isBusy = true;
+
+        // направление 
+        mover.RotateTo(victim.transform.position);
+        //var dir = victim.transform.position - transform.position;
+        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
+        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);      
 
         yield return new WaitForSeconds(time);
 
