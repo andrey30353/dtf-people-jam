@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 288909363144373026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -159,7 +159,9 @@ MonoBehaviour:
   mover: {fileID: 0}
   CanKill: 0
   CanInfect: 1
+  DeadAfterInfect: 1
   CanUseHatch: 1
+  AggressionToDamage: 0
   KillTime: 1
   InfectTime: 1
   HatchTime: 1

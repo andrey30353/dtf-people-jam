@@ -88,18 +88,38 @@ public class Enemy2D : MonoBehaviour
         //if (otherAgent.isBusy)
         //    return;      
 
-
-        if (CanInfect && !otherAgent.isInfected)
+        if(CanInfect && CanKill)
         {
-            StartCoroutine(InfectCor(otherAgent, 1));
+            var infect = UnityEngine.Random.value > 0.5f;
+            if (infect)
+            {
+                if (!otherAgent.isInfected)
+                {
+                    StartCoroutine(InfectCor(otherAgent, 1));
+                }
+            }
+            else
+            {
+                if (!otherAgent.isInfected)
+                {
+                    StartCoroutine(KillCor(otherAgent, KillTime));
+                }
+            }
         }
-        // не кушаем инфицированных ?
-        if (CanKill && !otherAgent.isInfected)
+        else
         {
-            StartCoroutine(KillCor(otherAgent, KillTime));
-        }
-        return;
 
+            if (CanInfect && !otherAgent.isInfected)
+            {
+                StartCoroutine(InfectCor(otherAgent, 1));
+            }
+            // не кушаем инфицированных ?
+            if (CanKill && !otherAgent.isInfected)
+            {
+                StartCoroutine(KillCor(otherAgent, KillTime));
+            }
+            return;
+        }  
     }
 
     public IEnumerator KillCor(Liver2D victim, float time)
@@ -155,7 +175,7 @@ public class Enemy2D : MonoBehaviour
         victim.mover.RestoreMove();
 
         if (DeadAfterInfect)
-            this.Dead();
+            this.Dead(false);
         else
             this.mover.RestoreMove();
     }
