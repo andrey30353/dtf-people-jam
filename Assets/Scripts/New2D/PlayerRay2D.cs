@@ -29,6 +29,9 @@ public class PlayerRay2D : MonoBehaviour
     // Update is called once per frame 
     void LateUpdate()
     {
+        if (Time.timeScale == 0)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {           
             var origin = camera.ScreenToWorldPoint(Input.mousePosition);

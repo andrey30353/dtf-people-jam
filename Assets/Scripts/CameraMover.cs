@@ -40,6 +40,7 @@ public class CameraMover : MonoBehaviour
         //float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
         camera.orthographicSize = MinZoom;
         camera.transform.localPosition = new Vector3(-4, -4, z);
+        zoom = 1;
     }
 
     // Update is called once per frame
