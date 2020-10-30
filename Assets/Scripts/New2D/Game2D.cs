@@ -249,7 +249,7 @@ public class Game2D : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void MoveAgents(Vector3 point, float radius)
+    public void MoveAgents(Vector3 point, float radius, Liver2D except)
     {
         // var result = new Collider[10];
 
@@ -259,8 +259,12 @@ public class Game2D : MonoBehaviour
         //print(res.Length);
 
         foreach (var item in res)
-        {
+        {   
             var agent = item.GetComponent<Liver2D>();
+
+            if (except != null && agent == except)
+                continue;
+
             // todo
             if (!agent.isBusy)
                 agent.MoveTo(point);

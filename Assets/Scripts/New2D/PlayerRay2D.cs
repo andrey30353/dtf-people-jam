@@ -12,7 +12,9 @@ public class PlayerRay2D : MonoBehaviour
 
     public float Radius;
     public Vector3 point;
- 
+
+    public float pointSize = 1f;
+
     public Liver2D selectedAgent;
 
     private CameraMover cameraMover;
@@ -48,24 +50,53 @@ public class PlayerRay2D : MonoBehaviour
                 var agent = hit.collider.gameObject.GetComponent<Liver2D>();
                 if (agent != null)
                 {
-                    if (selectedAgent != null && selectedAgent != agent)
-                    {
-                        selectedAgent.Manage(false);                      
-                    }                    
-
-                    selectedAgent = agent;                    
-                    agent.Manage(true);
-
-                    //cameraMover.SetZoom(0.5f);
+                    SelectLiver(agent);
                 }
             }
             else
             {
-                if (selectedAgent != null )
+                var colliders = Physics2D.OverlapCircleAll(origin, pointSize, InteractionMask);
+                if(colliders == null || colliders.Length == 0)
                 {
-                    selectedAgent.Manage(false);
-                    selectedAgent = null;
+                    if (selectedAgent != null)
+                    {
+                        selectedAgent.Manage(false);
+                        selectedAgent = null;
+                    }
                 }
+                else
+                {
+                    float minDist = int.MaxValue;
+                    Liver2D agent = null;
+                    foreach (var col in colliders)
+                    {
+                        var currAgen = col.gameObject.GetComponent<Liver2D>();
+                        if (currAgen == null)
+                            continue;
+
+                        var dist = (origin - transform.position).sqrMagnitude;
+                        if(dist < minDist)
+                        {
+                            agent = currAgen;
+                            minDist = dist;
+                        }
+                    }
+
+                    if(agent != null)
+                    {
+                        SelectLiver(agent);
+                    }
+                    else
+                    {
+                        if (selectedAgent != null)
+                        {
+                            selectedAgent.Manage(false);
+                            selectedAgent = null;
+                        }
+                    }
+                }
+
+               
             }
         }
 
@@ -75,10 +106,23 @@ public class PlayerRay2D : MonoBehaviour
             origin.z = 0;
             //print(origin);
             
-            Game2D.Instance.MoveAgents(origin, Radius);           
+            Game2D.Instance.MoveAgents(origin, Radius, selectedAgent);           
         }
 
         cameraMover.folowLiver = selectedAgent;
+    }
+
+    private void SelectLiver(Liver2D agent)
+    {
+        if (selectedAgent != null && selectedAgent != agent)
+        {
+            selectedAgent.Manage(false);
+        }
+
+        selectedAgent = agent;
+        agent.Manage(true);
+
+        //cameraMover.SetZoom(0.5f);
     }
 
     private void OnDrawGizmos()
