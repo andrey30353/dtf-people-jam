@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1040827815786187413}
   - component: {fileID: 3989920969584474360}
+  - component: {fileID: 2324277279425853610}
+  - component: {fileID: -6244445607530364994}
   m_Layer: 14
   m_Name: chair
   m_TagString: Untagged
@@ -25,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4442897822860231418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.581049, y: 22.803368, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,3 +84,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2324277279425853610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442897822860231418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da753940619438440aa098edbe22d478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BrokenSprite:
+  - {fileID: 21300000, guid: 7217d7b9b1aa94b4b84afa5bdb0043a1, type: 3}
+  - {fileID: 21300000, guid: 13beb2ebc9573b440abc90c5952c6d4f, type: 3}
+  - {fileID: 21300000, guid: ff71526b2d3c0114997f298fa311f6be, type: 3}
+  Hp: 1
+  BrokenScaleMin: 1
+  BrokenScaleMax: 1.5
+--- !u!61 &-6244445607530364994
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442897822860231418}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.53125, y: 0.625}
+    newSize: {x: 0.53125, y: 0.625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.47, y: 0.55}
+  m_EdgeRadius: 0

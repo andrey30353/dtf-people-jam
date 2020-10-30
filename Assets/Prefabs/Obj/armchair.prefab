@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7745301825698918364}
   - component: {fileID: 4114879493298220179}
+  - component: {fileID: 8595233362996108679}
+  - component: {fileID: -5446214876118871554}
   m_Layer: 14
   m_Name: armchair
   m_TagString: Untagged
@@ -82,3 +84,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8595233362996108679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861113347467856498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da753940619438440aa098edbe22d478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BrokenSprite:
+  - {fileID: 21300000, guid: 2a9a9689a6bb7b04a9592bc16917c7b4, type: 3}
+  - {fileID: 21300000, guid: 1c1939215051a7144916e394b85ad255, type: 3}
+  - {fileID: 21300000, guid: 13beb2ebc9573b440abc90c5952c6d4f, type: 3}
+  Hp: 1
+  BrokenScaleMin: 1
+  BrokenScaleMax: 1.5
+--- !u!61 &-5446214876118871554
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861113347467856498}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9375, y: 0.84375}
+    newSize: {x: 0.9375, y: 0.84375}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9375, y: 0.84375}
+  m_EdgeRadius: 0

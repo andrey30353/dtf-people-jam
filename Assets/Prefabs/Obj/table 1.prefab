@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 739954826552486006}
   - component: {fileID: 4589512019240603389}
+  - component: {fileID: 537529935629435825}
+  - component: {fileID: 1027118791215156231}
   m_Layer: 14
   m_Name: table 1
   m_TagString: Untagged
@@ -25,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5273586100731791598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.635, y: -28.576, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,3 +84,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &537529935629435825
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273586100731791598}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.875}
+    newSize: {x: 1, y: 0.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.875}
+  m_EdgeRadius: 0
+--- !u!114 &1027118791215156231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273586100731791598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da753940619438440aa098edbe22d478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BrokenSprite:
+  - {fileID: 21300000, guid: b254365a43641a54ea8f996975c0dc4a, type: 3}
+  - {fileID: 21300000, guid: 7f71e582a56a2364ab6315d45c503a6a, type: 3}
+  - {fileID: 21300000, guid: 7b21ab4f4a1cc06458fe9b640fe73edb, type: 3}
+  - {fileID: 21300000, guid: 2c2fef22733569d458baf6d209c86ef7, type: 3}
+  Hp: 1
+  BrokenScaleMin: 1
+  BrokenScaleMax: 1.5
