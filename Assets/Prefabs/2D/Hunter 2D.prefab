@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: af7141a1636295b4ea1b5f1a40cafaa6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,7 +179,6 @@ MonoBehaviour:
   - {fileID: 3828117436398729496, guid: 69b99aab07940cd4d905a01efd3f565c, type: 3}
   - {fileID: 3828117436398729496, guid: e30b7917439abae40897303e9cd0a35d, type: 3}
   - {fileID: 3828117436398729496, guid: 0772fb40a03dae947a899e61971c0d8d, type: 3}
-  DeadSound: {fileID: 0}
   isBusy: 0
   LiverInteract: {fileID: 0}
 --- !u!95 &4509032034134879567
