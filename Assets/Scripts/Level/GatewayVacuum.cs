@@ -18,7 +18,6 @@ public class GatewayVacuum : MonoBehaviour
         }
     }
 
-
     public void Switch(bool enable)
     {
         foreach (var item in triggers)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-
+// todo наследовать общий класс с Liver2D
 public class Enemy2D : MonoBehaviour
 {
     public int Hp;
@@ -255,19 +255,6 @@ public class Enemy2D : MonoBehaviour
 
         Destroy(gameObject);
     }
-    /*
-    public void DeadCor(float timer = 0)
-    {        
-        gameObject.SetActive(false);
-
-        Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(90, 0, 0));
-
-        Game2D.Instance.EnemyDead();
-
-        Destroy(gameObject, timer);
-    }*/
-
-
 
     internal void UseHatch(Hatch enter)
     {

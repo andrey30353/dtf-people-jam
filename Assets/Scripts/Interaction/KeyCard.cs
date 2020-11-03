@@ -10,16 +10,17 @@ public enum KeyCardType
     ArmoryKey = 3
 }
 
+// todo можно выделить общий класс с Equipment
 public class KeyCard : MonoBehaviour
 {    
     public KeyCardType Type;
 
     public Color Color => sr.color;
 
-    CircleCollider2D collider2d;
-    SpriteRenderer sr;
+    private CircleCollider2D collider2d;
+    private SpriteRenderer sr;
 
-    Transform defaultParent;
+    private Transform defaultParent;
 
     private void Start()
     {      

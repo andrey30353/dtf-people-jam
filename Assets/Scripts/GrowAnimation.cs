@@ -23,5 +23,7 @@ public class GrowAnimation : MonoBehaviour
         elapsedTime += Time.deltaTime;
 
         transform.localScale = Vector3.Lerp(StartScale, TargetScale, elapsedTime / GrowTime);
+
+        // todo disable
     }
 }

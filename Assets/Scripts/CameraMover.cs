@@ -165,31 +165,4 @@ public class CameraMover : MonoBehaviour
 
         camera.transform.localPosition = new Vector3(x, y, z);
     }
-
-    //void AdjustPosition2(Vector2 tagetPosition)
-    //{
-    //    var xDelta = camera.transform.position.x - tagetPosition.x;
-    //    var yDelta = camera.transform.position.y - tagetPosition.y;
-
-    //    AdjustPosition(xDelta, yDelta);
-
-    //    Vector3 direction = new Vector2(xDelta, yDelta).normalized;
-    //    float damping = Mathf.Max(Mathf.Abs(xDelta), Mathf.Abs(yDelta));
-
-    //    var minX = Mathf.Lerp(MinX_MinZoom, MinX_MaxZoom, zoom);
-    //    var maxX = Mathf.Lerp(MaxX_MinZoom, MaxX_MaxZoom, zoom);
-
-    //    var minY = Mathf.Lerp(MinY_MinZoom, MinY_MaxZoom, zoom);
-    //    var maxY = Mathf.Lerp(MaxY_MinZoom, MaxY_MaxZoom, zoom);
-
-    //    var distance = /*Mathf.Lerp(MinZoom, MaxZoom, zoom) * damping **/Speed * Time.deltaTime;
-
-    //    Vector3 position = camera.transform.localPosition;
-    //    position += direction * distance;
-
-    //    var x = Mathf.Clamp(position.x, minX, maxX);
-    //    var y = Mathf.Clamp(position.y, minY, maxY);
-
-    //    camera.transform.localPosition = new Vector3(x, y, z);
-    //}
 }

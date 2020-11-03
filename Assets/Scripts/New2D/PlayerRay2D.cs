@@ -58,6 +58,7 @@ public class PlayerRay2D : MonoBehaviour
                 var colliders = Physics2D.OverlapCircleAll(origin, pointSize, InteractionMask);
                 if(colliders == null || colliders.Length == 0)
                 {
+                    // todo копипаст 
                     if (selectedAgent != null)
                     {
                         selectedAgent.Manage(false);
@@ -88,6 +89,7 @@ public class PlayerRay2D : MonoBehaviour
                     }
                     else
                     {
+                        // todo копипаст 
                         if (selectedAgent != null)
                         {
                             selectedAgent.Manage(false);

@@ -48,13 +48,6 @@ public class Door2D : MonoBehaviour
         if (LinkedDoor != null)
             LinkedDoor.LinkedDoor = this;
 
-        //var settings = Settings.Instance;
-        //if (settings == null)
-        //{
-        //    settings = GameObject.Find("Settings").GetComponent<Settings>();
-        //}      
-        //sr.color = settings.GetDoorColor(RequireKey);
-
         if (OpeningDepends != null)
         {
             foreach (var door in OpeningDepends)

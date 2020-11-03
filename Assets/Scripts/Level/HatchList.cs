@@ -20,8 +20,7 @@ public class HatchList : MonoBehaviour
 
     public Hatch[] Hatches;
 
-    public static HatchList Instance;
-  
+    public static HatchList Instance;  
 
     private void Awake()
     {

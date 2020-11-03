@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+// todo наследовать общий класс с Enemy2D
 public class Liver2D : MonoBehaviour
 {
     public int Hp = 1;

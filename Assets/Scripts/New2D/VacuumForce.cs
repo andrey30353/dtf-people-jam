@@ -25,10 +25,7 @@ public class VacuumForce : MonoBehaviour
             //print(direction);
             //rb.velocity = direction * Force;
             rb.AddForce(force);
-
         }
-
-
     }
 
     private void OnDrawGizmos()

@@ -11,11 +11,11 @@ public class Equipment : MonoBehaviour
 {
     public EquipmentType Type;  
 
-    CircleCollider2D collider2d;
-    Rigidbody2D rb;
-    SpriteRenderer sr;
+    private CircleCollider2D collider2d;
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
-    Transform defaultParent;
+    private Transform defaultParent;
 
     private void Start()
     {
