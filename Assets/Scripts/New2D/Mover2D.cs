@@ -12,16 +12,19 @@ public class Mover2D : MonoBehaviour
     // public float startSpeed;
 
     public float Speed;
+    public float RealSpeed => feared ? Speed : Speed *0.5f;
 
-    float speedThreshold;
+    // todo
+    public bool feared = true;
 
     public bool isStoped;
 
     public Animator animator;
+       
+    float speedThreshold;
 
     private bool managed = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,14 +34,18 @@ public class Mover2D : MonoBehaviour
 
         SetRandomVelocity();
 
-        speedThreshold = Speed * 0f;
+        speedThreshold = Speed * 0f;      
+
+        // todo
+        feared = true;
     }
 
     private void SetRandomVelocity()
     {
         var randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
         //print(randomDirection);
-        rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * Speed;
+       
+        rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * RealSpeed;
     }   
 
     internal void StopMove()
@@ -78,7 +85,7 @@ public class Mover2D : MonoBehaviour
             var inputX = Input.GetAxis("Horizontal");
             var inputY = Input.GetAxis("Vertical");
 
-            var velocity = new Vector2(inputX, inputY).normalized * Speed;
+            var velocity = new Vector2(inputX, inputY).normalized * RealSpeed;
             rb.velocity = velocity;
 
             if (rb.velocity == Vector2.zero)
@@ -127,14 +134,14 @@ public class Mover2D : MonoBehaviour
             }
             else
             {
-                if (currentSpeed < Speed + speedThreshold)
+                if (currentSpeed < RealSpeed + speedThreshold)
                 {
-                    rb.velocity *= Speed / currentSpeed;
+                    rb.velocity *= RealSpeed / currentSpeed;
                 }
 
-                if (currentSpeed > Speed + speedThreshold)
+                if (currentSpeed > RealSpeed + speedThreshold)
                 {
-                    rb.velocity *= Speed / currentSpeed;
+                    rb.velocity *= RealSpeed / currentSpeed;
                 }
             }
 
@@ -177,6 +184,11 @@ public class Mover2D : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
+    public void MoveTo(Vector3 point)
+    {
+        rb.velocity = (point - transform.position).normalized * RealSpeed;
+    }    
 }
 
 

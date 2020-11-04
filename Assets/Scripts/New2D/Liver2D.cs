@@ -247,8 +247,8 @@ public class Liver2D : MonoBehaviour
 
     public void MoveTo(Vector3 point)
     {
-        if(mover!=null)
-            mover.rb.velocity = (point - transform.position).normalized * mover.Speed;
+        if (mover != null)
+            mover.MoveTo(point);          
     }
 
     private void OnDrawGizmos()
