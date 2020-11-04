@@ -7,21 +7,23 @@ public class TakeDinamit : MonoBehaviour
 {
     public GameObject LiverMoveMessage;
 
-    public float Delay;   
+    public float Delay;
+
+    public List<MoveAnimation> MoveLivers;
 
     public UnityEvent OnComplete;
 
     private int messageIndex;
 
     private void Start()
-    {
-    
-
+    {    
         LiverMoveMessage.SetActive(true);
-        //foreach (var message in Messages)
-        //{
-        //    message.SetActive(false);
-        //}
+
+
+        foreach (var moveAnimation in MoveLivers)
+        {
+            moveAnimation.enabled  = true;
+        }
 
         //ShowNextMessage();
     }
