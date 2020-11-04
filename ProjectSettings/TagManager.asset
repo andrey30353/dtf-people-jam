@@ -50,3 +50,9 @@ TagManager:
   - name: Interactable
     uniqueID: 4115783565
     locked: 0
+  - name: UI
+    uniqueID: 1475906233
+    locked: 0
+  - name: UI_Text
+    uniqueID: 3906523393
+    locked: 0

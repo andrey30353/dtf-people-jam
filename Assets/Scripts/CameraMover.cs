@@ -21,17 +21,20 @@ public class CameraMover : MonoBehaviour
           
     public Liver2D FolowLiver;
 
-    private Camera camera;
+    public float Zoom => zoom;
+    public Vector2 CameraPosition => cameraMain.transform.position;
+
+    private Camera cameraMain;
 
     private float zPosition;
 
-    private float zoom;
+    private float zoom;  
 
     private void Start()
     {
-        camera = Camera.main;
+        cameraMain = Camera.main;
 
-        zPosition = camera.transform.localPosition.z;
+        zPosition = cameraMain.transform.localPosition.z;
 
         if(SetPositionOnStart)
             SetStartPosition();
@@ -41,8 +44,8 @@ public class CameraMover : MonoBehaviour
     {
         //print("SetStartPosition");
         //float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
-        camera.orthographicSize = MinZoom;
-        camera.transform.localPosition = new Vector3(-4, -4, zPosition);
+        cameraMain.orthographicSize = MinZoom;
+        cameraMain.transform.localPosition = new Vector3(-4, -4, zPosition);
         zoom = 1;
     }
 
@@ -86,7 +89,7 @@ public class CameraMover : MonoBehaviour
 
         if (FolowLiver != null)
         {
-            var dir = (FolowLiver.transform.position - camera.transform.position).normalized;
+            var dir = (FolowLiver.transform.position - cameraMain.transform.position).normalized;
             xDelta = dir.x;
             yDelta = dir.y;
         }
@@ -111,7 +114,7 @@ public class CameraMover : MonoBehaviour
         zoom = Mathf.Clamp01(zoom + delta);
                
         float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
-        camera.orthographicSize = distance;
+        cameraMain.orthographicSize = distance;
     }
 
     public void SetZoom(float zoom)
@@ -120,7 +123,7 @@ public class CameraMover : MonoBehaviour
         zoom = Mathf.Clamp01(zoom /*+ delta*/);
 
         float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
-        camera.orthographicSize = distance;
+        cameraMain.orthographicSize = distance;
     }
 
 
@@ -138,12 +141,12 @@ public class CameraMover : MonoBehaviour
         //var speed = Mathf.Lerp(MoveSpeedOnMinZoom, MoveSpeedOnMaxZoom, zoom);
         var distance = MoveSpeed * damping * Time.deltaTime;
 
-        Vector3 position = camera.transform.localPosition;
+        Vector3 position = cameraMain.transform.localPosition;
         position += direction * distance;
 
         var x = Mathf.Clamp(position.x, minX, maxX);
         var y = Mathf.Clamp(position.y, minY, maxY);
 
-        camera.transform.localPosition = new Vector3(x, y, zPosition);
+        cameraMain.transform.localPosition = new Vector3(x, y, zPosition);
     }
 }

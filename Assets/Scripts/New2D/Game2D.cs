@@ -179,8 +179,11 @@ public class Game2D : MonoBehaviour
         lastDistanceProgress = (int)distanceProgress;
         lastDestroyTime = roundedTime;
 
-        lastEngineHp1 = Engines[0].Hp;
-        lastEngineHp2 = Engines[1].Hp;
+        if(Engines.Count > 1)
+        {
+            lastEngineHp1 = Engines[0].Hp;
+            lastEngineHp2 = Engines[1].Hp;
+        }     
         lastReactorHp = Reactor.Hp;
         lastCapitanPlace = capitanPlace;
 
