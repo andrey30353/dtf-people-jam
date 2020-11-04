@@ -90,6 +90,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7675013972713245357, guid: 1947e63b05b16244e880dc0b3be2bed5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675013972713245357, guid: 1947e63b05b16244e880dc0b3be2bed5, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -179183731
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675013972713245357, guid: 1947e63b05b16244e880dc0b3be2bed5, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7675013972713245358, guid: 1947e63b05b16244e880dc0b3be2bed5, type: 3}
       propertyPath: m_Name
       value: Door3 (7)
