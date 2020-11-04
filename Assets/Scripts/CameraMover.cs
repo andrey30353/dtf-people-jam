@@ -5,8 +5,7 @@ public class CameraMover : MonoBehaviour
     public bool SetPositionOnStart;
 
     public float MinZoom, MaxZoom;
-
-    // todo vector2
+       
     public float MinX_MinZoom, MaxX_MinZoom;
     public float MinX_MaxZoom, MaxX_MaxZoom;
 
