@@ -111,7 +111,7 @@ public class PlayerRay2D : MonoBehaviour
             Game2D.Instance.MoveAgents(origin, Radius, selectedAgent);           
         }
 
-        cameraMover.folowLiver = selectedAgent;
+        cameraMover.FolowLiver = selectedAgent;
     }
 
     private void SelectLiver(Liver2D agent)

@@ -1,37 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
+    public bool SetPositionOnStart;
+
     public float MinZoom, MaxZoom;
 
+    // todo vector2
     public float MinX_MinZoom, MaxX_MinZoom;
     public float MinX_MaxZoom, MaxX_MaxZoom;
 
     public float MinY_MinZoom, MaxY_MinZoom;
     public float MinY_MaxZoom, MaxY_MaxZoom;
+      
+    public float MoveSpeed = 20f;
+
+   /* public float MoveSpeedOnMinZoom = 10f;
+    public float MoveSpeedOnMaxZoom = 20f;*/
+
+    public float ZoomSpeed = 100f;
+          
+    public Liver2D FolowLiver;
+
+    private Camera camera;
+
+    private float zPosition;
 
     private float zoom;
-
-    public float Speed = 1f;
-    public float SpeedZoom = 100f;
-
-    public float Threshold = 0.2f;
-
-    public Liver2D folowLiver;
-
-    Camera camera;
-
-    float z;
 
     private void Start()
     {
         camera = Camera.main;
 
-        z = camera.transform.localPosition.z;
+        zPosition = camera.transform.localPosition.z;
 
-        SetStartPosition();
+        if(SetPositionOnStart)
+            SetStartPosition();
     }
 
     public void SetStartPosition()
@@ -39,7 +43,7 @@ public class CameraMover : MonoBehaviour
         //print("SetStartPosition");
         //float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
         camera.orthographicSize = MinZoom;
-        camera.transform.localPosition = new Vector3(-4, -4, z);
+        camera.transform.localPosition = new Vector3(-4, -4, zPosition);
         zoom = 1;
     }
 
@@ -81,9 +85,9 @@ public class CameraMover : MonoBehaviour
 
 
 
-        if (folowLiver != null)
+        if (FolowLiver != null)
         {
-            var dir = (folowLiver.transform.position - camera.transform.position).normalized;
+            var dir = (FolowLiver.transform.position - camera.transform.position).normalized;
             xDelta = dir.x;
             yDelta = dir.y;
         }
@@ -104,7 +108,7 @@ public class CameraMover : MonoBehaviour
 
     void AdjustZoom(float delta)
     {
-        delta *= SpeedZoom * Time.deltaTime;
+        delta *= ZoomSpeed * Time.deltaTime;
         zoom = Mathf.Clamp01(zoom + delta);
                
         float distance = Mathf.Lerp(MaxZoom, MinZoom, zoom);
@@ -132,8 +136,8 @@ public class CameraMover : MonoBehaviour
         var minY = Mathf.Lerp(MinY_MinZoom, MinY_MaxZoom, zoom);
         var maxY = Mathf.Lerp(MaxY_MinZoom, MaxY_MaxZoom, zoom);
 
-        var speed = Mathf.Lerp(MinZoom, MaxZoom, zoom);
-        var distance = speed * damping * Time.deltaTime;
+        //var speed = Mathf.Lerp(MoveSpeedOnMinZoom, MoveSpeedOnMaxZoom, zoom);
+        var distance = MoveSpeed * damping * Time.deltaTime;
 
         Vector3 position = camera.transform.localPosition;
         position += direction * distance;
@@ -141,28 +145,6 @@ public class CameraMover : MonoBehaviour
         var x = Mathf.Clamp(position.x, minX, maxX);
         var y = Mathf.Clamp(position.y, minY, maxY);
 
-        camera.transform.localPosition = new Vector3(x, y, z);
-    }
-
-    void AdjustPosition(Vector2 position)
-    {
-        //Vector3 direction = new Vector2(xDelta, yDelta).normalized;
-        //float damping = Mathf.Max(Mathf.Abs(xDelta), Mathf.Abs(yDelta));
-
-        var minX = Mathf.Lerp(MinX_MinZoom, MinX_MaxZoom, zoom);
-        var maxX = Mathf.Lerp(MaxX_MinZoom, MaxX_MaxZoom, zoom);
-
-        var minY = Mathf.Lerp(MinY_MinZoom, MinY_MaxZoom, zoom);
-        var maxY = Mathf.Lerp(MaxY_MinZoom, MaxY_MaxZoom, zoom);
-
-        //var distance = /*Mathf.Lerp(MinZoom, MaxZoom, zoom) * damping **/Speed * Time.deltaTime;
-
-        //Vector3 position = camera.transform.localPosition;
-        //position += direction * distance;
-
-        var x = Mathf.Clamp(position.x, minX, maxX);
-        var y = Mathf.Clamp(position.y, minY, maxY);
-
-        camera.transform.localPosition = new Vector3(x, y, z);
+        camera.transform.localPosition = new Vector3(x, y, zPosition);
     }
 }
