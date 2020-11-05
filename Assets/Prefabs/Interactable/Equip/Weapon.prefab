@@ -218,3 +218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
+  ShowOnWear: 0
+  WearingScaleRatio: 0
+  AuraRender: {fileID: 234611609140308545}

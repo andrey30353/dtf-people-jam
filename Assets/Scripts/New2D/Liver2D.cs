@@ -259,6 +259,11 @@ public class Liver2D : MonoBehaviour
         {
             Equipment.TakeOff(this, throwEquipment);
 
+            if(Equipment.Type == EquipmentType.Weapon)
+            {
+                mover.animator.SetBool("Weapon", false);
+            }
+
             Equipment = null;
             WeaponMark.enabled = false;
             RepairKitMark.enabled = false;

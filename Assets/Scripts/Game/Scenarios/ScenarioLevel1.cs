@@ -10,15 +10,33 @@ public class ScenarioLevel1 : MonoBehaviour
     public NeedExposionDialogue NeedExposionDialogue;
     public TakeDinamit TakeDinamit;
 
+    public List<Liver2D> DialogueLivers;
+    public Liver2D ScenarionLiver;
+
     public static ScenarioLevel1 Instance;
 
     private void Awake()
     {
         Instance = this;
+
+        MoveAndZoomCamera.gameObject.SetActive(false);
+        NeedExposionDialogue.gameObject.SetActive(false);
+        TakeDinamit.gameObject.SetActive(false);
     }
 
     public void Start()
     {
+
+
+        MoveAndZoomCamera.gameObject.SetActive(true);
+
+
+        foreach (var liver in DialogueLivers)
+        {
+            liver.mover.StopMove();
+        }
+
+        // открыть двери сразу
         foreach (var door in OperDoors)
         {
             door.Select();

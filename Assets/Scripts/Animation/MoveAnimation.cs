@@ -22,8 +22,7 @@ public class MoveAnimation : MonoBehaviour
 
         Speed = mover.RealSpeed;
 
-        time = (TargetPosition - startPosition).magnitude / Speed;
-
+        time = (TargetPosition - startPosition).magnitude / Speed;  
     }
 
     // Update is called once per frame
@@ -31,7 +30,15 @@ public class MoveAnimation : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
-        transform.position = Vector3.Lerp(startPosition, TargetPosition, elapsedTime / time);      
+        transform.position = Vector3.Lerp(startPosition, TargetPosition, elapsedTime / time);
+
+        mover.RotateTo(TargetPosition);
+
+        if(transform.position == TargetPosition)
+        {
+            mover.StopMove();
+            Destroy(this);
+        }
     }
 
     private void OnDrawGizmos()

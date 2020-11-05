@@ -136,6 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 2
+  ShowOnWear: 1
+  WearingScaleRatio: 0.5
+  AuraRender: {fileID: 3510656160915508360}
 --- !u!1 &4389141777193808347
 GameObject:
   m_ObjectHideFlags: 0
