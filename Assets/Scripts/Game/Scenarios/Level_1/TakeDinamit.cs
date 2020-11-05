@@ -121,10 +121,10 @@ public class TakeDinamit : MonoBehaviour
             state = State.BringDinamit;
         }
 
-        if (state == State.BringDinamit && ScenarioLiver.Equipment == null)
+        if (state == State.BringDinamit && ScenarioLiver.Equipment != null)
         {
            // print("Almost Bring Dinamit");
-            if (BringDinamitTrigger.OverlapPoint(dinamit.transform.position))
+            if (BringDinamitTrigger.OverlapPoint(ScenarioLiver.transform.position))
             {
                 print("Bring Dinamit");
 
@@ -143,7 +143,7 @@ public class TakeDinamit : MonoBehaviour
         if (state == State.PutDinamit && ScenarioLiver.Equipment == null)
         {
             // todo мб дистанцию проверять
-            if (BringDinamitTrigger.OverlapPoint(ScenarioLiver.transform.position))
+            if (BringDinamitTrigger.OverlapPoint(dinamit.transform.position))
             {
                 print("PutDinamit");
                 LiverMoveMessage.SetActive(false);

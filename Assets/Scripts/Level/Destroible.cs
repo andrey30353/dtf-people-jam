@@ -30,7 +30,7 @@ public class Destroible : MonoBehaviour
         }              
     }
 
-    private void Break()
+    public void Break()
     {
         if(BrokenSprite != null && BrokenSprite.Count != 0)
         {

@@ -25,8 +25,7 @@ public class Liver2D : MonoBehaviour
     public bool HasRepairKit => Equipment != null && Equipment.Type == EquipmentType.RepairKit;
 
     [Space]
-    public SpriteRenderer WeaponMark;
-    public SpriteRenderer RepairKitMark;
+    public SpriteRenderer EquipmentMark;
     public SpriteRenderer KeyMark;
     public SpriteRenderer SelectionMark;
 
@@ -116,13 +115,16 @@ public class Liver2D : MonoBehaviour
         Equipment = equipment;
         if (equipment.Type == EquipmentType.Weapon)
         {
-            WeaponMark.enabled = true;
+            //WeaponMark.enabled = true;
             mover.animator.SetBool("Weapon", true);
         }
 
 
-        if (equipment.Type == EquipmentType.RepairKit)
-            RepairKitMark.enabled = true;
+      /*  if (equipment.Type == EquipmentType.RepairKit)
+            RepairKitMark.enabled = true;*/
+
+        EquipmentMark.enabled = true;
+        EquipmentMark.color = equipment.AuraRender.color;
         /*if(equipment.Type == EquipmentType.Weapon)
         {
             Hp = HpWithWeapon;
@@ -265,8 +267,11 @@ public class Liver2D : MonoBehaviour
             }
 
             Equipment = null;
-            WeaponMark.enabled = false;
-            RepairKitMark.enabled = false;
+
+            EquipmentMark.enabled = false;
+
+            //WeaponMark.enabled = false;
+            //RepairKitMark.enabled = false;
         }
 
         if (Key != null)
