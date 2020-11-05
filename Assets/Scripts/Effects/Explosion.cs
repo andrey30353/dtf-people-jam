@@ -11,6 +11,8 @@ public class Explosion : MonoBehaviour
 
     public int Radius = 3;
 
+    public int Force = 3;
+
     public LayerMask Mask;
 
     public ParticleSystem Effect;
@@ -50,6 +52,14 @@ public class Explosion : MonoBehaviour
                 enemy.TakeDamage(Mathf.RoundToInt(dist), transform.position);
                 continue;
             }
+
+            var rb = collider.GetComponent<Rigidbody2D>();
+            if(rb != null)
+            {
+                var force = (rb.transform.position - transform.position).normalized * Force;
+                rb.AddForce(force, ForceMode2D.Impulse);
+            }
+           
         }
 
         Effect.Play();
