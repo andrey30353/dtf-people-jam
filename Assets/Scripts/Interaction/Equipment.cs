@@ -9,13 +9,21 @@ public enum EquipmentType
 
 public class Equipment : MonoBehaviour
 {
-    public EquipmentType Type;  
+    public EquipmentType Type;
+
+    public bool ShowOnWear;
+    public float WearingScaleRatio;
+
+    public SpriteRenderer AuraRender;
 
     private CircleCollider2D collider2d;
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
+    private SpriteRenderer sr; 
 
     private Transform defaultParent;
+    private Vector3 throwForce;
+
+    private Vector3 startScale;
 
     private void Start()
     {
@@ -24,6 +32,8 @@ public class Equipment : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         defaultParent = transform.parent;
+
+        startScale = transform.localScale;
     }
         
     private void OnCollisionEnter2D(Collision2D collision)
@@ -33,40 +43,78 @@ public class Equipment : MonoBehaviour
         var liver = collision.gameObject.GetComponent<Liver2D>();
         if (liver != null)
         {           
-            if (liver.Equipment == null)
+            if (liver.Equipment == null && liver.TakeDelay <= 0)
             {   
                 Take(liver);
             }
         }
     }
 
+    /*private void FixedUpdate()
+    {
+        if(throwForce != Vector3.zero)
+        {
+            rb.AddForce(throwForce, ForceMode2D.Impulse);
+            throwForce = Vector3.zero;
+        }
+    }*/
+
     public void Take(Liver2D liver)
     {
         //print("Take " + Type);
+
 
         rb.simulated = false;
         collider2d.enabled = false;       
 
         transform.SetParent(liver.transform);
-        transform.localPosition = Vector3.zero;
+        // держим немного впереди
+        transform.localPosition = Vector3.zero + Vector3.down * 0.2f;
 
-        sr.enabled = false;
+        if (ShowOnWear)
+        {
+            transform.localRotation = Quaternion.identity;
+            transform.localScale = startScale * WearingScaleRatio;
+            AuraRender.enabled = false;
+        }
+        else
+        { 
+            sr.enabled = false;
+            AuraRender.enabled = false;
+        }
 
         liver.Equip(this);
 
         //sr.sortingOrder = 0;
     }
 
-    public void TakeOff()
+    public void TakeOff(Liver2D owner, bool throwing)
     {
         //print("TakeOff " + Type);
 
+        
+
         collider2d.enabled = true;
         rb.simulated = true;
+
+        if (throwing)
+        {
+            var force = (transform.position - owner.transform.position).normalized * 7f;
+            throwForce = force;
+            rb.velocity = force;
+          /*  print(force);
+            rb.AddForce(force, ForceMode2D.Impulse);*/
+        }
+       
 
         sr.enabled = true;
 
         transform.SetParent(defaultParent);
 
+        if (ShowOnWear)
+        {
+            transform.localScale = startScale;           
+        }
+        AuraRender.enabled = true;
     }
 }

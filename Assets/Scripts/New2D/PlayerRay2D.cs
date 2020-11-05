@@ -111,6 +111,15 @@ public class PlayerRay2D : MonoBehaviour
             Game2D.Instance.MoveAgents(origin, Radius, selectedAgent);           
         }
 
+        // бросить предмет
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (selectedAgent != null /*&& selectedAgent.Equipment != null*/)
+            {
+                selectedAgent.ThrowEquipment();
+            }
+        }  
+
         cameraMover.FolowLiver = selectedAgent;
     }
 

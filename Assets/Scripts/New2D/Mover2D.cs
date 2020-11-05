@@ -63,7 +63,8 @@ public class Mover2D : MonoBehaviour
     {
         animator.enabled = true;
         //rb.simulated = true;
-        SetRandomVelocity();
+        if(!managed)
+            SetRandomVelocity();
 
         //  enabled = true;
 
