@@ -10,7 +10,7 @@ public class Liver2D : MonoBehaviour
     public int Hp = 1;
     //public int HpWithWeapon = 2;    
     public float AttackRange = 1;
-    public float AttackTimeout = 1;    
+    public float AttackTimeout = 1;
     public LayerMask AttackMask;
     public LayerMask AttackCheckMask;
     public Bullet BulletPrefab;
@@ -19,6 +19,8 @@ public class Liver2D : MonoBehaviour
     [Space]
     public Equipment Equipment;
     public KeyCard Key;
+    public float TakeDelay;
+
     public bool HasWeapon => Equipment != null && Equipment.Type == EquipmentType.Weapon;
     public bool HasRepairKit => Equipment != null && Equipment.Type == EquipmentType.RepairKit;
 
@@ -39,7 +41,7 @@ public class Liver2D : MonoBehaviour
     // занят ли сейчас
     public bool isBusy;
 
-    public bool isInfected;     
+    public bool isInfected;
 
     public StopZone ManageObject;
     public Enemy2D EnemyInteract;
@@ -47,13 +49,13 @@ public class Liver2D : MonoBehaviour
     //public AudioSource ShotSound;
     //public AudioSource DeadSound;
 
-    SpriteRenderer sr;    
-   
+    SpriteRenderer sr;
+
     private void Start()
     {
         mover = GetComponent<Mover2D>();
 
-        sr = GetComponent<SpriteRenderer>();  
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -62,32 +64,33 @@ public class Liver2D : MonoBehaviour
             return;
 
         attackTimeoutProcess -= Time.deltaTime;
+        TakeDelay -= Time.deltaTime;
 
         if (HasWeapon && attackTimeoutProcess <= 0)
         {
-           var targets = Physics2D.OverlapCircleAll(transform.position, AttackRange, AttackMask.value);
-       
-           //print(targets.Length);
-           if (targets.Length > 0)
-           {
+            var targets = Physics2D.OverlapCircleAll(transform.position, AttackRange, AttackMask.value);
+
+            //print(targets.Length);
+            if (targets.Length > 0)
+            {
                 foreach (var target in targets)
                 {
                     var targetPosition = target.gameObject.transform.position;
                     var direction = (targetPosition - transform.position).normalized;
                     var hit = Physics2D.Raycast(transform.position, direction, AttackRange, AttackCheckMask.value);
                     //print(hit.collider.name);
-                    
+
                     if (hit.collider == target)
                     {
-                       // Debug.DrawLine(transform.position, hit.point, Color.green, 10f);
+                        // Debug.DrawLine(transform.position, hit.point, Color.green, 10f);
                         Shoot(targetPosition);
                         return;
-                    }    
+                    }
                     /*else
                         Debug.DrawLine(transform.position, hit.point, Color.red, 10f);*/
-                }               
-           }          
-        }       
+                }
+            }
+        }
     }
 
     private void Shoot(Vector3 targetPosition)
@@ -104,9 +107,9 @@ public class Liver2D : MonoBehaviour
 
         attackTimeoutProcess = AttackTimeout;
 
-      
+
         Settings.Instance.ShotSound.Play();
-    }    
+    }
 
     internal void Equip(Equipment equipment)
     {
@@ -116,7 +119,7 @@ public class Liver2D : MonoBehaviour
             WeaponMark.enabled = true;
             mover.animator.SetBool("Weapon", true);
         }
-           
+
 
         if (equipment.Type == EquipmentType.RepairKit)
             RepairKitMark.enabled = true;
@@ -126,7 +129,16 @@ public class Liver2D : MonoBehaviour
         }*/
     }
 
-    internal void Manage(bool manage)
+    public void ThrowEquipment()
+    {
+        // Assert.IsNotNull(Equipment);      
+
+        //print("ThrowEquipment");
+
+        LostItems(true);
+    }
+
+    public void Manage(bool manage)
     {
         SelectionMark.enabled = manage;
         mover.Manage(manage);
@@ -140,7 +152,7 @@ public class Liver2D : MonoBehaviour
         isInfected = true;
 
         sr.material.color = Settings.Instance.InfectedColor;//infector.Color;
-                       
+
         // todo
         var producer = gameObject.AddComponent<AgentProducer>();
         var templ = infector.GetComponent<AgentProducer>();
@@ -167,20 +179,20 @@ public class Liver2D : MonoBehaviour
     public void TakeDamage(int value)
     {
         Hp -= value;
-        if(Hp <= 0)
+        if (Hp <= 0)
         {
             Dead();
         }
     }
 
-    public void Dead( bool needCorpse = true)
-    {     
-       // gameObject.SetActive(false);
+    public void Dead(bool needCorpse = true)
+    {
+        // gameObject.SetActive(false);
 
         if (needCorpse)
         {
-           // sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
-           // sr.sortingOrder = 0;
+            // sr.sprite = DeadSprites[UnityEngine.Random.Range(0, DeadSprites.Count)];
+            // sr.sortingOrder = 0;
             //Instantiate(DeadSpritePrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
 
             var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
@@ -192,9 +204,9 @@ public class Liver2D : MonoBehaviour
         {
             var effect = Instantiate(DeadEffectPrefab, transform.position, Quaternion.Euler(0, 0, 0));
             Destroy(effect, 1f);
-        }   
+        }
 
-        LostItems();
+        LostItems(false);
 
         Game2D.Instance.LiverDead();
 
@@ -226,7 +238,7 @@ public class Liver2D : MonoBehaviour
     {
         Destroy(Key.gameObject);
         Key = null;
-        KeyMark.enabled = false;        
+        KeyMark.enabled = false;
     }
 
     internal void TakeKey(KeyCard keyCard)
@@ -236,19 +248,35 @@ public class Liver2D : MonoBehaviour
         KeyMark.color = keyCard.Color;// Settings.Instance.GetMarkColor(keyCard.Type);
     }
 
-    private void LostItems()
+    private void LostItems(bool throwEquipment)
     {
+        if (Equipment != null || Key != null)
+        {
+            TakeDelay = 1f;
+        }
+
         if (Equipment != null)
-            Equipment.TakeOff();
+        {
+            Equipment.TakeOff(this, throwEquipment);
+
+            Equipment = null;
+            WeaponMark.enabled = false;
+            RepairKitMark.enabled = false;
+        }
 
         if (Key != null)
+        {
             Key.TakeOff();
+
+            Key = null;
+            KeyMark.enabled = false;
+        }
     }
 
     public void MoveTo(Vector3 point)
     {
         if (mover != null)
-            mover.MoveTo(point);          
+            mover.MoveTo(point);
     }
 
     private void OnDrawGizmos()

@@ -37,7 +37,7 @@ public class KeyCard : MonoBehaviour
         var liver = collision.gameObject.GetComponent<Liver2D>();
         if (liver != null)
         {
-            if (liver.Key == null)
+            if (liver.Key == null && liver.TakeDelay <= 0)
             {
                 Take(liver);
             }
