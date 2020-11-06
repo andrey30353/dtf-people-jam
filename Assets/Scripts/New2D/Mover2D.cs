@@ -30,6 +30,10 @@ public class Mover2D : MonoBehaviour
           
     private bool managed = false;
 
+    private bool moved;
+    private bool lastMovedValue;
+    private Vector3 movePoint;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -67,61 +71,68 @@ public class Mover2D : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {     
-        if (managed)
-        {
-            var inputX = Input.GetAxis("Horizontal");
-            var inputY = Input.GetAxis("Vertical");
-
-            var velocity = new Vector2(inputX, inputY).normalized * MaxSpeed;
-            rb.velocity = velocity;
-
-            if (rb.velocity == Vector2.zero)
-            {
-                animator.enabled = false;
-            }
-            else
-            {
-                animator.enabled = true;
-            }
+    {
+        if (moved)
+        {           
+            rb.velocity = (movePoint - transform.position).normalized * MaxSpeed;
         }
         else
         {
-            if (state == MoverState.Stop)
+            if (managed)
             {
-                rb.velocity = Vector2.zero;
-                return;
+                var inputX = Input.GetAxis("Horizontal");
+                var inputY = Input.GetAxis("Vertical");
+
+                var velocity = new Vector2(inputX, inputY).normalized * MaxSpeed;
+                rb.velocity = velocity;
             }
             else
             {
-                var xVal = Mathf.Abs(rb.velocity.x);
-                var yVal = Mathf.Abs(rb.velocity.y);               
-
-                var speed = rb.velocity.magnitude;
-                if (speed == 0)
+                if (state == MoverState.Stop)
                 {
-                    SetRandomVelocity();
+                    rb.velocity = Vector2.zero;                   
                 }
                 else
                 {
-                    if (speed < currentSpeed)
+                    var xVal = Mathf.Abs(rb.velocity.x);
+                    var yVal = Mathf.Abs(rb.velocity.y);
+
+                    var speed = rb.velocity.magnitude;
+                    if (speed == 0)
                     {
-                        rb.velocity *= currentSpeed / speed;
+                        SetRandomVelocity();
+                    }
+                    else
+                    {
+                        if (speed < currentSpeed)
+                        {
+                            rb.velocity *= currentSpeed / speed;
+                        }
+
+                        if (speed > currentSpeed)
+                        {
+                            rb.velocity *= currentSpeed / speed;
+                        }
                     }
 
-                    if (speed > currentSpeed)
+                    if (xVal < 0.05f || yVal < 0.05f)
                     {
-                        rb.velocity *= currentSpeed / speed;
+                        SetRandomVelocity();
                     }
-                }
-
-                if (xVal < 0.05f || yVal < 0.05f)
-                {
-                    SetRandomVelocity();
                 }
             }
         }
+        
+        RotateToVelocity();
 
+        animator.speed = rb.velocity.sqrMagnitude / (MaxSpeed * MaxSpeed);        
+        //animator.enabled = rb.velocity != Vector2.zero;       
+
+        moved = false;
+    }
+
+    private void RotateToVelocity()
+    {
         if (rb.velocity != Vector2.zero)
         {
             var dir = rb.velocity;
@@ -133,11 +144,6 @@ public class Mover2D : MonoBehaviour
     internal void Manage(bool manage)
     {
         managed = manage;
-
-        if (manage)
-            SetAnimationByState(MoverState.Fast);
-        else
-            SetAnimationByState(state);
 
         if (!manage)
         {
@@ -158,10 +164,11 @@ public class Mover2D : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
+ 
     public void MoveTo(Vector3 point)
     {
-        rb.velocity = (point - transform.position).normalized * MaxSpeed;
+        moved = true;
+        movePoint = point;        
     }  
     
     public void SwitchState(MoverState state)
@@ -183,7 +190,7 @@ public class Mover2D : MonoBehaviour
                 break;
         }
 
-        SetAnimationByState(state);
+       // SetAnimationByState(state);
     }
 
     public void SetAnimationByState(MoverState state)

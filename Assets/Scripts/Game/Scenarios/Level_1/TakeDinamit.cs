@@ -103,7 +103,7 @@ public class TakeDinamit : MonoBehaviour
         if (state == State.WaitLiverSelect && playerRay.selectedAgent == ScenarioLiver)
         {
            // print("SelectLiver");
-            ScenarioLiver.mover.RestoreMove();
+           // ScenarioLiver.mover.RestoreMove();
             // ScenarioLiver.mover.Speed = 3;
 
 
@@ -185,10 +185,10 @@ public class TakeDinamit : MonoBehaviour
                 PutDinamitMessage.SetActive(false);
                 CaveEnterMessage.SetActive(true);
 
-                foreach (var liver in OtherLivers)
-                {
-                    liver.mover.RestoreMove();
-                }
+                //foreach (var liver in OtherLivers)
+                //{
+                //    liver.mover.RestoreMove();
+                //}
 
                 state = State.CaveExplore;           
         }
@@ -226,6 +226,12 @@ public class TakeDinamit : MonoBehaviour
 
                 CaveExploreMessage.SetActive(false);
                 GoShelterMessage.SetActive(true);
+
+                ScenarioLiver.mover.SwitchState(MoverState.Fast);
+                foreach (var liver in OtherLivers)
+                {
+                    liver.mover.SwitchState(MoverState.Fast);
+                }               
 
                 EnemiesWakeUp();
 

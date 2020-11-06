@@ -63,8 +63,7 @@ public class NeedExposionDialogue : MonoBehaviour
 
             foreach (var liver in DialogueLivers)
             {
-                liver.mover.enabled = true;
-                liver.mover.animator.enabled = true;
+                liver.mover.SwitchState(MoverState.Fast);             
             }
 
             OnComplete?.Invoke();

@@ -143,6 +143,7 @@ MonoBehaviour:
   rb: {fileID: 288909363144373025}
   collider2d: {fileID: 288909363144373038}
   MaxSpeed: 3
+  state: 0
   animator: {fileID: 3281543005485726809}
 --- !u!114 &7589721539931355027
 MonoBehaviour:
@@ -177,7 +178,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 26ef328d4075d194799dd7db99bdcee6, type: 3}
   - {fileID: 21300000, guid: e1df97cf4bcbc4a46ba4a3ef5347f144, type: 3}
   - {fileID: 21300000, guid: 88460f00ea0498c4787cd10654b68197, type: 3}
-  CorpsePrefab: {fileID: 3828117436398729496, guid: bdae47b035309ed41b470b71905f7a7a, type: 3}
+  CorpsePrefab: {fileID: 0}
   DeadPrefabs:
   - {fileID: 3828117436398729496, guid: 6103f29b97ab39148a9c90a847c4aa1a, type: 3}
   - {fileID: 3828117436398729496, guid: 7373cf5d515f5e94894c154b13cb9762, type: 3}

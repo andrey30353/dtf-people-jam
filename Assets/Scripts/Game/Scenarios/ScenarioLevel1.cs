@@ -26,15 +26,12 @@ public class ScenarioLevel1 : MonoBehaviour
 
     public void Start()
     {
-
-
         MoveAndZoomCamera.gameObject.SetActive(true);
-
-
-        foreach (var liver in DialogueLivers)
-        {
-            liver.mover.StopMove();
-        }
+        
+        //foreach (var liver in DialogueLivers)
+        //{
+        //    liver.mover.StopMove();
+        //}
 
         // открыть двери сразу
         foreach (var door in OperDoors)
