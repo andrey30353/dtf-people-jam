@@ -41,10 +41,10 @@ public class Level1UI : MonoBehaviour
     }
 
 
-    public void UpdateAgentCount(int liverCount, int enemyCount)
+    public void UpdateAgentCount()
     {
-        LiveCountText.text = liverCount.ToString();
-        DeadCountText.text = enemyCount.ToString();
+        LiveCountText.text = Game2D.Instance.LiverCount.ToString();
+        DeadCountText.text = Game2D.Instance.EnemiesCount.ToString();
     }
 
     public void SetMaxTime(float fullTime)

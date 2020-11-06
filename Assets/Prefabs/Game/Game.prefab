@@ -43,23 +43,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a44e4b7885c5214aa7044ff33519b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistanceInMinutes: 5
   AgentsContent: {fileID: 0}
   LiverCount: 0
   EnemiesCount: 0
-  MaxEnemiesCount: 50
+  MaxEnemiesCount: 30
   Livers: []
   Enemies: []
-  AgentMask:
-    serializedVersion: 2
-    m_Bits: 512
-  DestroyTime: 60
-  GameUi: {fileID: 0}
-  CapitanPlace: {fileID: 0}
-  Engines:
-  - {fileID: 0}
-  - {fileID: 0}
-  Reactor: {fileID: 0}
-  currentSpeed: 0
-  lastCurrentSpeed: 0
-  maxDistanceInSeconds: 0
+  LiverDeadEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Level3UI, Assembly-CSharp
+        m_MethodName: UpdateAgentCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  EnemyDeadEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Level3UI, Assembly-CSharp
+        m_MethodName: UpdateAgentCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AddEnemyEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Level3UI, Assembly-CSharp
+        m_MethodName: UpdateAgentCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  started: 0

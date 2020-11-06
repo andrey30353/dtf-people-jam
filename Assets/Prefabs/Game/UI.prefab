@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 104, y: 104}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &78367653
 CanvasRenderer:
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 6
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -563,7 +563,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -160, y: 100}
+  m_SizeDelta: {x: -208, y: 118}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1167197521
 CanvasRenderer:
@@ -853,7 +853,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 6
@@ -877,7 +877,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: ShowStartMessage
         m_Mode: 1
@@ -1002,7 +1002,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 104, y: 104}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2101343099
 CanvasRenderer:
@@ -1363,7 +1363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 45.7, y: -175.75}
+  m_AnchoredPosition: {x: 45.699997, y: -216.89719}
   m_SizeDelta: {x: 18, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &160522403018780017
@@ -1535,7 +1535,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 6
@@ -1650,7 +1650,7 @@ RectTransform:
   m_GameObject: {fileID: 969977471800918980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 386358665}
   m_RootOrder: 1
@@ -1870,7 +1870,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -2052,7 +2052,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -2098,7 +2098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -10, y: -64}
   m_SizeDelta: {x: 400, y: 730}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1676876210806031994
@@ -2203,14 +2203,14 @@ RectTransform:
   m_GameObject: {fileID: 1972565403985685503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4947107255083101904}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.9999695, y: -272}
+  m_AnchoredPosition: {x: 9.9999695, y: -330}
   m_SizeDelta: {x: -20.000061, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8712133088191151954
@@ -2437,7 +2437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -39.2, y: -130.75}
+  m_AnchoredPosition: {x: -39.2, y: -149}
   m_SizeDelta: {x: 68, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5306258580050847092
@@ -2589,7 +2589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 140.4, y: -175.75}
+  m_AnchoredPosition: {x: 140.4, y: -216.89719}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8443297779425260924
@@ -2831,7 +2831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 59.1, y: -83.6}
+  m_AnchoredPosition: {x: 59.1, y: -87}
   m_SizeDelta: {x: 68, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8044818564523652966
@@ -3039,7 +3039,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -3192,8 +3192,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8}
-  m_SizeDelta: {x: -400.00003, y: 32}
+  m_AnchoredPosition: {x: -19, y: 2}
+  m_SizeDelta: {x: -437.99994, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3627500741641876341
 MonoBehaviour:
@@ -3537,7 +3537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3627500741962059364}
-  - component: {fileID: 3627500741962059365}
+  - component: {fileID: 1118812582}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -3560,7 +3560,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3627500741962059365
+--- !u!114 &1118812582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3569,7 +3569,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3627500741962059366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d27cb1884efd1645973283f7b8dd8a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 46e67749341ff244999564dfae37f7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LiveCountText: {fileID: 3627500741825080254}
@@ -3586,7 +3586,7 @@ MonoBehaviour:
   EngineImageMap2: {fileID: 7295921569253940400}
   ReactorImageMap: {fileID: 3499249848457203509}
   CapitanImageMap: {fileID: 6998682820879101556}
-  normColor: {r: 0, g: 1, b: 0.91764706, a: 1}
+  normColor: {r: 0, g: 1, b: 0.9176471, a: 1}
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   StartMessage: {fileID: 138795539833388427}
   WarningMessage: {fileID: 183165674}
@@ -3708,7 +3708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -40, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 32, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &3627500742330616009
@@ -4255,7 +4255,7 @@ RectTransform:
   m_GameObject: {fileID: 3875009134600695075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 3627500742330616010}
   m_RootOrder: 0
@@ -4263,7 +4263,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 48, y: 48}
+  m_SizeDelta: {x: 37.3, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &802997173864450142
 CanvasRenderer:
@@ -4490,7 +4490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 38.9}
+  m_AnchoredPosition: {x: 0, y: 38.899994}
   m_SizeDelta: {x: 122, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5991426904307651564
@@ -5022,8 +5022,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 230, y: 425}
+  m_AnchoredPosition: {x: 10, y: 20}
+  m_SizeDelta: {x: 230, y: 544}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6646146601137216951
 CanvasRenderer:
@@ -5090,14 +5090,14 @@ RectTransform:
   m_GameObject: {fileID: 5580759839835042834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4947107255083101904}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.9999695, y: -212}
+  m_AnchoredPosition: {x: 9.9999695, y: -270}
   m_SizeDelta: {x: -20.000061, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2844214082968326138
@@ -5284,7 +5284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -62, y: 0}
+  m_AnchoredPosition: {x: -39, y: 0}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4312348760162747750
@@ -5695,7 +5695,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -5734,14 +5734,14 @@ RectTransform:
   m_GameObject: {fileID: 5971434528675868795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4947107255083101904}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: -92}
+  m_AnchoredPosition: {x: 10, y: -150}
   m_SizeDelta: {x: -20.000061, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4661394641826992191
@@ -5817,7 +5817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -115.2}
+  m_AnchoredPosition: {x: 0, y: -174}
   m_SizeDelta: {x: 146, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4447199454295588289
@@ -6200,14 +6200,14 @@ RectTransform:
   m_GameObject: {fileID: 6564996104768709694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4947107255083101904}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.9999695, y: -362}
+  m_AnchoredPosition: {x: 9.9999695, y: -450}
   m_SizeDelta: {x: -20.000061, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4835492774539345222
@@ -6501,14 +6501,14 @@ RectTransform:
   m_GameObject: {fileID: 7087131377507008778}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4947107255083101904}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.9999695, y: -322}
+  m_AnchoredPosition: {x: 9.9999695, y: -390}
   m_SizeDelta: {x: -20.000061, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5425035078423645211
@@ -6680,7 +6680,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -6925,14 +6925,14 @@ RectTransform:
   m_GameObject: {fileID: 7573155551928797084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4947107255083101904}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 9.9999695, y: -152}
+  m_AnchoredPosition: {x: 9.9999695, y: -210}
   m_SizeDelta: {x: -20.000061, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8833606003921698738
@@ -7000,7 +7000,7 @@ RectTransform:
   m_GameObject: {fileID: 8037496405008293100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 8688765769628605858}
   - {fileID: 4223103861175023301}
@@ -7011,7 +7011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 10, y: -20}
+  m_AnchoredPosition: {x: 10, y: -41}
   m_SizeDelta: {x: 86, y: 62}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1609253890990457145
@@ -7540,7 +7540,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -7683,7 +7683,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3627500741962059365}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
