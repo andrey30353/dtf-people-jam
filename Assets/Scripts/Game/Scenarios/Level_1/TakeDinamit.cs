@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -55,14 +56,17 @@ public class TakeDinamit : MonoBehaviour
     [Space]
     public GameObject ClickDoorMarker;
     public GameObject BringDinamitMarker;
-
-    public float Delay;
-
+      
     public List<MoveAnimation> MoveLivers;
 
     public List<Liver2D> OtherLivers;
     public Liver2D ScenarioLiver;
 
+    [Space]
+    public List<Enemy2D> Eggs;
+    public Enemy2D Queen;   
+    
+    [Space]
     public PlayerRay2D playerRay;
 
     public Door2D ClickDoor;
@@ -223,6 +227,8 @@ public class TakeDinamit : MonoBehaviour
                 CaveExploreMessage.SetActive(false);
                 GoShelterMessage.SetActive(true);
 
+                EnemiesWakeUp();
+
                 state = State.GoShelter;
             }
         }
@@ -271,6 +277,18 @@ public class TakeDinamit : MonoBehaviour
 
                 Destroy(gameObject);
             }    
+        }
+    }
+
+    private void EnemiesWakeUp()
+    {
+        foreach (var egg in Eggs)
+        {
+            var producer = egg.GetComponent<AgentProducer>();
+            producer.enabled = true;
+
+            var animator = egg.GetComponent<Animator>();
+            animator.enabled = true;
         }
     }
 

@@ -142,9 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 288909363144373025}
   collider2d: {fileID: 288909363144373038}
-  Speed: 3
-  feared: 1
-  isStoped: 0
+  MaxSpeed: 3
   animator: {fileID: 3281543005485726809}
 --- !u!114 &7589721539931355027
 MonoBehaviour:
@@ -172,8 +170,6 @@ MonoBehaviour:
   Key: {fileID: 0}
   TakeDelay: 0
   EquipmentMark: {fileID: 5376977380696319599}
-  WeaponMark: {fileID: 0}
-  RepairKitMark: {fileID: 0}
   KeyMark: {fileID: 3736628693837874387}
   SelectionMark: {fileID: 3164751479710014393}
   DeadEffectPrefab: {fileID: 5368460846223691020, guid: e7b32fdcccf827741a454bafe8cd1beb, type: 3}

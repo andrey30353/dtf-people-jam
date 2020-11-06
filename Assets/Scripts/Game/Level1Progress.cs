@@ -9,22 +9,10 @@ public enum Level1State
     SafersIsArrived,  
 }
 
-
 public class Level1Progress : MonoBehaviour
 {
     [Header("Время до победы")]
     public int TimeToWin;
-
-    public GameObject AgentsContent;
-
-    public int LiverCount;
-    public int EnemiesCount;
-    public int MaxEnemiesCount = 30;
-
-    public bool CanAgentProduce => EnemiesCount < MaxEnemiesCount;
-
-    public Liver2D[] Livers;
-    public Enemy2D[] Enemies;
 
     [Space]
     public Destructible Reactor;
@@ -38,27 +26,14 @@ public class Level1Progress : MonoBehaviour
 
     public Level1State lastState;
     public Level1State state;
-
-    public static Level1Progress Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
+       
     public void Start()
     {
         timeProgress = 0;        
 
-        Livers = AgentsContent.GetComponentsInChildren<Liver2D>();
-        Enemies = AgentsContent.GetComponentsInChildren<Enemy2D>();
-
-        LiverCount = Livers.Length;
-        EnemiesCount = Enemies.Length;
-
         GameUi.ShowTopPanel();
 
-        GameUi.UpdateAgentCount(LiverCount, EnemiesCount);
+        GameUi.UpdateAgentCount();
         //GameUi.SetMaxTime(TimeToWin);
         GameUi.UpdateTime(0); 
     }
@@ -68,7 +43,7 @@ public class Level1Progress : MonoBehaviour
     {
         started = true;
 
-        foreach (var liver in Livers)
+        foreach (var liver in Game2D.Instance.Livers)
         {
             liver.mover.RestoreMove();
         }
@@ -101,7 +76,7 @@ public class Level1Progress : MonoBehaviour
     private Level1State DefineStatus()
     {
         // поражение
-        if (LiverCount == 0)
+        if (Game2D.Instance.LiverCount == 0)
         {
             return Level1State.LiversDiedDefeat;
         }
@@ -112,39 +87,5 @@ public class Level1Progress : MonoBehaviour
         }
 
         return Level1State.Unknown;
-    }  
-
-    internal void LiverDead()
-    {
-        LiverCount--;
-
-        /*if(LiverCount == 1)
-        {
-            var livers = AgentsContent.GetComponentsInChildren<Liver2D>();
-            if(livers.Length == 1)
-            {
-                livers[0].Manage(true);
-            }               
-        }*/
-
-        GameUi.UpdateAgentCount(LiverCount, EnemiesCount);
-
-        //CheckGameOver();
-    }
-
-    internal void EnemyDead()
-    {
-        EnemiesCount--;
-
-        GameUi.UpdateAgentCount(LiverCount, EnemiesCount);
-
-        //CheckGameOver();
-    }
-
-    internal void AddEnemy()
-    {
-        EnemiesCount++;
-
-        GameUi.UpdateAgentCount(LiverCount, EnemiesCount);
-    }
+    }      
 }

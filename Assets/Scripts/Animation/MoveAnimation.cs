@@ -20,7 +20,7 @@ public class MoveAnimation : MonoBehaviour
         startPosition = transform.position;
         mover = GetComponent<Mover2D>();
 
-        Speed = mover.RealSpeed;
+        Speed = mover.CurrentSpeed;
 
         time = (TargetPosition - startPosition).magnitude / Speed;  
     }
