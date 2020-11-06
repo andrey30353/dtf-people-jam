@@ -15,10 +15,20 @@ public class TakeDinamit : MonoBehaviour
         BringDinamit,
         PutDinamit,
 
+        ExplodeDinamit,
+
+        CaveEnter,
+        CaveExplore,
+
+        GoShelter,
+
+        RadioSignal,
 
         Complete
-
     }
+
+   // Level1Progress
+    public Level1Progress Level1;
 
     public CameraMover CameraMover;
 
@@ -27,10 +37,20 @@ public class TakeDinamit : MonoBehaviour
     public GameObject UnblockDoorMessage;
     public GameObject TakeDinamitMessage;
     public GameObject PutDinamitMessage;
+    public GameObject CaveEnterMessage;
+    public GameObject CaveExploreMessage;
+    public GameObject GoShelterMessage;
+    public GameObject RadioSignalMessage;
+    public GameObject ScenarioGoalMessage;
 
     [Space]
     public BoxCollider2D DoorTrigger;
     public BoxCollider2D BringDinamitTrigger;
+    public BoxCollider2D CaveEnterTrigger;
+    public BoxCollider2D CaveExploreTrigger;
+    public BoxCollider2D GoShelterTrigger;
+    public BoxCollider2D RadioSignalTrigger;
+    public StopZone RadioSignalZone;
 
     [Space]
     public GameObject ClickDoorMarker;
@@ -40,6 +60,7 @@ public class TakeDinamit : MonoBehaviour
 
     public List<MoveAnimation> MoveLivers;
 
+    public List<Liver2D> OtherLivers;
     public Liver2D ScenarioLiver;
 
     public PlayerRay2D playerRay;
@@ -58,8 +79,9 @@ public class TakeDinamit : MonoBehaviour
         LiverMoveMessage.SetActive(true);
 
 
-        foreach (var moveAnimation in MoveLivers)
+        foreach (var liver in OtherLivers)
         {
+            var moveAnimation = liver.GetComponent<MoveAnimation>();
             moveAnimation.enabled = true;
         }
 
@@ -146,14 +168,109 @@ public class TakeDinamit : MonoBehaviour
             if (BringDinamitTrigger.OverlapPoint(dinamit.transform.position))
             {
                 print("PutDinamit");
-                LiverMoveMessage.SetActive(false);
-                ClickDoorMessage.SetActive(true);
+                PutDinamitMessage.SetActive(false);              
 
-                state = State.Complete;
+                state = State.ExplodeDinamit;
+            }          
+        }
+
+
+        if (state == State.ExplodeDinamit && dinamit == null)
+        {            
+                print("ExplodeDinamit");
+                PutDinamitMessage.SetActive(false);
+                CaveEnterMessage.SetActive(true);
+
+                foreach (var liver in OtherLivers)
+                {
+                    liver.mover.RestoreMove();
+                }
+
+                state = State.CaveExplore;           
+        }
+        /*
+        if (state == State.CaveEnter)
+        {      
+            if (CaveEnterTrigger.OverlapPoint(ScenarioLiver.transform.position))
+            {
+                print("ScenarioLiver in cave enter");
+                foreach (var liver in OtherLivers)
+                {
+                    if (!CaveEnterTrigger.OverlapPoint(liver.transform.position))
+                        return;                    
+                }
+                print("other livers in cave enter");
+
+                CaveEnterMessage.SetActive(false);
+                CaveExploreMessage.SetActive(true);
+
+                state = State.CaveExplore;
+            }
+        }*/
+
+        if (state == State.CaveExplore)
+        {
+            if (CaveExploreTrigger.OverlapPoint(ScenarioLiver.transform.position))
+            {
+                print("ScenarioLiver inside cave");
+                foreach (var liver in OtherLivers)
+                {
+                    if (!CaveExploreTrigger.OverlapPoint(liver.transform.position))
+                        return;
+                }
+                print("other livers inside cave");
+
+                CaveExploreMessage.SetActive(false);
+                GoShelterMessage.SetActive(true);
+
+                state = State.GoShelter;
+            }
+        }
+
+        if (state == State.GoShelter)
+        {
+            bool inShelter = false;
+            if (GoShelterTrigger.OverlapPoint(ScenarioLiver.transform.position))
+            {
+                inShelter = true;  
             }
 
+            if (!inShelter)
+            {
+                foreach (var liver in OtherLivers)
+                {
+                    if (GoShelterTrigger.OverlapPoint(liver.transform.position))
+                        inShelter = true;
+                    break;
+                }                
+            }
 
-          
+            if (inShelter)
+            {
+                print("In shelter");
+
+                GoShelterMessage.SetActive(false);
+                RadioSignalMessage.SetActive(true);
+
+                state = State.RadioSignal;
+            }
+        }
+
+        if (state == State.RadioSignal)
+        {
+            if(RadioSignalZone.Visitor != null)
+            {
+                print("Radio signal");
+
+                RadioSignalMessage.SetActive(false);
+                ScenarioGoalMessage.SetActive(true);
+
+                Level1.enabled = true;
+
+                state = State.Complete;
+
+                Destroy(gameObject);
+            }    
         }
     }
 

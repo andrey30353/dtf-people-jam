@@ -36,9 +36,7 @@ public class Game2D : MonoBehaviour
 
     public Liver2D[] Livers;
     public Enemy2D[] Enemies;
-
-    public LayerMask AgentMask;
-
+   
     public int DestroyTime = 60;
     private int lastDestroyTime;
     private float currentDestroyTime;
@@ -250,31 +248,6 @@ public class Game2D : MonoBehaviour
     private void PauseGame()
     {
         Time.timeScale = 0;
-    }
-
-    public void MoveAgents(Vector3 point, float radius, Liver2D except)
-    {
-        // var result = new Collider[10];
-
-        var res = Physics2D.OverlapCircleAll(point, radius, AgentMask.value);
-        // Physics.OverlapSphereNonAlloc(point, radius, result, AgentMask.value);
-
-        //print(res.Length);
-
-        foreach (var item in res)
-        {   
-            var agent = item.GetComponent<Liver2D>();
-
-            if (except != null && agent == except)
-                continue;
-
-            // todo
-            if (!agent.isBusy)
-                agent.MoveTo(point);
-        }
-
-
-        // fore
     }
 
     internal void LiverDead()

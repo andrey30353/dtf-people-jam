@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public enum EquipmentType
 {
@@ -15,6 +16,8 @@ public class Equipment : MonoBehaviour
     public float WearingScaleRatio;
 
     public SpriteRenderer AuraRender;
+
+    public UnityEvent OnThrowEvent;
 
     private CircleCollider2D collider2d;
     private Rigidbody2D rb;
@@ -102,8 +105,10 @@ public class Equipment : MonoBehaviour
             var force = (transform.position - owner.transform.position).normalized * 7f;
             throwForce = force;
             rb.velocity = force;
-          /*  print(force);
-            rb.AddForce(force, ForceMode2D.Impulse);*/
+            /*  print(force);
+              rb.AddForce(force, ForceMode2D.Impulse);*/
+
+            OnThrowEvent?.Invoke();
         }
        
 

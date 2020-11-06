@@ -14,18 +14,20 @@ public class PlayerRay2D : MonoBehaviour
     public Vector3 point;
 
     public float pointSize = 1f;
+       
+    public LayerMask AgentMask;
 
     public Liver2D selectedAgent;
 
     private CameraMover cameraMover;
-
+      
     Camera camera;
     void Start()
     {
         camera = Camera.main;
         point = Vector3.up;
 
-        cameraMover = GetComponent<CameraMover>();
+        cameraMover = GetComponent<CameraMover>();        
     }
 
     // Update is called once per frame 
@@ -108,7 +110,7 @@ public class PlayerRay2D : MonoBehaviour
             origin.z = 0;
             //print(origin);
             
-            Game2D.Instance.MoveAgents(origin, Radius, selectedAgent);           
+            MoveAgents(origin, Radius, selectedAgent);           
         }
 
         // бросить предмет
@@ -134,6 +136,31 @@ public class PlayerRay2D : MonoBehaviour
         agent.Manage(true);
 
         //cameraMover.SetZoom(0.5f);
+    }
+
+    public void MoveAgents(Vector3 point, float radius, Liver2D except)
+    {
+        // var result = new Collider[10];
+
+        var res = Physics2D.OverlapCircleAll(point, radius, AgentMask.value);
+        // Physics.OverlapSphereNonAlloc(point, radius, result, AgentMask.value);
+
+        //print(res.Length);
+
+        foreach (var item in res)
+        {
+            var agent = item.GetComponent<Liver2D>();
+
+            if (except != null && agent == except)
+                continue;
+
+            // todo
+            if (!agent.isBusy)
+                agent.MoveTo(point);
+        }
+
+
+        // fore
     }
 
     private void OnDrawGizmos()
