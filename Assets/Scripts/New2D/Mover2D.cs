@@ -4,25 +4,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MoverState
+{
+    Fast,
+    Slow,
+    Stop
+}
+
 public class Mover2D : MonoBehaviour
 {
     public Rigidbody2D rb;
     public CircleCollider2D collider2d;
 
     // public float startSpeed;
-
-    public float Speed;
-    public float RealSpeed => feared ? Speed : Speed *0.5f;
-
+              
+    public float MaxSpeed;
     // todo
-    public bool feared = true;
 
-    public bool isStoped;
+    private float currentSpeed;
+    public float CurrentSpeed => currentSpeed;
+              
+    [SerializeField] private MoverState state;
 
     public Animator animator;
-       
-    float speedThreshold;
-
+          
     private bool managed = false;
 
     void Start()
@@ -33,11 +38,8 @@ public class Mover2D : MonoBehaviour
         animator = GetComponent<Animator>();
 
         SetRandomVelocity();
-
-        speedThreshold = Speed * 0f;      
-
-        // todo
-        feared = true;
+        
+        SwitchState(state);       
     }
 
     private void SetRandomVelocity()
@@ -45,48 +47,33 @@ public class Mover2D : MonoBehaviour
         var randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
         //print(randomDirection);
        
-        rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * RealSpeed;
+        rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * currentSpeed;
     }   
 
     internal void StopMove()
     {
-        animator.enabled = false;
-        //rb.simulated = false;
-        rb.velocity = Vector2.zero;
-
-        // enabled = false;
-
-        isStoped = true;
+        SwitchState(MoverState.Stop);
+       
+        //rb.velocity = Vector2.zero;
     }
 
     internal void RestoreMove()
     {
-        animator.enabled = true;
-        //rb.simulated = true;
-        if(!managed)
-            SetRandomVelocity();
+        SwitchState(MoverState.Fast);
 
-        //  enabled = true;
-
-        isStoped = false;
+        if (!managed)
+            SetRandomVelocity();       
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (isStoped)
-        {
-            //rb.angularVelocity = 0;
-            rb.velocity = Vector2.zero;
-            return;
-        }
-
+    {     
         if (managed)
         {
             var inputX = Input.GetAxis("Horizontal");
             var inputY = Input.GetAxis("Vertical");
 
-            var velocity = new Vector2(inputX, inputY).normalized * RealSpeed;
+            var velocity = new Vector2(inputX, inputY).normalized * MaxSpeed;
             rb.velocity = velocity;
 
             if (rb.velocity == Vector2.zero)
@@ -100,55 +87,38 @@ public class Mover2D : MonoBehaviour
         }
         else
         {
-
-            var rel = 1f;
-            var xVal = Mathf.Abs(rb.velocity.x);
-            var yVal = Mathf.Abs(rb.velocity.y);
-            /*if (xVal < yVal)
+            if (state == MoverState.Stop)
             {
-                rel = rb.velocity.x / rb.velocity.y;
+                rb.velocity = Vector2.zero;
+                return;
             }
             else
             {
-                rel = rb.velocity.y / rb.velocity.x;
-            }
-            
-            if (Mathf.Abs(rel) < 0.1f)
-            {
-                Vector2 additional;
-                if (rb.velocity.x < rb.velocity.y)
+                var xVal = Mathf.Abs(rb.velocity.x);
+                var yVal = Mathf.Abs(rb.velocity.y);               
+
+                var speed = rb.velocity.magnitude;
+                if (speed == 0)
                 {
-                    additional = rb.velocity.x < 0 ? Vector2.left : Vector2.right;
+                    SetRandomVelocity();
                 }
                 else
                 {
-                    additional = rb.velocity.y < 0 ? Vector2.down : Vector2.up;
-                }
-                rb.velocity += additional*0.5f;
-            }
-            */
+                    if (speed < currentSpeed)
+                    {
+                        rb.velocity *= currentSpeed / speed;
+                    }
 
-            var currentSpeed = rb.velocity.magnitude;
-            if (currentSpeed == 0)
-            {
-                SetRandomVelocity();
-            }
-            else
-            {
-                if (currentSpeed < RealSpeed + speedThreshold)
+                    if (speed > currentSpeed)
+                    {
+                        rb.velocity *= currentSpeed / speed;
+                    }
+                }
+
+                if (xVal < 0.05f || yVal < 0.05f)
                 {
-                    rb.velocity *= RealSpeed / currentSpeed;
+                    SetRandomVelocity();
                 }
-
-                if (currentSpeed > RealSpeed + speedThreshold)
-                {
-                    rb.velocity *= RealSpeed / currentSpeed;
-                }
-            }
-
-            if (xVal < 0.05f || yVal < 0.05f)
-            {
-                SetRandomVelocity();
             }
         }
 
@@ -164,7 +134,10 @@ public class Mover2D : MonoBehaviour
     {
         managed = manage;
 
-        animator.enabled = !manage;
+        if (manage)
+            SetAnimationByState(MoverState.Fast);
+        else
+            SetAnimationByState(state);
 
         if (!manage)
         {
@@ -188,8 +161,50 @@ public class Mover2D : MonoBehaviour
 
     public void MoveTo(Vector3 point)
     {
-        rb.velocity = (point - transform.position).normalized * RealSpeed;
-    }    
+        rb.velocity = (point - transform.position).normalized * MaxSpeed;
+    }  
+    
+    public void SwitchState(MoverState state)
+    {
+        this.state = state;
+
+        switch (state)
+        {
+            case MoverState.Fast:               
+                currentSpeed = MaxSpeed;
+                break;
+            case MoverState.Slow:              
+                currentSpeed = MaxSpeed * 0.5f;
+                break;
+            case MoverState.Stop:
+                currentSpeed = 0;               
+                break;
+            default:
+                break;
+        }
+
+        SetAnimationByState(state);
+    }
+
+    public void SetAnimationByState(MoverState state)
+    {       
+        switch (state)
+        {
+            case MoverState.Fast:
+                animator.speed = 1f;              
+                break;
+            case MoverState.Slow:
+                animator.speed = 0.5f;               
+                break;
+            case MoverState.Stop:
+                currentSpeed = 0;
+                break;
+            default:
+                break;
+        }
+
+        animator.enabled = state != MoverState.Stop;
+    }
 }
 
 

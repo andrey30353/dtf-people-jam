@@ -139,8 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   collider2d: {fileID: 0}
-  Speed: 5
-  isStoped: 0
+  MaxSpeed: 5
   animator: {fileID: 0}
 --- !u!114 &288909363144373037
 MonoBehaviour:

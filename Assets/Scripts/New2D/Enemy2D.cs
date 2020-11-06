@@ -278,7 +278,7 @@ public class Enemy2D : MonoBehaviour
         var targetPos = targetHatch.transform.position;
         var startPos = enter.transform.position;
         var dir = startPos - targetPos;
-        var time = dir.magnitude / (mover.Speed * HatchList.Instance.SpeedKoefInHatch);
+        var time = dir.magnitude / (mover.MaxSpeed * HatchList.Instance.SpeedKoefInHatch);
 
         // для направления значка в решетке
         mover.rb.velocity = dir;        
@@ -318,7 +318,7 @@ public class Enemy2D : MonoBehaviour
 
         if (AggressionToDamage)
         {
-            mover.rb.velocity = -agresstionPoint.normalized * mover.Speed;
+            mover.rb.velocity = -agresstionPoint.normalized * mover.MaxSpeed;
         }
     }
 }
