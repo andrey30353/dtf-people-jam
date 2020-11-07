@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScenarioLevel1 : MonoBehaviour
 {
-    public List<Door2D> OperDoors;
+    public List<Door2D> OpenDoors;
 
     public MoveAndZoomCamera MoveAndZoomCamera;
     public NeedExposionDialogue NeedExposionDialogue;
@@ -34,7 +34,7 @@ public class ScenarioLevel1 : MonoBehaviour
         //}
 
         // открыть двери сразу
-        foreach (var door in OperDoors)
+        foreach (var door in OpenDoors)
         {
             door.Select();
         }
