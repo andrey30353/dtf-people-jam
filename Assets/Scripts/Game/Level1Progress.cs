@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum Level1State
 {
-    Unknown,
+    Unknown,  
 
     LiversDiedDefeat,
     SafersIsArrived,  
@@ -25,8 +25,8 @@ public class Level1Progress : MonoBehaviour
     public float lastTimeProgress;
 
     public Level1State lastState;
-    public Level1State state;
-       
+    public Level1State state;  
+
     public void Start()
     {
         timeProgress = 0;        
@@ -75,6 +75,8 @@ public class Level1Progress : MonoBehaviour
 
     private Level1State DefineStatus()
     {
+
+
         // поражение
         if (Game2D.Instance.LiverCount == 0)
         {

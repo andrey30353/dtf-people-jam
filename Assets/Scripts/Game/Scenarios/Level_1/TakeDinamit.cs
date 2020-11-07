@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TakeDinamit : MonoBehaviour
+public enum Level1TutorialGameOver
 {
+    NobodyGoToShelter,
+
+    Complete
+}
+
+public class TakeDinamit : MonoBehaviour
+{   
     private enum State
     {
         WaitLiverSelect,
@@ -28,10 +36,13 @@ public class TakeDinamit : MonoBehaviour
         Complete
     }
 
-   // Level1Progress
+   
+    public ScenarioLevel1 Tutorial;
     public Level1Progress Level1;
 
     public CameraMover CameraMover;
+
+    public GameObject CaveBlock;
 
     public GameObject LiverMoveMessage;
     public GameObject ClickDoorMessage;
@@ -47,7 +58,7 @@ public class TakeDinamit : MonoBehaviour
     [Space]
     public BoxCollider2D DoorTrigger;
     public BoxCollider2D BringDinamitTrigger;
-    public BoxCollider2D CaveEnterTrigger;
+    public BoxCollider2D CaveEnterTrigger;   
     public BoxCollider2D CaveExploreTrigger;
     public BoxCollider2D GoShelterTrigger;
     public BoxCollider2D RadioSignalTrigger;
@@ -56,7 +67,7 @@ public class TakeDinamit : MonoBehaviour
     [Space]
     public GameObject ClickDoorMarker;
     public GameObject BringDinamitMarker;
-      
+
     public List<MoveAnimation> MoveLivers;
 
     public List<Liver2D> OtherLivers;
@@ -64,8 +75,8 @@ public class TakeDinamit : MonoBehaviour
 
     [Space]
     public List<Enemy2D> Eggs;
-    public Enemy2D Queen;   
-    
+    public Enemy2D Queen;
+
     [Space]
     public PlayerRay2D playerRay;
 
@@ -99,11 +110,13 @@ public class TakeDinamit : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckGameOver();
+
         // выделили чувака
         if (state == State.WaitLiverSelect && playerRay.selectedAgent == ScenarioLiver)
         {
-           // print("SelectLiver");
-           // ScenarioLiver.mover.RestoreMove();
+            // print("SelectLiver");
+            // ScenarioLiver.mover.RestoreMove();
             // ScenarioLiver.mover.Speed = 3;
 
 
@@ -113,7 +126,7 @@ public class TakeDinamit : MonoBehaviour
         // подошли к двери
         if (state == State.LiverMove && DoorTrigger.OverlapPoint(ScenarioLiver.transform.position))
         {
-           // print("Visited");
+            // print("Visited");
             LiverMoveMessage.SetActive(false);
             ClickDoorMessage.SetActive(true);
 
@@ -125,7 +138,7 @@ public class TakeDinamit : MonoBehaviour
         // кликнули на дверь
         if (state == State.ClickDoor && ClickDoor.IsOpen)
         {
-           // print("Open door");
+            // print("Open door");
             ClickDoorMessage.SetActive(false);
             UnblockDoorMessage.SetActive(true);
 
@@ -135,7 +148,7 @@ public class TakeDinamit : MonoBehaviour
         // принесли карту, открыли дверь
         if (state == State.UnblockDoor && NeedUnblockDoor.IsOpen)
         {
-           // print("Ublock door");
+            // print("Ublock door");
             UnblockDoorMessage.SetActive(false);
             TakeDinamitMessage.SetActive(true);
 
@@ -149,7 +162,7 @@ public class TakeDinamit : MonoBehaviour
 
         if (state == State.BringDinamit && ScenarioLiver.Equipment != null)
         {
-           // print("Almost Bring Dinamit");
+            // print("Almost Bring Dinamit");
             if (BringDinamitTrigger.OverlapPoint(ScenarioLiver.transform.position))
             {
                 print("Bring Dinamit");
@@ -172,25 +185,26 @@ public class TakeDinamit : MonoBehaviour
             if (BringDinamitTrigger.OverlapPoint(dinamit.transform.position))
             {
                 print("PutDinamit");
-                PutDinamitMessage.SetActive(false);              
+                PutDinamitMessage.SetActive(false);
 
                 state = State.ExplodeDinamit;
-            }          
+            }
         }
 
 
         if (state == State.ExplodeDinamit && dinamit == null)
-        {            
-                print("ExplodeDinamit");
-                PutDinamitMessage.SetActive(false);
-                CaveEnterMessage.SetActive(true);
+        {
+            print("ExplodeDinamit");
+            PutDinamitMessage.SetActive(false);
+            CaveEnterMessage.SetActive(true);
 
-                //foreach (var liver in OtherLivers)
-                //{
-                //    liver.mover.RestoreMove();
-                //}
+            Destroy(CaveBlock);
+            //foreach (var liver in OtherLivers)
+            //{
+            //    liver.mover.RestoreMove();
+            //}
 
-                state = State.CaveExplore;           
+            state = State.CaveExplore;
         }
         /*
         if (state == State.CaveEnter)
@@ -231,7 +245,7 @@ public class TakeDinamit : MonoBehaviour
                 foreach (var liver in OtherLivers)
                 {
                     liver.mover.SwitchState(MoverState.Fast);
-                }               
+                }
 
                 EnemiesWakeUp();
 
@@ -242,19 +256,25 @@ public class TakeDinamit : MonoBehaviour
         if (state == State.GoShelter)
         {
             bool inShelter = false;
-            if (GoShelterTrigger.OverlapPoint(ScenarioLiver.transform.position))
+            if (ScenarioLiver != null)
             {
-                inShelter = true;  
+                if (GoShelterTrigger.OverlapPoint(ScenarioLiver.transform.position))
+                {
+                    inShelter = true;
+                }
             }
 
             if (!inShelter)
             {
                 foreach (var liver in OtherLivers)
                 {
+                    if (liver == null)
+                        continue;
+
                     if (GoShelterTrigger.OverlapPoint(liver.transform.position))
                         inShelter = true;
                     break;
-                }                
+                }
             }
 
             if (inShelter)
@@ -270,7 +290,7 @@ public class TakeDinamit : MonoBehaviour
 
         if (state == State.RadioSignal)
         {
-            if(RadioSignalZone.Visitor != null)
+            if (RadioSignalZone.Visitor != null)
             {
                 print("Radio signal");
 
@@ -282,7 +302,7 @@ public class TakeDinamit : MonoBehaviour
                 state = State.Complete;
 
                 Destroy(gameObject);
-            }    
+            }
         }
     }
 
@@ -296,6 +316,68 @@ public class TakeDinamit : MonoBehaviour
             var animator = egg.GetComponent<Animator>();
             animator.enabled = true;
         }
+    }
+
+    private void CheckGameOver()
+    {
+        // выделили чувака
+        /*  if (state == State.WaitLiverSelect)
+           {
+              if(AnyTutorialLiversDied())
+                   PauseGame();
+
+               return;
+           }*/
+
+        if (state == State.GoShelter)
+        {
+
+            var allDied = AllTutorialLiversDied();
+            if (allDied)
+            {
+                //print("Никто не сообщил о происшествии на базу");
+                Tutorial.NobodyGoToShelterMessage.SetActive(true);
+                Level1.GameUi.PauseGame(true);                              
+            }
+
+            //if (ScenarioLiver == null)
+            //{
+            //    //print
+               
+            //}           
+
+            //foreach (var liver in OtherLivers)
+            //{
+            //    if (liver == null)
+            //        print("liver safs df ");
+            //}
+
+        }
+    }
+
+    private bool AnyTutorialLiversDied()
+    {
+        if (ScenarioLiver == null)
+        {
+            print("asd");
+            return true;
+        }
+
+        if (OtherLivers.Any(t => t == null))
+            return true;
+
+        return false;
+    }
+
+    private bool AllTutorialLiversDied()
+    {
+        if (ScenarioLiver == null)
+        {
+            if (OtherLivers.All(t => t == null))
+                return true;
+        }      
+
+        return false;
     }
 
     private void ShowNextMessage()

@@ -13,6 +13,9 @@ public class ScenarioLevel1 : MonoBehaviour
     public List<Liver2D> DialogueLivers;
     public Liver2D ScenarionLiver;
 
+    [Space]
+    public GameObject NobodyGoToShelterMessage;
+
     public static ScenarioLevel1 Instance;
 
     private void Awake()

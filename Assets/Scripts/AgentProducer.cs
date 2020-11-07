@@ -29,45 +29,14 @@ public class AgentProducer : MonoBehaviour
     {
         timeoutProcess -= Time.deltaTime;
         // todo
-        if (timeoutProcess <= 0 && Game2D.Instance.CanAgentProduce)
+        if (timeoutProcess <= 0 && Game2D.Instance.CanAgentProduce)        
             Produce();
-    }
-
-    private IEnumerator ProduceCor()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(Timeout);
-
-            var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
-            var newAgent = Instantiate(randomAgent, AgenContent);
-            newAgent.transform.position = transform.position;
-            newAgent.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-
-            if (Once)
-                break;
-        }
-
-        if (Once)
-        {
-            var agentCarrier = GetComponent<Liver2D>();
-            if (agentCarrier != null)
-            {
-                agentCarrier.Dead();
-            }
-            else
-            {
-                // Game2D.Instance.AgentCount
-                Destroy(gameObject);
-            }
-        }
-        //Ma
+                  
     }
 
     private void Produce()
-    {
-
-        var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];
+    {        
+        var randomAgent = AgenPrefab[Random.Range(0, AgenPrefab.Length)];       
         var newAgent = Instantiate(randomAgent, AgenContent);
         newAgent.transform.position = transform.position;
         newAgent.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
@@ -77,10 +46,10 @@ public class AgentProducer : MonoBehaviour
         Game2D.Instance.AddEnemy();
 
         if (Once)
-        {
+        {           
             var agentCarrier = GetComponent<Liver2D>();
             if (agentCarrier != null)
-            {
+            {                
                 agentCarrier.Dead();
             }
             else
