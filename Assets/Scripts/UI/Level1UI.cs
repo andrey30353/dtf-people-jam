@@ -71,7 +71,13 @@ public class Level1UI : MonoBehaviour
                 //LiversDiedMessage.SetActive(true);
                 break;
 
-            case Level1State.SafersIsArrived:
+            case Level1State.NeedGoShipTimeIsOver:
+                print("Поражение! Корабль улетел");
+                PauseGame(true);
+                //LiversDiedMessage.SetActive(true);
+                break;
+
+            case Level1State.SafeLiverOnShip:
                 print("Победа!");
                 PauseGame(true);
                // ReactorExplosionMessage.SetActive(true);

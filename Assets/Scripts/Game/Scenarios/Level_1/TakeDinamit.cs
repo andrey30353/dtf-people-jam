@@ -61,12 +61,13 @@ public class TakeDinamit : MonoBehaviour
     public BoxCollider2D CaveEnterTrigger;   
     public BoxCollider2D CaveExploreTrigger;
     public BoxCollider2D GoShelterTrigger;
-    public BoxCollider2D RadioSignalTrigger;
+    public CircleCollider2D RadioSignalTrigger;
     public StopZone RadioSignalZone;
 
     [Space]
     public GameObject ClickDoorMarker;
     public GameObject BringDinamitMarker;
+    public GameObject RadioSignalMarker;
 
     public List<MoveAnimation> MoveLivers;
 
@@ -284,18 +285,27 @@ public class TakeDinamit : MonoBehaviour
                 GoShelterMessage.SetActive(false);
                 RadioSignalMessage.SetActive(true);
 
+                RadioSignalMarker.SetActive(true);
+
                 state = State.RadioSignal;
             }
         }
 
         if (state == State.RadioSignal)
         {
+            // Physics2D.OverlapCircleAll(RadioSignalTrigger.transform.position, 0.,.)
+           // Physics2D.Ove
+           // if (RadioSignalTrigger.OverlapPoint())
             if (RadioSignalZone.Visitor != null)
             {
                 print("Radio signal");
 
                 RadioSignalMessage.SetActive(false);
                 ScenarioGoalMessage.SetActive(true);
+
+                RadioSignalMarker.SetActive(false);
+
+
 
                 Level1.enabled = true;
 
