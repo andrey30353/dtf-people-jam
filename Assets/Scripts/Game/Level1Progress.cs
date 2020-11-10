@@ -2,20 +2,29 @@
 using UnityEngine;
 
 public enum Level1State
-{
-    Unknown,  
-
+{   
     LiversDiedDefeat,
-    SafersIsArrived,  
+
+    WaitSafers,
+       
+    NeedGoShip,
+     
+    NeedGoShipTimeIsOver,
+
+    SafeLiverOnShip
 }
 
 public class Level1Progress : MonoBehaviour
 {
-    [Header("Время до победы")]
-    public int TimeToWin;
+    [Header("Время ожидания спасателей")]
+    public int WaitSafersTime;
+
+    [Header("Время эвакуации")]
+    public int NeedGoShipTime;
 
     [Space]
-    public Destructible Reactor;
+    public GameObject Ship;
+    public StopZone ShipPlace;
 
     [Space]
     public Level1UI GameUi;
@@ -23,6 +32,9 @@ public class Level1Progress : MonoBehaviour
     [Space]
     public float timeProgress;
     public float lastTimeProgress;
+
+    public float evacuationTimeProgress;
+    public float lastEvacuationTimeProgress;
 
     public Level1State lastState;
     public Level1State state;  
@@ -47,13 +59,26 @@ public class Level1Progress : MonoBehaviour
         {
             liver.mover.RestoreMove();
         }
+
+        state = Level1State.WaitSafers;
     }
 
     private void Update()
     {
         timeProgress += Time.deltaTime;
 
-        var timeProgressRel = timeProgress / TimeToWin;
+        // todo
+        var fullTime = timeProgress;
+        if(state == Level1State.WaitSafers)
+        {
+            fullTime = WaitSafersTime;
+        }
+        if (state == Level1State.NeedGoShip)
+        {
+            fullTime = NeedGoShipTime;
+        }      
+
+        var timeProgressRel = timeProgress / fullTime;
 
         //if ((int)timeProgress != lastTimeProgress)
             GameUi.UpdateTime(timeProgressRel);
@@ -75,19 +100,30 @@ public class Level1Progress : MonoBehaviour
 
     private Level1State DefineStatus()
     {
-
-
         // поражение
         if (Game2D.Instance.LiverCount == 0)
         {
             return Level1State.LiversDiedDefeat;
         }
 
-        if (timeProgress >= TimeToWin)               
+        if (state == Level1State.WaitSafers && timeProgress >= WaitSafersTime)               
         {
-            return Level1State.SafersIsArrived;
+            timeProgress = 0;
+            Ship.SetActive(true);
+            return Level1State.NeedGoShip;
         }
 
-        return Level1State.Unknown;
+        if (state == Level1State.NeedGoShip )
+        {
+            if(ShipPlace.Visitor != null)            
+                return Level1State.SafeLiverOnShip;
+            
+            if(timeProgress >= NeedGoShipTime)
+                return Level1State.NeedGoShipTimeIsOver;
+
+            return Level1State.NeedGoShip;
+        }           
+
+        return Level1State.WaitSafers;
     }      
 }

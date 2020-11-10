@@ -16,6 +16,8 @@ public class ScenarioLevel1 : MonoBehaviour
     [Space]
     public GameObject NobodyGoToShelterMessage;
 
+    public List<Door2D> UblockDoors;
+
     public static ScenarioLevel1 Instance;
 
     private void Awake()
