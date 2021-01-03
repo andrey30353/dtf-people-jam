@@ -76,6 +76,7 @@ public class TakeDinamit : MonoBehaviour
 
     [Space]
     public List<Enemy2D> Eggs;
+    public GameObject CaveEggsContent;
     public Enemy2D Queen;
 
     [Space]
@@ -287,6 +288,8 @@ public class TakeDinamit : MonoBehaviour
 
                 RadioSignalMarker.SetActive(true);
 
+                //Queen.gameObject.SetActive(true);
+
                 state = State.RadioSignal;
             }
         }
@@ -318,7 +321,8 @@ public class TakeDinamit : MonoBehaviour
 
     private void EnemiesWakeUp()
     {
-        foreach (var egg in Eggs)
+        var eggs = CaveEggsContent.GetComponentsInChildren<Enemy2D>();
+        foreach (var egg in eggs)
         {
             var producer = egg.GetComponent<AgentProducer>();
             producer.enabled = true;
