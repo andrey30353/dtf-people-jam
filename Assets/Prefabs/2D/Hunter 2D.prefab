@@ -140,6 +140,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   collider2d: {fileID: 0}
   MaxSpeed: 5
+  state: 0
   animator: {fileID: 0}
 --- !u!114 &288909363144373037
 MonoBehaviour:
@@ -165,7 +166,7 @@ MonoBehaviour:
   InfectTime: 1
   HatchTime: 1
   HatchSprite: {fileID: 21300000, guid: e2303e809aa7e7c48aaa5b8dd2d0f9d2, type: 3}
-  HatchSizeKoef: 1
+  HatchSizeKoef: 2
   HatchColor: {r: 1, g: 1, b: 1, a: 1}
   TakeDamageEffectPrefab: {fileID: 5368460846223691020, guid: 32769896f7a0fec43ac223ee4ab31fc7, type: 3}
   TakeDamageEffect: {fileID: 3147679647188712392}

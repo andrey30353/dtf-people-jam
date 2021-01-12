@@ -10,6 +10,8 @@ public class Destroible : MonoBehaviour
     public float BrokenScaleMin = 1f;
     public float BrokenScaleMax = 2f;
 
+    public Color BrokenColor = Color.white;
+
     public bool Broken => Hp <= 0;
 
     private BoxCollider2D boxCollider;
@@ -36,6 +38,7 @@ public class Destroible : MonoBehaviour
         {
             var randomSprite = BrokenSprite[Random.Range(0, BrokenSprite.Count)];
             sr.sprite = randomSprite;
+            sr.color = BrokenColor;
 
             transform.localScale *= Random.Range(BrokenScaleMin, BrokenScaleMax);
             transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));

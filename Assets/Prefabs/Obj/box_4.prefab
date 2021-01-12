@@ -128,5 +128,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f4c36e110ed58bc4aabcd246176aea5c, type: 3}
   - {fileID: 21300000, guid: 905abf8b72647784db40c21d05229f4b, type: 3}
   Hp: 1
-  BrokenScaleMin: 1
-  BrokenScaleMax: 1.5
+  BrokenScaleMin: 1.5
+  BrokenScaleMax: 2
+  BrokenColor: {r: 1, g: 1, b: 1, a: 1}
