@@ -9,7 +9,7 @@ public enum ScenarioState
 
 public class MoveAndZoomCamera : MonoBehaviour
 {
-    public GameObject CameraMoveMessage; 
+    public GameObject CameraMoveMessage;
 
     public CameraMover CameraMover;
 
@@ -28,7 +28,7 @@ public class MoveAndZoomCamera : MonoBehaviour
 
     private void Update()
     {
-        CheckComplete(State);          
+        CheckComplete(State);
     }
 
     private void CheckComplete(ScenarioState state)
@@ -54,8 +54,8 @@ public class MoveAndZoomCamera : MonoBehaviour
         var cameraY = CameraMover.CameraPosition.y;
         var requiredX = RequiredPosition.transform.position.x;
         var requiredY = RequiredPosition.transform.position.y;
-        if (cameraX > requiredX - AcceptablePosition.x 
-            && cameraX < requiredX + AcceptablePosition.x 
+        if (cameraX > requiredX - AcceptablePosition.x
+            && cameraX < requiredX + AcceptablePosition.x
             && cameraY > requiredY - AcceptablePosition.y
             && cameraY < requiredY + AcceptablePosition.y)
         {
