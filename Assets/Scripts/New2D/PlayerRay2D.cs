@@ -8,41 +8,41 @@ public class PlayerRay2D : MonoBehaviour
 
     public LayerMask InteractionMask;
 
-    public LayerMask FloorLayerMask;  
+    public LayerMask FloorLayerMask;
 
     public float Radius;
     public Vector3 point;
 
     public float pointSize = 1f;
-       
+
     public LayerMask AgentMask;
 
     public Liver2D selectedAgent;
 
-    private CameraMover cameraMover;
-      
+    [SerializeField] private CameraMover cameraMover;
+
     Camera camera;
     void Start()
     {
         camera = Camera.main;
         point = Vector3.up;
 
-        cameraMover = GetComponent<CameraMover>();        
+        //cameraMover = GetComponent<CameraMover>();
     }
 
-    // Update is called once per frame 
+    // Update is called once per frame
     void LateUpdate()
     {
         if (Time.timeScale == 0)
             return;
 
         if (Input.GetMouseButtonDown(0))
-        {           
+        {
             var origin = camera.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, Distance, InteractionMask);            
-           
+            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, Distance, InteractionMask);
+
             if (hit.collider != null)
-            {               
+            {
                 var door = hit.collider.gameObject.GetComponent<Door2D>();
                 if (door != null)
                 {
@@ -60,7 +60,7 @@ public class PlayerRay2D : MonoBehaviour
                 var colliders = Physics2D.OverlapCircleAll(origin, pointSize, InteractionMask);
                 if(colliders == null || colliders.Length == 0)
                 {
-                    // todo копипаст 
+                    // todo копипаст
                     if (selectedAgent != null)
                     {
                         selectedAgent.Manage(false);
@@ -91,7 +91,7 @@ public class PlayerRay2D : MonoBehaviour
                     }
                     else
                     {
-                        // todo копипаст 
+                        // todo копипаст
                         if (selectedAgent != null)
                         {
                             selectedAgent.Manage(false);
@@ -100,7 +100,7 @@ public class PlayerRay2D : MonoBehaviour
                     }
                 }
 
-               
+
             }
         }
 
@@ -109,8 +109,8 @@ public class PlayerRay2D : MonoBehaviour
             var origin = camera.ScreenToWorldPoint(Input.mousePosition);
             origin.z = 0;
             //print(origin);
-            
-            MoveAgents(origin, Radius, selectedAgent);           
+
+            MoveAgents(origin, Radius, selectedAgent);
         }
 
         // бросить предмет
@@ -120,7 +120,7 @@ public class PlayerRay2D : MonoBehaviour
             {
                 selectedAgent.ThrowEquipment();
             }
-        }  
+        }
 
         cameraMover.FolowLiver = selectedAgent;
     }
