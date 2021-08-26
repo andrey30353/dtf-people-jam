@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamagedSprite: {fileID: 0}
   BrokenSprite: {fileID: 21300000, guid: e9ecb83bb69e1e546a6c68cf8d7828d6, type: 3}
+  StartHp: 20
   Hp: 20
   Repaired: 1
   RepairSpeedKoef: 0.2

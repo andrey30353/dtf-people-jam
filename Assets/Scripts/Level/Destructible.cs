@@ -9,9 +9,8 @@ public class Destructible : MonoBehaviour
     public Sprite BrokenSprite;
     private Sprite defaultSprite;
 
+    public float StartHp = 5;
     public float Hp = 5;
-    private float startHp;
-    public float StartHp  => startHp; 
 
     public bool Repaired;
 
@@ -35,7 +34,6 @@ public class Destructible : MonoBehaviour
 
     void Start()
     {
-        startHp = Hp;
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
@@ -80,7 +78,7 @@ public class Destructible : MonoBehaviour
                 agent.isBusy = true;
             }
         }
-       
+
     }
 
     private void CheckHp()
@@ -101,9 +99,9 @@ public class Destructible : MonoBehaviour
 
     private void Break()
     {
-        if (animator != null)         
-            animator.enabled = false; 
-        
+        if (animator != null)
+            animator.enabled = false;
+
         if(BrokenSprite != null)
             sr.sprite = BrokenSprite;
     }
