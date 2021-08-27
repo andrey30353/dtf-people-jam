@@ -13,7 +13,7 @@ public enum Level1TutorialGameOver
 }
 
 public class TakeDinamit : MonoBehaviour
-{   
+{
     private enum State
     {
         WaitLiverSelect,
@@ -36,7 +36,7 @@ public class TakeDinamit : MonoBehaviour
         Complete
     }
 
-   
+
     public ScenarioLevel1 Tutorial;
     public Level1Progress Level1;
 
@@ -58,7 +58,7 @@ public class TakeDinamit : MonoBehaviour
     [Space]
     public BoxCollider2D DoorTrigger;
     public BoxCollider2D BringDinamitTrigger;
-    public BoxCollider2D CaveEnterTrigger;   
+    public BoxCollider2D CaveEnterTrigger;
     public BoxCollider2D CaveExploreTrigger;
     public BoxCollider2D GoShelterTrigger;
     public CircleCollider2D RadioSignalTrigger;
@@ -210,14 +210,14 @@ public class TakeDinamit : MonoBehaviour
         }
         /*
         if (state == State.CaveEnter)
-        {      
+        {
             if (CaveEnterTrigger.OverlapPoint(ScenarioLiver.transform.position))
             {
                 print("ScenarioLiver in cave enter");
                 foreach (var liver in OtherLivers)
                 {
                     if (!CaveEnterTrigger.OverlapPoint(liver.transform.position))
-                        return;                    
+                        return;
                 }
                 print("other livers in cave enter");
 
@@ -351,14 +351,14 @@ public class TakeDinamit : MonoBehaviour
             {
                 //print("Никто не сообщил о происшествии на базу");
                 Tutorial.NobodyGoToShelterMessage.SetActive(true);
-                Level1.GameUi.PauseGame(true);                              
+                Level1.GameUi.PauseGame(true);
             }
 
             //if (ScenarioLiver == null)
             //{
             //    //print
-               
-            //}           
+
+            //}
 
             //foreach (var liver in OtherLivers)
             //{
@@ -389,7 +389,7 @@ public class TakeDinamit : MonoBehaviour
         {
             if (OtherLivers.All(t => t == null))
                 return true;
-        }      
+        }
 
         return false;
     }
@@ -397,7 +397,7 @@ public class TakeDinamit : MonoBehaviour
     private void ShowNextMessage()
     {
         //    if (messageIndex > 0)
-        //    { 
+        //    {
         //        Messages[messageIndex - 1].SetActive(false);
         //    }
 

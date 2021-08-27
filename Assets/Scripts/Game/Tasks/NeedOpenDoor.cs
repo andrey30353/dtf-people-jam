@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class NeedRepair : MonoBehaviour
+public class NeedInteractWithDoor : MonoBehaviour
 {
-    public Destructible RepairObject;
+    public Door2D Door;
+
+    public bool Open;
 
     public GameObject MessageUI;
 
@@ -18,11 +20,9 @@ public class NeedRepair : MonoBehaviour
 
     private void Update()
     {
-        if (!RepairObject.NeedRepair)
+        if (!Door.IsOpen)
         {
             OnComplete?.Invoke();
-
-            MessageUI?.SetActive(false);
             gameObject.SetActive(false);
         }
     }

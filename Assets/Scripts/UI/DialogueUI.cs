@@ -14,66 +14,53 @@ public class DialogueUI : MonoBehaviour
 {
     [SerializeField] private CloudMessageUI _messageUI;
 
-    public GameObject ClickToNextMessage;
+    public GameObject HintUI;
 
     public float Delay;
 
     public List<Message> Messages;
 
-
-    public List<Liver2D> DialogueLivers;
-
     public UnityEvent OnComplete;
 
-    private int messageIndex;
+    private int _messageIndex;
 
-    private bool canClick;
-
-    private IEnumerator Start()
+    private void Start()
     {
-        /*foreach (var message in Messages)
-        {
-            message.SetActive(false);
-        }*/
+        _messageUI.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
-
-        canClick = true;
-
-        //ClickToNextMessage.SetActive(true);
+        if (HintUI != null)
+            HintUI.SetActive(true);
 
         ShowNextMessage();
     }
 
     private void Update()
     {
-        if (canClick && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             ShowNextMessage();
         }
-
     }
 
     private void ShowNextMessage()
     {
-        if (messageIndex >= 0 && messageIndex < Messages.Count)
+        if (_messageIndex >= 0 && _messageIndex < Messages.Count)
         {
-            _messageUI.SetMessage(Messages[messageIndex]);
+            _messageUI.SetMessage(Messages[_messageIndex]);
         }
 
-        if (messageIndex == Messages.Count-1)
+        if(_messageIndex == Messages.Count)
         {
-
-        }
-
-        if(messageIndex == Messages.Count)
-        {
-            print("OnComplete");
             OnComplete?.Invoke();
+
+            _messageUI.gameObject.SetActive(false);
+
+            if(HintUI != null)
+                HintUI.SetActive(false);
 
             gameObject.SetActive(false);
         }
 
-        messageIndex++;
+        _messageIndex++;
     }
 }
