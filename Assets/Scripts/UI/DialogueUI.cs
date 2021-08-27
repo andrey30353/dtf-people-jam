@@ -49,7 +49,6 @@ public class DialogueUI : MonoBehaviour
     {
         if (canClick && Input.GetMouseButtonDown(0))
         {
-            print("Click");
             ShowNextMessage();
         }
 
