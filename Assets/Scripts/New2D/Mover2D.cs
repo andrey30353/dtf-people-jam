@@ -17,17 +17,19 @@ public class Mover2D : MonoBehaviour
     public CircleCollider2D collider2d;
 
     // public float startSpeed;
-              
+
     public float MaxSpeed;
     // todo
 
     private float currentSpeed;
     public float CurrentSpeed => currentSpeed;
-              
+
+    public bool Managed { get => managed; }
+
     [SerializeField] private MoverState state;
 
     public Animator animator;
-          
+
     private bool managed = false;
 
     private bool moved;
@@ -42,22 +44,22 @@ public class Mover2D : MonoBehaviour
         animator = GetComponent<Animator>();
 
         SetRandomVelocity();
-        
-        SwitchState(state);       
+
+        SwitchState(state);
     }
 
     private void SetRandomVelocity()
     {
         var randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
         //print(randomDirection);
-       
+
         rb.velocity = new Vector2(randomDirection.x, randomDirection.y) * currentSpeed;
-    }   
+    }
 
     internal void StopMove()
     {
         SwitchState(MoverState.Stop);
-       
+
         //rb.velocity = Vector2.zero;
     }
 
@@ -66,14 +68,14 @@ public class Mover2D : MonoBehaviour
         SwitchState(MoverState.Fast);
 
         if (!managed)
-            SetRandomVelocity();       
+            SetRandomVelocity();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (moved)
-        {           
+        {
             rb.velocity = (movePoint - transform.position).normalized * MaxSpeed;
         }
         else
@@ -90,7 +92,7 @@ public class Mover2D : MonoBehaviour
             {
                 if (state == MoverState.Stop)
                 {
-                    rb.velocity = Vector2.zero;                   
+                    rb.velocity = Vector2.zero;
                 }
                 else
                 {
@@ -122,11 +124,11 @@ public class Mover2D : MonoBehaviour
                 }
             }
         }
-        
+
         RotateToVelocity();
 
-        animator.speed = rb.velocity.sqrMagnitude / (MaxSpeed * MaxSpeed);        
-        //animator.enabled = rb.velocity != Vector2.zero;       
+        animator.speed = rb.velocity.sqrMagnitude / (MaxSpeed * MaxSpeed);
+        //animator.enabled = rb.velocity != Vector2.zero;
 
         moved = false;
     }
@@ -164,27 +166,27 @@ public class Mover2D : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
- 
+
     public void MoveTo(Vector3 point)
     {
         moved = true;
-        movePoint = point;        
-    }  
-    
+        movePoint = point;
+    }
+
     public void SwitchState(MoverState state)
     {
         this.state = state;
 
         switch (state)
         {
-            case MoverState.Fast:               
+            case MoverState.Fast:
                 currentSpeed = MaxSpeed;
                 break;
-            case MoverState.Slow:              
+            case MoverState.Slow:
                 currentSpeed = MaxSpeed * 0.5f;
                 break;
             case MoverState.Stop:
-                currentSpeed = 0;               
+                currentSpeed = 0;
                 break;
             default:
                 break;
@@ -194,14 +196,14 @@ public class Mover2D : MonoBehaviour
     }
 
     public void SetAnimationByState(MoverState state)
-    {       
+    {
         switch (state)
         {
             case MoverState.Fast:
-                animator.speed = 1f;              
+                animator.speed = 1f;
                 break;
             case MoverState.Slow:
-                animator.speed = 0.5f;               
+                animator.speed = 0.5f;
                 break;
             case MoverState.Stop:
                 currentSpeed = 0;

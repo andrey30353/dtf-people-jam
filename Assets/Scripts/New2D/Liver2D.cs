@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 public class Liver2D : MonoBehaviour
 {
     public int Hp = 1;
-    //public int HpWithWeapon = 2;    
+    //public int HpWithWeapon = 2;
     public float AttackRange = 1;
     public float AttackTimeout = 1;
     public LayerMask AttackMask;
@@ -41,6 +41,8 @@ public class Liver2D : MonoBehaviour
     public bool isBusy;
 
     public bool isInfected;
+
+    public bool Selected { get => mover.Managed; }
 
     public StopZone ManageObject;
     public Enemy2D EnemyInteract;
@@ -133,7 +135,7 @@ public class Liver2D : MonoBehaviour
 
     public void ThrowEquipment()
     {
-        // Assert.IsNotNull(Equipment);      
+        // Assert.IsNotNull(Equipment);
 
         //print("ThrowEquipment");
 
@@ -199,7 +201,7 @@ public class Liver2D : MonoBehaviour
 
             var randomDeadPrefab = DeadPrefabs[UnityEngine.Random.Range(0, DeadPrefabs.Count)];
             Instantiate(randomDeadPrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
-            
+
             if(CorpsePrefab != null)
                 Instantiate(CorpsePrefab, transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
         }
@@ -218,9 +220,9 @@ public class Liver2D : MonoBehaviour
             Settings.Instance.LiverDeadSound.Play();
 
         /*
-        Destroy(mover.animator);       
+        Destroy(mover.animator);
         Destroy(mover.rb);
-        Destroy(mover.collider2d);      
+        Destroy(mover.collider2d);
         Destroy(mover);
         Destroy(this);*/
         if (ManageObject != null && ManageObject.Visitor == this)
