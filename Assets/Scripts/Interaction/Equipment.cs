@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public enum EquipmentType
 {
     Weapon = 1,
-    RepairKit = 2   
+    RepairKit = 2
 }
 
 
@@ -17,11 +17,14 @@ public class Equipment : MonoBehaviour
 
     public SpriteRenderer AuraRender;
 
+    public Liver2D Carrier { get; private set; }
+    public bool IsCarried => Carrier != null;
+
     public UnityEvent OnThrowEvent;
 
     private CircleCollider2D collider2d;
     private Rigidbody2D rb;
-    private SpriteRenderer sr; 
+    private SpriteRenderer sr;
 
     private Transform defaultParent;
     private Vector3 throwForce;
@@ -38,16 +41,16 @@ public class Equipment : MonoBehaviour
 
         startScale = transform.localScale;
     }
-        
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //print("OnCollisionEnter2D " + collision.gameObject.name);
 
         var liver = collision.gameObject.GetComponent<Liver2D>();
         if (liver != null)
-        {           
+        {
             if (liver.Equipment == null && liver.TakeDelay <= 0)
-            {   
+            {
                 Take(liver);
             }
         }
@@ -68,7 +71,7 @@ public class Equipment : MonoBehaviour
 
 
         rb.simulated = false;
-        collider2d.enabled = false;       
+        collider2d.enabled = false;
 
         transform.SetParent(liver.transform);
         // держим немного впереди
@@ -81,12 +84,14 @@ public class Equipment : MonoBehaviour
             AuraRender.enabled = false;
         }
         else
-        { 
+        {
             sr.enabled = false;
             AuraRender.enabled = false;
         }
 
         liver.Equip(this);
+
+        Carrier = liver;
 
         //sr.sortingOrder = 0;
     }
@@ -95,7 +100,7 @@ public class Equipment : MonoBehaviour
     {
         //print("TakeOff " + Type);
 
-        
+        Carrier = null;
 
         collider2d.enabled = true;
         rb.simulated = true;
@@ -110,7 +115,7 @@ public class Equipment : MonoBehaviour
 
             OnThrowEvent?.Invoke();
         }
-       
+
 
         sr.enabled = true;
 
@@ -118,7 +123,7 @@ public class Equipment : MonoBehaviour
 
         if (ShowOnWear)
         {
-            transform.localScale = startScale;           
+            transform.localScale = startScale;
         }
         AuraRender.enabled = true;
     }
