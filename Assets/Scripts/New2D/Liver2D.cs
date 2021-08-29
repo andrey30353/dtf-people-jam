@@ -299,7 +299,7 @@ public class Liver2D : MonoBehaviour
             mover.MoveTo(point);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (HasWeapon)
         {
