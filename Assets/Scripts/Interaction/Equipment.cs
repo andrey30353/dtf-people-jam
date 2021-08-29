@@ -51,7 +51,7 @@ public class Equipment : MonoBehaviour
         {
             if (liver.Equipment == null && liver.TakeDelay <= 0)
             {
-                Take(liver);
+                liver.Equip(this);
             }
         }
     }
@@ -89,7 +89,6 @@ public class Equipment : MonoBehaviour
             AuraRender.enabled = false;
         }
 
-        liver.Equip(this);
 
         Carrier = liver;
 

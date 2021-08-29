@@ -57,6 +57,11 @@ public class Liver2D : MonoBehaviour
         mover = GetComponent<Mover2D>();
 
         sr = GetComponent<SpriteRenderer>();
+
+        if(Equipment != null)
+        {
+            Equip(Equipment);
+        }
     }
 
     private void FixedUpdate()
@@ -131,6 +136,7 @@ public class Liver2D : MonoBehaviour
         {
             Hp = HpWithWeapon;
         }*/
+        equipment.Take(this);
     }
 
     public void ThrowEquipment()
