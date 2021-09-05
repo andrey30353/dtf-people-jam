@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class NeedTakeEquipment : MonoBehaviour
+public class NeedTakeKey : MonoBehaviour
 {
-    public Equipment Equipment;
+    public KeyCard Key;
     public GameObject Mark;
     public Vector3 MarkOffset;
 
@@ -26,7 +26,7 @@ public class NeedTakeEquipment : MonoBehaviour
 
     private void Update()
     {
-        if (Equipment.IsCarried)
+        if (Key.IsCarried)
         {
             OnComplete?.Invoke();
 
@@ -38,6 +38,6 @@ public class NeedTakeEquipment : MonoBehaviour
     private void SetMark()
     {
         if (Mark != null)
-            Mark.transform.position = Equipment.transform.position + MarkOffset;
+            Mark.transform.position = Key.transform.position + MarkOffset;
     }
 }

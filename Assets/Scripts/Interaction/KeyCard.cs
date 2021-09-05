@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum KeyCardType
-{   
+{
     None = 0,
     WorkerKey = 1,
     LabKey = 2,
@@ -12,10 +12,13 @@ public enum KeyCardType
 
 // todo можно выделить общий класс с Equipment
 public class KeyCard : MonoBehaviour
-{    
+{
     public KeyCardType Type;
 
     public Color Color => sr.color;
+
+    public Liver2D Carrier { get; private set; }
+    public bool IsCarried => Carrier != null;
 
     private CircleCollider2D collider2d;
     private SpriteRenderer sr;
@@ -23,12 +26,12 @@ public class KeyCard : MonoBehaviour
     private Transform defaultParent;
 
     private void Start()
-    {      
+    {
         collider2d = GetComponent<CircleCollider2D>();
         sr = GetComponent<SpriteRenderer>();
 
         defaultParent = transform.parent;
-    }   
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,21 +44,23 @@ public class KeyCard : MonoBehaviour
             {
                 Take(liver);
             }
-        }       
+        }
     }
 
     public void Take(Liver2D liver)
     {
        // print("Take " + Type);
-       
-        collider2d.enabled = false;        
+
+        collider2d.enabled = false;
 
         transform.SetParent(liver.transform);
         transform.localPosition = Vector3.zero;
 
         sr.enabled = false;
 
-        liver.TakeKey(this);       
+        Carrier = liver;
+
+        liver.TakeKey(this);
     }
 
     public void TakeOff()
@@ -67,6 +72,8 @@ public class KeyCard : MonoBehaviour
         sr.enabled = true;
 
         transform.SetParent(defaultParent);
+
+        Carrier = null;
     }
 
     public void UseCard()

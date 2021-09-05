@@ -5,6 +5,8 @@ using UnityEngine.Events;
 public class NeedSelectLiver : MonoBehaviour
 {
     public Liver2D Liver;
+    public GameObject Mark;
+    public Vector3 MarkOffset;
 
     public GameObject MessageUI;
 
@@ -12,7 +14,14 @@ public class NeedSelectLiver : MonoBehaviour
 
     private void Start()
     {
+        SetMark();
+
         MessageUI?.SetActive(true);
+    }
+
+    private void OnValidate()
+    {
+        SetMark();
     }
 
     private void Update()
@@ -24,5 +33,11 @@ public class NeedSelectLiver : MonoBehaviour
             MessageUI?.SetActive(false);
             gameObject.SetActive(false);
         }
+    }
+
+    private void SetMark()
+    {
+        if (Mark != null)
+            Mark.transform.position = Liver.transform.position + MarkOffset;
     }
 }

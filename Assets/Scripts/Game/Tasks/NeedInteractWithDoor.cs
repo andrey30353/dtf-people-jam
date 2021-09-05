@@ -6,8 +6,10 @@ using UnityEngine.Events;
 public class NeedInteractWithDoor : MonoBehaviour
 {
     public Door2D Door;
+    public bool NeedOpen;
 
-    public bool Open;
+    public GameObject Mark;
+    public Vector3 MarkOffset;
 
     public GameObject MessageUI;
 
@@ -15,15 +17,30 @@ public class NeedInteractWithDoor : MonoBehaviour
 
     private void Start()
     {
+        SetMark();
+
         MessageUI?.SetActive(true);
+    }
+
+    private void OnValidate()
+    {
+        SetMark();
     }
 
     private void Update()
     {
-        if (!Door.IsOpen)
+        if (Door.IsOpen == NeedOpen)
         {
             OnComplete?.Invoke();
+
+            MessageUI?.SetActive(false);
             gameObject.SetActive(false);
         }
+    }
+
+    private void SetMark()
+    {
+        if (Mark != null)
+            Mark.transform.position = Door.transform.position + MarkOffset;
     }
 }
