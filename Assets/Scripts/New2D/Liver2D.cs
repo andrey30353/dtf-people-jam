@@ -136,7 +136,7 @@ public class Liver2D : MonoBehaviour
         {
             Hp = HpWithWeapon;
         }*/
-        //equipment.Take(this);
+        equipment.Take(this);
     }
 
     public void ThrowEquipment()

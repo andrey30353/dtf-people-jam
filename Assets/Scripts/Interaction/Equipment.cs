@@ -51,7 +51,7 @@ public class Equipment : MonoBehaviour
         {
             if (liver.Equipment == null && liver.TakeDelay <= 0)
             {
-
+                liver.Equip(this);
                 Take(liver);
             }
         }
@@ -66,10 +66,9 @@ public class Equipment : MonoBehaviour
         }
     }*/
 
-    private void Take(Liver2D liver)
+    public void Take(Liver2D liver)
     {
         //print("Take " + Type);
-        liver.Equip(this);
 
         rb.simulated = false;
         collider2d.enabled = false;
