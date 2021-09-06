@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
     public Sprite DamagedSprite;
     public Sprite BrokenSprite;
+
+    [SerializeField] private HealthBar _healthBar;
+
     private Sprite defaultSprite;
+
 
     public float StartHp = 5;
     public float Hp = 5;
@@ -38,6 +39,12 @@ public class Destructible : MonoBehaviour
         animator = GetComponent<Animator>();
 
         defaultSprite = sr.sprite;
+        InitHealthBar();
+    }
+
+    private void OnValidate()
+    {
+        InitHealthBar();
     }
 
     private void Update()
@@ -56,6 +63,8 @@ public class Destructible : MonoBehaviour
                 if (animator != null)
                     animator.enabled = false;
             }
+
+            _healthBar.UpdateHp(Hp);
         }
     }
 
@@ -104,5 +113,13 @@ public class Destructible : MonoBehaviour
 
         if(BrokenSprite != null)
             sr.sprite = BrokenSprite;
+    }
+
+    private void InitHealthBar()
+    {
+        if (_healthBar != null)
+        {
+            _healthBar.Init(StartHp, Hp);
+        }
     }
 }
