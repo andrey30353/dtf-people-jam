@@ -4357,6 +4357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 308123607}
+  - component: {fileID: 308123608}
   m_Layer: 0
   m_Name: Workers
   m_TagString: Untagged
@@ -4382,6 +4383,18 @@ Transform:
   m_Father: {fileID: 19577305}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &308123608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308123606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740b20a7a2cdf8c4c87145ac9423110f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &317119432
 GameObject:
   m_ObjectHideFlags: 0
@@ -6352,6 +6365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 530931345}
+  - component: {fileID: 530931346}
   m_Layer: 0
   m_Name: Soldiers
   m_TagString: Untagged
@@ -6376,6 +6390,18 @@ Transform:
   m_Father: {fileID: 19577305}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530931346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530931344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740b20a7a2cdf8c4c87145ac9423110f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &532405893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8112,6 +8138,30 @@ MonoBehaviour:
       - m_Target: {fileID: 4832660681901389264}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 308123608}
+        m_TargetAssemblyTypeName: LiversManager, Assembly-CSharp
+        m_MethodName: CanManage
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 530931346}
+        m_TargetAssemblyTypeName: LiversManager, Assembly-CSharp
+        m_MethodName: CanManage
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26469,6 +26519,33 @@ MonoBehaviour:
   ScenarionLiver: {fileID: 0}
   NobodyGoToShelterMessage: {fileID: 0}
   UblockDoors: []
+  OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 308123608}
+        m_TargetAssemblyTypeName: LiversManager, Assembly-CSharp
+        m_MethodName: CanManage
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 530931346}
+        m_TargetAssemblyTypeName: LiversManager, Assembly-CSharp
+        m_MethodName: CanManage
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1861138787
 PrefabInstance:
   m_ObjectHideFlags: 0

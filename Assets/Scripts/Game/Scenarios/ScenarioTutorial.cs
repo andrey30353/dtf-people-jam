@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScenarioTutorial : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class ScenarioTutorial : MonoBehaviour
 
     public List<Door2D> UblockDoors;
 
+    public UnityEvent OnStart;
+
     public static ScenarioTutorial Instance;
 
     private void Awake()
@@ -27,6 +30,8 @@ public class ScenarioTutorial : MonoBehaviour
         MoveAndZoomCamera.gameObject.SetActive(false);
         //NeedExposionDialogue.gameObject.SetActive(false);
         //TakeDinamit.gameObject.SetActive(false);
+
+        OnStart?.Invoke();
     }
 
     public void Start()

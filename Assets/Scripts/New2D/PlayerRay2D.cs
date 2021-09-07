@@ -54,31 +54,26 @@ public class PlayerRay2D : MonoBehaviour
             else
             {
                 // для более простого выбора юнита, если лучом не попали
+                float minDist = int.MaxValue;
+                Liver2D agent = null;
+
                 var colliders = Physics2D.OverlapCircleAll(origin, pointSize, InteractionMask);
-                if(colliders == null || colliders.Length == 0)
+                if (colliders.Length > 0)
                 {
-                    SelectLiver(null);
-                }
-                else
-                {
-                    float minDist = int.MaxValue;
-                    Liver2D agent = null;
                     foreach (var col in colliders)
                     {
-                        var currAgen = col.gameObject.GetComponent<Liver2D>();
-                        if (currAgen == null)
+                        if (col.gameObject.TryGetComponent<Liver2D>(out var currAgen) == false)
                             continue;
 
                         var dist = (origin - transform.position).sqrMagnitude;
-                        if(dist < minDist)
+                        if (dist < minDist)
                         {
                             agent = currAgen;
                             minDist = dist;
                         }
                     }
-
-                    SelectLiver(agent);
                 }
+                SelectLiver(agent);
             }
         }
 
@@ -105,6 +100,9 @@ public class PlayerRay2D : MonoBehaviour
 
     private void SelectLiver(Liver2D agent)
     {
+        if (agent != null && !agent.CanManage)
+            return;
+
         // снять выбор с предыдущего
         if (selectedAgent != null && selectedAgent != agent)
         {
@@ -133,6 +131,8 @@ public class PlayerRay2D : MonoBehaviour
         foreach (var item in res)
         {
             var agent = item.GetComponent<Liver2D>();
+            if (agent.CanManage == false)
+                continue;
 
             if (except != null && agent == except)
                 continue;
