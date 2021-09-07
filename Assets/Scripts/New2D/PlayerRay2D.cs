@@ -8,8 +8,6 @@ public class PlayerRay2D : MonoBehaviour
 
     public LayerMask InteractionMask;
 
-    public LayerMask FloorLayerMask;
-
     public float Radius;
     public Vector3 point;
 
@@ -39,33 +37,27 @@ public class PlayerRay2D : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             var origin = camera.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero, Distance, InteractionMask);
+            var hit = Physics2D.Raycast(origin, Vector2.zero, Distance, InteractionMask);
 
             if (hit.collider != null)
             {
-                var door = hit.collider.gameObject.GetComponent<Door2D>();
-                if (door != null)
+                if (hit.collider.gameObject.TryGetComponent<Door2D>(out var door))
                 {
                     door.Select();
                 }
 
-                var agent = hit.collider.gameObject.GetComponent<Liver2D>();
-                if (agent != null)
+                if (hit.collider.gameObject.TryGetComponent<Liver2D>(out var agent))
                 {
                     SelectLiver(agent);
                 }
             }
             else
             {
+                // для более простого выбора юнита, если лучом не попали
                 var colliders = Physics2D.OverlapCircleAll(origin, pointSize, InteractionMask);
                 if(colliders == null || colliders.Length == 0)
                 {
-                    // todo копипаст
-                    if (selectedAgent != null)
-                    {
-                        selectedAgent.Manage(false);
-                        selectedAgent = null;
-                    }
+                    SelectLiver(null);
                 }
                 else
                 {
@@ -85,22 +77,8 @@ public class PlayerRay2D : MonoBehaviour
                         }
                     }
 
-                    if(agent != null)
-                    {
-                        SelectLiver(agent);
-                    }
-                    else
-                    {
-                        // todo копипаст
-                        if (selectedAgent != null)
-                        {
-                            selectedAgent.Manage(false);
-                            selectedAgent = null;
-                        }
-                    }
+                    SelectLiver(agent);
                 }
-
-
             }
         }
 
@@ -127,13 +105,18 @@ public class PlayerRay2D : MonoBehaviour
 
     private void SelectLiver(Liver2D agent)
     {
+        // снять выбор с предыдущего
         if (selectedAgent != null && selectedAgent != agent)
         {
             selectedAgent.Manage(false);
         }
 
         selectedAgent = agent;
-        agent.Manage(true);
+
+        if (agent != null)
+        {
+            agent.Manage(true);
+        }
 
         //cameraMover.SetZoom(0.5f);
     }
