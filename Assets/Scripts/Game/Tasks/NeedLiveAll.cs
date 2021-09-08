@@ -2,16 +2,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class NeedVisitArea : MonoBehaviour
+public class NeedLiveAll : MonoBehaviour
 {
-    [SerializeField] private List<Liver2D> Visiters;
-
-    public BoxCollider2D AreaTrigger;
+    public List<Liver2D> Livers;
 
     public GameObject MessageUI;
 
     public UnityEvent OnStart;
+
     public UnityEvent OnComplete;
+
+    public UnityEvent OnFail;
 
     private void Start()
     {
@@ -22,19 +23,19 @@ public class NeedVisitArea : MonoBehaviour
 
     private void Update()
     {
-        var completed = true;
-        foreach (var liver in Visiters)
+        var allLive = true;
+        for (int i = 0; i < Livers.Count; i++)
         {
-            if (!AreaTrigger.OverlapPoint(liver.transform.position))
+            if (Livers[i] == null)
             {
-                completed = false;
+                allLive = false;
                 break;
             }
         }
 
-        if (completed)
+        if (allLive == false)
         {
-            OnComplete?.Invoke();
+            OnFail?.Invoke();
 
             MessageUI?.SetActive(false);
             gameObject.SetActive(false);

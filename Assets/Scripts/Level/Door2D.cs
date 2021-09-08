@@ -32,6 +32,8 @@ public class Door2D : MonoBehaviour
     public bool Broken => Hp <= 0;
     public bool Damaged => Hp <= startHp / 2;
 
+    public bool CanManage { get; set; } = true;
+
     public List<Door2D> OpeningDepends;
 
     //public List<Door2D> CloseDoorIfOpen;
@@ -84,7 +86,7 @@ public class Door2D : MonoBehaviour
 
     public void Select()
     {
-        if (blocked || Broken || InProcess)
+        if (blocked || Broken || InProcess || !CanManage)
             return;
 
         if (IsOpen)
@@ -190,7 +192,7 @@ public class Door2D : MonoBehaviour
                 print(enemy);
                 enemy.TakeDamage(1, Vector3.zero);
             }
-                
+
         }
         else
         {   // ломается только закрытая дверь

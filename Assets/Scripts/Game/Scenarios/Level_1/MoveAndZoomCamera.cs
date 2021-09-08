@@ -59,9 +59,7 @@ public class MoveAndZoomCamera : MonoBehaviour
             && cameraY > requiredY - AcceptablePosition.y
             && cameraY < requiredY + AcceptablePosition.y)
         {
-            print("OnComplete");
             OnComplete.Invoke();
-            //print("Zoom + Position");
         }
     }
 

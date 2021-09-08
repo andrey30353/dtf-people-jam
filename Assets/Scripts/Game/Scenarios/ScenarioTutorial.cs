@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class ScenarioTutorial : MonoBehaviour
 {
-    public List<Door2D> OpenDoors;
-
     public MoveAndZoomCamera MoveAndZoomCamera;
     public NeedExposionDialogue NeedExposionDialogue;
     public TakeDinamit TakeDinamit;
@@ -26,27 +24,31 @@ public class ScenarioTutorial : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        MoveAndZoomCamera.gameObject.SetActive(false);
-        //NeedExposionDialogue.gameObject.SetActive(false);
-        //TakeDinamit.gameObject.SetActive(false);
-
-        OnStart?.Invoke();
     }
 
     public void Start()
     {
         MoveAndZoomCamera.gameObject.SetActive(true);
 
-        //foreach (var liver in DialogueLivers)
-        //{
-        //    liver.mover.StopMove();
-        //}
+        OnStart?.Invoke();
+    }
 
-        // открыть двери сразу
-        foreach (var door in OpenDoors)
-        {
-            door.Select();
-        }
+    public void Complete()
+    {
+        Debug.Log("Complete");
+    }
+
+    public void Fail()
+    {
+        Debug.Log("Fail");
+        PauseGame(true);
+    }
+
+    public void PauseGame(bool pause)
+    {
+        if (pause)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
     }
 }

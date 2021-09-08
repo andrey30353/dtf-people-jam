@@ -42,7 +42,7 @@ public class Liver2D : MonoBehaviour
 
     public bool isInfected;
 
-    public bool CanManage = true;
+    public bool CanManage { get; set; } = true;
 
     public bool Selected { get => mover.Managed; }
 

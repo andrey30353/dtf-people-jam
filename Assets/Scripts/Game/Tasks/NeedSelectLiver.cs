@@ -10,6 +10,8 @@ public class NeedSelectLiver : MonoBehaviour
 
     public GameObject MessageUI;
 
+    public UnityEvent OnStart;
+
     public UnityEvent OnComplete;
 
     private void Start()
@@ -17,6 +19,8 @@ public class NeedSelectLiver : MonoBehaviour
         SetMark();
 
         MessageUI?.SetActive(true);
+
+        OnStart?.Invoke();
     }
 
     private void OnValidate()
