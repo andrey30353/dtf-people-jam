@@ -13,6 +13,7 @@ public class Settings : MonoBehaviour
     public Color WorkerDoorColor;
     public Color LabDoorColor;
     public Color ArmoryDoorColor;
+    public Color BlokedDoorColor;
 
     [Header("Ключ карточка")]
     public Color DefaultKeyColor;
@@ -20,7 +21,7 @@ public class Settings : MonoBehaviour
     public Color LabKeyColor;
     public Color ArmoryKeyColor;
 
-    [Header("Звуки")]  
+    [Header("Звуки")]
     public AudioSource EnemyDeadSound;
     public AudioSource LiverDeadSound;
     public AudioSource DoorSound;
@@ -43,15 +44,18 @@ public class Settings : MonoBehaviour
         {
             case KeyCardType.None:
                 return DefaultDoorColor;
-                
+
             case KeyCardType.WorkerKey:
                 return WorkerDoorColor;
-                
+
             case KeyCardType.LabKey:
                 return LabDoorColor;
 
             case KeyCardType.ArmoryKey:
                 return ArmoryDoorColor;
+
+            case KeyCardType.Bloked:
+                return BlokedDoorColor;
 
             default:
                 return DefaultDoorColor;

@@ -555,15 +555,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00ddc6ae84bab74d94e4b63c10e2e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LiveColor: {r: 0.34229445, g: 1, b: 0, a: 1}
-  HunterColor: {r: 0.4056604, g: 0.032529376, b: 0.032529376, a: 1}
-  InfectorColor: {r: 0.5849056, g: 0.10208259, b: 0.5750371, a: 1}
-  QueenColor: {r: 0, g: 0, b: 0, a: 1}
   InfectedColor: {r: 1, g: 0.8513402, b: 0.0141509175, a: 1}
   DefaultDoorColor: {r: 1, g: 1, b: 1, a: 1}
   WorkerDoorColor: {r: 0.70980394, g: 0.7176471, b: 0.38039216, a: 1}
   LabDoorColor: {r: 0.24390353, g: 0.5943396, b: 0.27976063, a: 1}
   ArmoryDoorColor: {r: 0.6415094, g: 0.16037735, b: 0.16037735, a: 1}
+  BlokedDoorColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
   DefaultKeyColor: {r: 1, g: 1, b: 1, a: 1}
   WorkerKeyColor: {r: 1, g: 0.9964248, b: 0, a: 1}
   LabKeyColor: {r: 0, g: 1, b: 0, a: 1}

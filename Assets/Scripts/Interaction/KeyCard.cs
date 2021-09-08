@@ -7,7 +7,9 @@ public enum KeyCardType
     None = 0,
     WorkerKey = 1,
     LabKey = 2,
-    ArmoryKey = 3
+    ArmoryKey = 3,
+
+    Bloked = 4
 }
 
 // todo можно выделить общий класс с Equipment
