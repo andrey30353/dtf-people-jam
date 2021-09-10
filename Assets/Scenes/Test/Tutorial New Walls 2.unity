@@ -2924,7 +2924,7 @@ Transform:
   m_GameObject: {fileID: 171491835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.1, y: 0.5, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 1189590713}
   m_RootOrder: 0
@@ -2969,7 +2969,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2ceb9924e7e1a24aa6165416d81e351, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11549b2cfcbf89d4d9ccb8c80037c329, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8094,7 +8094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &598506161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8519,7 +8519,7 @@ Transform:
   m_GameObject: {fileID: 620821964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.29000002, y: 0.26, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 1695386279}
   m_RootOrder: 0
@@ -8564,7 +8564,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2ceb9924e7e1a24aa6165416d81e351, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 11549b2cfcbf89d4d9ccb8c80037c329, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11239,7 +11239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808f72125957b9f4ca4399a514fb4d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Livers: []
   MessageUI: {fileID: 449087220}
   OnStart:
     m_PersistentCalls:
@@ -11903,17 +11902,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894050553}
   m_CullTransparentMesh: 0
---- !u!114 &899775430 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7589721539931355027, guid: 1b57efc6ed6784549909203da319ef49, type: 3}
-  m_PrefabInstance: {fileID: 1396651314}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4e9d5f0985d5d49a7615732c6389d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &903759631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27477,13 +27465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2cb2669f4016c44ae3fcc35810fa4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Livers:
-  - {fileID: 161545847}
-  - {fileID: 892384006}
-  - {fileID: 899775430}
-  - {fileID: 1374898633}
-  - {fileID: 526687393}
-  - {fileID: 828708778}
   MessageUI: {fileID: 753238062}
   OnStart:
     m_PersistentCalls:
