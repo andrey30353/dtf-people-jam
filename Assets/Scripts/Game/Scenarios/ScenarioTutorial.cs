@@ -36,6 +36,7 @@ public class ScenarioTutorial : MonoBehaviour
     public void Complete()
     {
         Debug.Log("Complete");
+        PauseGame(true);
     }
 
     public void Fail()

@@ -4,8 +4,6 @@ using UnityEngine.Events;
 
 public class NeedLiveAll : MonoBehaviour
 {
-    public List<Liver2D> Livers;
-
     public GameObject MessageUI;
 
     public UnityEvent OnStart;
@@ -23,21 +21,10 @@ public class NeedLiveAll : MonoBehaviour
 
     private void Update()
     {
-        var allLive = true;
-        for (int i = 0; i < Livers.Count; i++)
-        {
-            if (Livers[i] == null)
-            {
-                allLive = false;
-                break;
-            }
-        }
-
-        if (allLive == false)
+        if (Game2D.Instance.LiverCount < Game2D.Instance.LiverCountStart)
         {
             OnFail?.Invoke();
 
-            MessageUI?.SetActive(false);
             gameObject.SetActive(false);
         }
     }

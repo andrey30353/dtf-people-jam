@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class NeedTakeKey : MonoBehaviour
+public class NeedVisitStopZone : MonoBehaviour
 {
-    public KeyCard Key;
+    [SerializeField] private StopZone _zone;
+
     public GameObject Mark;
     public Vector3 MarkOffset;
 
     public GameObject MessageUI;
 
+    public UnityEvent OnStart;
     public UnityEvent OnComplete;
 
     private void Start()
@@ -17,6 +18,8 @@ public class NeedTakeKey : MonoBehaviour
         SetMark();
 
         MessageUI?.SetActive(true);
+
+        OnStart?.Invoke();
     }
 
     private void OnValidate()
@@ -26,7 +29,7 @@ public class NeedTakeKey : MonoBehaviour
 
     private void Update()
     {
-        if (Key == null || Key.IsCarried)
+        if (_zone.Visitor != null)
         {
             OnComplete?.Invoke();
 
@@ -37,7 +40,7 @@ public class NeedTakeKey : MonoBehaviour
 
     private void SetMark()
     {
-        if (Mark != null && Key != null)
-            Mark.transform.position = Key.transform.position + MarkOffset;
+        if (Mark != null)
+            Mark.transform.position = _zone.transform.position + MarkOffset;
     }
 }
